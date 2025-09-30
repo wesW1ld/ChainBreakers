@@ -11,6 +11,7 @@ public class playerManager : MonoBehaviour
 
     public event System.Action updateHealth;
 
+    //makes the script a singleton, call methods and get variables with playerManager.instance
     public static playerManager Instance
     {
         get
@@ -51,7 +52,7 @@ public class playerManager : MonoBehaviour
 
     }
 
-    public void TakeDamage(float amt)
+    public void TakeDamage(float amt) //called from Telegraph.cs
     {
         HP -= amt;
         updateHealth?.Invoke(); //invokes updateHealth event, which tells the hpBar.cs to update the healthbar

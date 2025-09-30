@@ -26,6 +26,6 @@ public class hpBar : MonoBehaviour
     private void UpdateHP()
     {
         HP = playerManager.instance.HP;
-        gameObject.GetComponent<UnityEngine.UI.Image>().fillAmount = HP / maxHP;
+        gameObject.GetComponent<UnityEngine.UI.Image>().fillAmount = HP / maxHP; //updates bar image
     }
 }

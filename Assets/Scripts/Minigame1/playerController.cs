@@ -24,12 +24,12 @@ public class playerController : MonoBehaviour
 
     }
 
-    void FixedUpdate()
+    void FixedUpdate() //move on fixed update for better physics
     {
         rb.velocity = new Vector2(direction.x * moveSpeed, direction.y * moveSpeed);
     }
 
-    void OnMove(InputValue value)
+    void OnMove(InputValue value) //calls from input system (On<action>)
     {
         direction = value.Get<Vector2>();
     }

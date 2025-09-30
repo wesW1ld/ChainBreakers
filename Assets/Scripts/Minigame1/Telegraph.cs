@@ -18,10 +18,10 @@ public class Telegraph : MonoBehaviour
 
     IEnumerator Activate()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1f);
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-        gameObject.GetComponent<BoxCollider2D>().enabled = true;
-        yield return new WaitForSeconds(2);
+        gameObject.GetComponent<BoxCollider2D>().enabled = true; //turns on collider to hit player
+        yield return new WaitForSeconds(.75f);
         Destroy(gameObject);
     }
     
@@ -30,8 +30,8 @@ public class Telegraph : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("hit player");
-            Destroy(gameObject);
             playerManager.instance.TakeDamage(1);
+            Destroy(gameObject);
         }
     }
 }
