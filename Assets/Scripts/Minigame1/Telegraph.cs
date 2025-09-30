@@ -27,11 +27,11 @@ public class Telegraph : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("hit something");
         if (other.CompareTag("Player"))
         {
             Debug.Log("hit player");
             Destroy(gameObject);
+            playerManager.instance.TakeDamage(1);
         }
     }
 }
