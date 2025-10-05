@@ -30,12 +30,12 @@ public class DeckManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(this); 
+            DontDestroyOnLoad(this);
         }
 
     }
 
-    
+
     public enum CardType
     {
         Atk,
@@ -86,5 +86,17 @@ public class DeckManager : MonoBehaviour
                 Debug.Log("Card not found");
                 break;
         }
+    }
+
+    public List<Card> deck = new List<Card>();
+
+    void Start()
+    {
+        MakeDeck();
+    }
+
+    private void MakeDeck()
+    {
+        deck.Add(new Card(CardName.ShortStrike, CardType.Atk, 5, 10));
     }
 }
