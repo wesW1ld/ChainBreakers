@@ -11,7 +11,7 @@ public class scoreManager : MonoBehaviour
 
     public int Score { get; private set; }
 
-    private TextMeshProUGUI text;
+    public TextMeshProUGUI text;
 
     public static scoreManager Instance
     {
@@ -38,16 +38,15 @@ public class scoreManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
             Score = 0;
-            text = GetComponentInChildren<TextMeshProUGUI>();
             text.text = $"Score: {Score}";
+            SceneManager.activeSceneChanged += OnSceneChanged;
         }
 
     }
 
-    void OnMove(InputValue value)
+    void OnClick(InputValue value)
     {
-        //SceneManager.LoadScene(1);
-        ChangeScore(10000);
+        SceneManager.LoadScene(2);
     }
 
     public void ChangeScore(int amt)
@@ -85,5 +84,16 @@ public class scoreManager : MonoBehaviour
         {
             //damage * 2
         }
+    }
+
+    void OnSceneChanged(Scene oldScene, Scene newScene)
+    {
+        text.text = $"Score: {Score}";
+    }
+
+    public void SetTextObject(TextMeshProUGUI newText)
+    {
+        text = newText;
+        text.text = $"Score: {Score}";
     }
 }

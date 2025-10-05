@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObstaclesManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ObstaclesManager : MonoBehaviour
     public float startPosY = 0;
     public float vlength = 8;
     public float hlength = 15;
+    public float perfectScore = 150000;
 
     // Start is called before the first frame update
     void Start()
@@ -63,5 +65,10 @@ public class ObstaclesManager : MonoBehaviour
         tele2.transform.localScale = new Vector3(1, vlength, 1);
         tele3 = Instantiate(telegraphPrefab, new Vector3(startPosX - 6, startPosY, 0), Quaternion.identity);
         tele3.transform.localScale = new Vector3(1, vlength, 1);
+
+        yield return new WaitForSeconds(3f);
+
+        scoreManager.instance.ChangeScore((int)((playerManager.instance.HP / playerManager.instance.maxHP) * perfectScore));
+        SceneManager.LoadScene(0);
     }
 }
