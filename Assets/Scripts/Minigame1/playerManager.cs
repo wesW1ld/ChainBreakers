@@ -35,7 +35,7 @@ public class playerManager : MonoBehaviour
         else
         {
             instance = this;
-            //DontDestroyOnLoad(this); 
+            DontDestroyOnLoad(this); 
         }
 
     }
