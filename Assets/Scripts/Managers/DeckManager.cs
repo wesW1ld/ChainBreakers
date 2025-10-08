@@ -103,6 +103,7 @@ public class DeckManager : MonoBehaviour
         public bool dropped = false;                    //card can only be used once
 
 
+        //Cards that are static in their output
         public Card(CardName name, CardType type)
         {
             this.name = name;
@@ -111,6 +112,7 @@ public class DeckManager : MonoBehaviour
             this.higher = 0;
         }
 
+        //Cards with variable output amounts 
         public Card(CardName name, CardType type, int lower, int upper, StatusEffect statusEffect)
         {
             this.name = name;
@@ -122,7 +124,7 @@ public class DeckManager : MonoBehaviour
             this.statusEffect = statusEffect;
         }
 
-
+        //Cards with an additional variable for various effects 
         public Card(CardName name, CardType type, int lower, int upper, int turnLower, int turnHigher, StatusEffect statusEffect)
         {
             this.name = name;
@@ -134,6 +136,7 @@ public class DeckManager : MonoBehaviour
             this.statusEffect = statusEffect;
         }
 
+        //Cards will an additional amount of uses
         public Card(CardName name, CardType type, int lower, int upper, int turnLower, int turnHigher, StatusEffect statusEffect, int uses)
         {
             this.name = name;
@@ -216,6 +219,11 @@ public class DeckManager : MonoBehaviour
             case CardName.NowThisIsAKnife:
                 //Still working on this one
                 card.description = $"";
+                break;
+
+            case CardName.BagBoy:
+                //Adds cards and shield
+                card.description = $"Adds {card.lower} to {card.higher} shield and will draw an extra card next turn plus increase play card slot by 1.";
                 break;
 
             case CardName.MuscleUp:
@@ -322,5 +330,28 @@ public class DeckManager : MonoBehaviour
         }
         deck.Add(new Card(CardName.RageBait, CardType.Status, 0, 0, StatusEffect.Enraged));
         deck.Add(new Card(CardName.ScoutScan, CardType.Spec));
+    }
+
+    private void Area1Pool()
+    {
+        deck.Add(new Card(CardName.TaserSpear, CardType.Atk, 3, 7, 1, 2, StatusEffect.Shocked));
+        deck.Add(new Card(CardName.FlameShot, CardType.Atk, 2, 5, StatusEffect.None));
+        deck.Add(new Card(CardName.StimShot, CardType.Def, 7, 14, StatusEffect.Rage));
+        deck.Add(new Card(CardName.HealingAura, CardType.Def, 7, 13, StatusEffect.None));
+        deck.Add(new Card(CardName.IronArmor, CardType.Def, 5, 8, 1, 2, StatusEffect.Poise));
+        deck.Add(new Card(CardName.FullyCharged, CardType.Spec, 0, 0, StatusEffect.None));
+        deck.Add(new Card(CardName.MuscleUp, CardType.Status, 0, 0, StatusEffect.None));
+    }
+
+    private void Area1ShopPool()
+    {
+        deck.Add(new Card(CardName.BagBoy, CardType.Def, 0, 0, StatusEffect.None));
+        deck.Add(new Card(CardName.NowThisIsAKnife, CardType.Atk, 7, 10, StatusEffect.None));
+        deck.Add(new Card(CardName.AskChat, CardType.Spec, 0, 0, StatusEffect.None));
+    }
+
+    private void Area2Pool()
+    {
+        
     }
 }
