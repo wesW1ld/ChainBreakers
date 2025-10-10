@@ -46,7 +46,7 @@ public class scoreManager : MonoBehaviour
 
     void OnClick(InputValue value)
     {
-        SceneManager.LoadScene(2);
+        ChangeScore(10000);
     }
 
     public void ChangeScore(int amt)
