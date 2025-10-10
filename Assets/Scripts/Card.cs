@@ -9,8 +9,10 @@ namespace ChainBreakers
     {
         public string cardName;
         public Sprite artwork;
-        public int minDam;
-        public int maxDam;
+        public int min;
+        public int max;
+        public int minTurn;
+        public int maxTurn;
         public List<CardType> cardTypes;
         public List<StatusEffect> statusEffects;
         public string description;

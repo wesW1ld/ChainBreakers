@@ -59,6 +59,7 @@ public class DeckManager : MonoBehaviour
         IronArmor,
         FullyCharged,
         NowThisIsAKnife,
+        BagBoy,
         MuscleUp,
         AskChat,
         NowYouDont,
@@ -86,6 +87,7 @@ public class DeckManager : MonoBehaviour
         Blur,
         Binded,
         Regenerative
+        ,Poise
     }
 
     public struct Card
@@ -100,7 +102,7 @@ public class DeckManager : MonoBehaviour
         public Sprite artwork;
         public StatusEffect statusEffect;
         public string description;
-        public bool dropped = false;                    //card can only be used once
+        public bool dropped;                    //card can only be used once
 
 
         //Cards that are static in their output
@@ -110,6 +112,13 @@ public class DeckManager : MonoBehaviour
             this.type = type;
             this.lower = 0;
             this.higher = 0;
+            this.turnLower = 0;
+            this.turnHigher = 0;
+            this.uses = 0;
+            this.artwork = null;
+            this.statusEffect = StatusEffect.None;
+            this.description = "";
+            this.dropped = false;
         }
 
         //Cards with variable output amounts 
@@ -121,7 +130,11 @@ public class DeckManager : MonoBehaviour
             this.higher = upper;
             this.turnLower = 0;
             this.turnHigher = 0;
+            this.uses = 0;
+            this.artwork = null;
             this.statusEffect = statusEffect;
+            this.description = "";
+            this.dropped = false;
         }
 
         //Cards with an additional variable for various effects 
@@ -133,7 +146,11 @@ public class DeckManager : MonoBehaviour
             this.higher = upper;
             this.turnLower = turnLower;
             this.turnHigher = turnHigher;
+            this.uses = 0;
+            this.artwork = null;
             this.statusEffect = statusEffect;
+            this.description = "";
+            this.dropped = false;
         }
 
         //Cards will an additional amount of uses
@@ -147,6 +164,9 @@ public class DeckManager : MonoBehaviour
             this.turnHigher = turnHigher;
             this.statusEffect = statusEffect;
             this.uses = uses;
+            this.artwork = null;
+            this.description = "";
+            this.dropped = false;
         }
     }
 
@@ -324,7 +344,7 @@ public class DeckManager : MonoBehaviour
         }
         for (int i = 0; i < 2; i++)
         {
-            deck.Add(new Card(CardName.HammerTime, CardType.Atk, 0, 0, 1, 2, StatusEffect.Dazed));
+            deck.Add(new Card(CardName.HammerTime, CardType.Atk, 3,7, 1, 2, StatusEffect.Dazed));
             deck.Add(new Card(CardName.MedicalTraining, CardType.Def, 2, 5, StatusEffect.None));
 
         }

@@ -12,8 +12,6 @@ public class CardDisplay : MonoBehaviour
     public Image cardImage;
     public TMP_Text cardName;
     public TMP_Text cardDescription;
-    public TMP_Text min;
-    public TMP_Text max;
 
     public void Start()
     {
@@ -27,8 +25,5 @@ public class CardDisplay : MonoBehaviour
     cardName.text = card.cardName;
     cardDescription.text = card.description;
     cardImage.sprite = card.artwork;
-    min.text = card.minDam.ToString();
-    max.text = card.maxDam.ToString();
-
     }
 }
