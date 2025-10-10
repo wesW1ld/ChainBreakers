@@ -39,6 +39,7 @@ public class scoreManager : MonoBehaviour
             DontDestroyOnLoad(this);
             Score = 0;
             text.text = $"Score: {Score}";
+            Debug.Log($"[ScoreManager] Initialized with Score = {Score}");
             SceneManager.activeSceneChanged += OnSceneChanged;
         }
 
@@ -53,6 +54,7 @@ public class scoreManager : MonoBehaviour
     {
         Score += amt;
         text.text = $"Score: {Score}";
+        Debug.Log($"[ScoreManager] Score changed by {amt}. New Score = {Score}");
     }
 
     public void ComboEnd()
@@ -89,11 +91,13 @@ public class scoreManager : MonoBehaviour
     void OnSceneChanged(Scene oldScene, Scene newScene)
     {
         text.text = $"Score: {Score}";
+        Debug.Log($"[ScoreManager] Scene changed to {newScene.name}. Current Score = {Score}");
     }
 
     public void SetTextObject(TextMeshProUGUI newText)
     {
         text = newText;
         text.text = $"Score: {Score}";
+        Debug.Log($"[ScoreManager] Text object set. Current Score = {Score}");
     }
 }
