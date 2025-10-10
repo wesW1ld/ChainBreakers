@@ -10,14 +10,24 @@ public class Enemy : MonoBehaviour
     public int attackPower = 20;
     public int damageReceived = 10;
 
+    private bool inDefenseMode = false;
+
     private void Start()
     {
         currentHP = maxHP;
+        Debug.Log($"{enemyName} has entered battle with {currentHP} HP.");
     }
 
     public void TakeDamage(int amount)
     {
+        // Check if enemy is in defense mode, halve the damage
+        if (inDefenseMode)
+        {
+            amount /= 2;
+        }
+
         currentHP -= amount;
+        Debug.Log($"{enemyName} took {amount} damage! Current HP: {currentHP}/{maxHP}");
 
         // Update score using your existing singleton ScoreManager
         if (scoreManager.Instance != null)
@@ -29,16 +39,23 @@ public class Enemy : MonoBehaviour
             Debug.LogWarning("ScoreManager instance not found!");
         }
 
+        // Enter defense mode if HP is below half
+        if (!inDefenseMode && currentHP <= maxHP / 2 && currentHP > 0)
+        {
+            EnterDefenseMode();
+        }
+
         if (currentHP <= 0)
         {
             Die();
         }
     }
 
-    //public void AttackPlayer(Player player)
-    //{
-    //    player.TakeDamage(attackPower);
-    //}
+    private void EnterDefenseMode()
+    {
+        inDefenseMode = true;
+        Debug.Log("ENEMY HAS GONE INTO DEFENSE MODE!");
+    }
 
     private void Die()
     {
@@ -53,4 +70,3 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 }
-
