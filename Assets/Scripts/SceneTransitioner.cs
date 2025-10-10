@@ -33,9 +33,20 @@ public class SceneTransitioner : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
         }
-    }  
+    }
+
+    void Start()
+    {
+        StartCoroutine(Next());
+    }
     void OnClick(InputValue value)
     {
+        SceneManager.LoadScene(3);
+    }
+
+    IEnumerator Next()
+    {
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(3);
     }
 }
