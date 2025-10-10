@@ -37,12 +37,16 @@ public class scoreManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this);
-            Score = 0;
-            text.text = $"Score: {Score}";
-            Debug.Log($"[ScoreManager] Initialized with Score = {Score}");
-            SceneManager.activeSceneChanged += OnSceneChanged;
         }
 
+    }
+
+    void Start()
+    {
+        Score = 0;
+        text.text = $"Score: {Score}";
+        Debug.Log($"[ScoreManager] Initialized with Score = {Score}");
+        SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
     void OnClick(InputValue value)
