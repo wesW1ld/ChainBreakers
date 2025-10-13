@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class player : MonoBehaviour
@@ -10,13 +11,7 @@ public class player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Slash))
         {
-            // Simulate attacking Polaris
-            Enemy enemy = FindObjectOfType<Enemy>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(attackDamage);
-                Debug.Log("Player attacked Polaris!");
-            }
+            scoreManager.instance.ComboEnd();
         }
     }
 }

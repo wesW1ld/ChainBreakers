@@ -1,5 +1,8 @@
+using System.Collections;
+using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -101,6 +104,32 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public void DealDamage(int dmg)
+    {
+        int enemyIndex = 0;
+        bool enemyFound = false;
+        while (!enemyFound && (enemyIndex < enemies.Count))
+        {
+            if (enemies[enemyIndex] == null)
+            {
+                enemyIndex++;
+            }
+            else
+            {
+                enemyFound = true;
+            }
+        }
+
+        if ((enemyIndex >= enemies.Count))
+        {
+            StartCoroutine(GoToEnd());
+        }
+        else
+        {
+            enemies[enemyIndex].GetComponent<Enemy>().TakeDamage(dmg);
+        }
+    }
+
     // Called when an enemy dies
     public void EnemyDestroyed(GameObject enemy)
     {
@@ -122,5 +151,11 @@ public class EnemyManager : MonoBehaviour
 
         enemies.Clear();
         Debug.Log("[EnemyManager] All enemies cleared.");
+    }
+
+    IEnumerator GoToEnd()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(3);
     }
 }
