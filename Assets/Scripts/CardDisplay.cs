@@ -7,23 +7,22 @@ using ChainBreakers;
 
 public class CardDisplay : MonoBehaviour
 {
-
-    public Card card;
+    public Card cardData;
     public Image cardImage;
     public TMP_Text cardName;
     public TMP_Text cardDescription;
 
-    public void Start()
+    void Start ()
     {
-        UpdateCardDisplay();
-    }
-
-    public void UpdateCardDisplay()
-    {
-    if (card == null) return;
-
-    cardName.text = card.cardName;
-    cardDescription.text = card.description;
-    cardImage.sprite = card.artwork;
+        if (cardData != null)
+        {
+            cardName.text = cardData.cardName;
+            cardDescription.text = cardData.description;
+            cardImage.sprite = cardData.artwork;
+        }
+        else
+        {
+            Debug.LogWarning("Card data is not assigned.");
+        }
     }
 }

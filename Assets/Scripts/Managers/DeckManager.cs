@@ -333,6 +333,7 @@ public class DeckManager : MonoBehaviour
     void Start()
     {
         MakeDeck();
+        DisplayDeck();
     }
 
     private void MakeDeck()
@@ -372,6 +373,22 @@ public class DeckManager : MonoBehaviour
 
     private void Area2Pool()
     {
-        
+
+    }
+
+    public GameObject cardPrefab;
+    public Transform handArea;      //A UI parenet where cards will go
+
+    
+    private void DisplayDeck()
+    {
+        foreach (DeckManager.Card c in deck)
+        {
+            UseCard(c);
+
+            GameObject newCard = Instantiate(cardPrefab, handArea);
+            CardDisplay cardDisplay = newCard.GetComponent<CardDisplay>();
+            //cardDisplay.SetupCard(c);
+        }
     }
 }
