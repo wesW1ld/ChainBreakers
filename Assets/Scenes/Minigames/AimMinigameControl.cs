@@ -28,6 +28,8 @@ public class AimMinigameControl : MonoBehaviour
     private int targetNum;
     private UnityEngine.Vector2 targetRandomPosition;
 
+    public float targetScale = .1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,8 +74,10 @@ public class AimMinigameControl : MonoBehaviour
 
         for (int a = targetNum; a > 0; a--)
         {
-            targetRandomPosition = new UnityEngine.Vector2(Random.Range(-500, 500), Random.Range(-250, 250));
-            Instantiate(target, targetRandomPosition, UnityEngine.Quaternion.identity);
+            targetRandomPosition = new UnityEngine.Vector2(Random.Range(-3, 3), Random.Range(-3, 3));
+            GameObject tar = Instantiate(target, targetRandomPosition, UnityEngine.Quaternion.identity);
+            tar.transform.localScale = new UnityEngine.Vector3(targetScale, targetScale, 1);
+
 
             yield return new WaitForSeconds(time);
 

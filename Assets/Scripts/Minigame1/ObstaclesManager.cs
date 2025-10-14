@@ -6,6 +6,35 @@ using UnityEngine.SceneManagement;
 
 public class ObstaclesManager : MonoBehaviour
 {
+    private static ObstaclesManager instance;
+    public static ObstaclesManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                Debug.LogError("EnemyManager is NULL.");
+            }
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+
+        if (instance)
+        {
+            Debug.LogError("GameManager is already in the scene");
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+
+    }
+
+
     public GameObject telegraphPrefab;
 
     public float startPosX = 0;
@@ -15,9 +44,9 @@ public class ObstaclesManager : MonoBehaviour
     public float perfectScore = 150000;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        StartCoroutine(Waves());
+
     }
 
     // Update is called once per frame
@@ -26,49 +55,56 @@ public class ObstaclesManager : MonoBehaviour
 
     }
 
+    public void StartWaves()
+    {
+        StartCoroutine(Waves());
+    }
+
     IEnumerator Waves()
     {
-        //creates a set of 3 telgraghs from the prefab
-        GameObject tele1 = Instantiate(telegraphPrefab, new Vector3(startPosX - 3, startPosY, 0), Quaternion.identity); //creates at position
-        tele1.transform.localScale = new Vector3(1, vlength, 1); //changes telegraph size
-        GameObject tele2 = Instantiate(telegraphPrefab, new Vector3(startPosX, startPosY, 0), Quaternion.identity);
-        tele2.transform.localScale = new Vector3(1, vlength, 1);
-        GameObject tele3 = Instantiate(telegraphPrefab, new Vector3(startPosX + 3, startPosY, 0), Quaternion.identity);
-        tele3.transform.localScale = new Vector3(1, vlength, 1);
-
-        //waits
-        yield return new WaitForSeconds(1f);
-
-        //creates more
-        tele1 = Instantiate(telegraphPrefab, new Vector3(startPosX - 5, startPosY, 0), Quaternion.identity);
-        tele1.transform.localScale = new Vector3(1, vlength, 1);
-        tele2 = Instantiate(telegraphPrefab, new Vector3(startPosX + 2, startPosY, 0), Quaternion.identity);
-        tele2.transform.localScale = new Vector3(1, vlength, 1);
-        tele3 = Instantiate(telegraphPrefab, new Vector3(startPosX + 5, startPosY, 0), Quaternion.identity);
-        tele3.transform.localScale = new Vector3(1, vlength, 1);
-        tele1 = Instantiate(telegraphPrefab, new Vector3(startPosX, startPosY, 0), Quaternion.identity);
-        tele1.transform.localScale = new Vector3(hlength, 1, 1);
-        tele2 = Instantiate(telegraphPrefab, new Vector3(startPosX - 6, startPosY, 0), Quaternion.identity);
-        tele2.transform.localScale = new Vector3(1, vlength, 1);
 
         yield return new WaitForSeconds(1f);
 
-        tele1 = Instantiate(telegraphPrefab, new Vector3(startPosX, startPosY, 0), Quaternion.identity);
-        tele1.transform.localScale = new Vector3(1, vlength, 1);
-        tele2 = Instantiate(telegraphPrefab, new Vector3(startPosX + 2, startPosY, 0), Quaternion.identity);
-        tele2.transform.localScale = new Vector3(1, vlength, 1);
-        tele3 = Instantiate(telegraphPrefab, new Vector3(startPosX + 4, startPosY, 0), Quaternion.identity);
-        tele3.transform.localScale = new Vector3(1, vlength, 1);
-        tele1 = Instantiate(telegraphPrefab, new Vector3(startPosX - 2, startPosY, 0), Quaternion.identity);
-        tele1.transform.localScale = new Vector3(1, vlength, 1);
-        tele2 = Instantiate(telegraphPrefab, new Vector3(startPosX - 4, startPosY, 0), Quaternion.identity);
-        tele2.transform.localScale = new Vector3(1, vlength, 1);
-        tele3 = Instantiate(telegraphPrefab, new Vector3(startPosX - 6, startPosY, 0), Quaternion.identity);
-        tele3.transform.localScale = new Vector3(1, vlength, 1);
+        MakeObstacle(-3, true);
+        MakeObstacle(0, true);
+        MakeObstacle(3, true);
+
+
+        yield return new WaitForSeconds(1f);
+
+        MakeObstacle(Random.Range(-6f, 7f), true);
+        MakeObstacle(Random.Range(-6f, 7f), true);
+        MakeObstacle(Random.Range(-6f, 7f), true);
+        MakeObstacle(Random.Range(-4f, 3f), false);
+        MakeObstacle(Random.Range(-6f, 7f), true);
+
+        yield return new WaitForSeconds(1f);
+
+        MakeObstacle(Random.Range(-6f, 7f), true);
+        MakeObstacle(Random.Range(-6f, 7f), true);
+        MakeObstacle(Random.Range(-6f, 7f), true);
+        MakeObstacle(Random.Range(-6f, 7f), true);
+        MakeObstacle(Random.Range(-4f, 3f), false);
+        MakeObstacle(Random.Range(-4f, 3f), false);
 
         yield return new WaitForSeconds(3f);
 
         scoreManager.instance.ChangeScore((int)((playerManager.instance.HP / playerManager.instance.maxHP) * perfectScore));
-        SceneManager.LoadScene(0);
+        scoreManager.instance.MinigameEnd();
+    }
+
+    private void MakeObstacle(float offset, bool vertical)//x between 7 and -6, y between 3 and -4 (inclusive)
+    {
+        if (vertical)
+        {
+            GameObject tele1 = Instantiate(telegraphPrefab, new Vector3(startPosX - offset, startPosY, 0), Quaternion.identity); //creates at position
+            tele1.transform.localScale = new Vector3(1, vlength, 1); //changes telegraph size
+        }
+        else
+        {
+            GameObject tele1 = Instantiate(telegraphPrefab, new Vector3(startPosX - .33f, startPosY - offset, 0), Quaternion.identity); //creates at position
+            tele1.transform.localScale = new Vector3(hlength, 1, 1);
+        }
+        
     }
 }
