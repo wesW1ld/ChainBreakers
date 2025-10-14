@@ -15,6 +15,7 @@ public class scoreManager : MonoBehaviour
     public int baseDmg = 20;
 
     public GameObject minigame1;
+    public GameObject minigame2;
 
     public static scoreManager Instance
     {
@@ -62,7 +63,7 @@ public class scoreManager : MonoBehaviour
     public void ComboEnd()
     {
         //minigame
-        minigame1.SetActive(true);
+        minigame2.SetActive(true);
         minigameMode = true;
     }
 
