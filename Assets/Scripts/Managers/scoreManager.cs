@@ -63,7 +63,15 @@ public class scoreManager : MonoBehaviour
     public void ComboEnd()
     {
         //minigame
-        minigame2.SetActive(true);
+        int pick = Random.Range(0, 1);
+        if (pick == 0)
+        {
+            minigame1.SetActive(true);
+        }
+        else
+        {
+            minigame2.SetActive(true);
+        }        
         minigameMode = true;
     }
 
