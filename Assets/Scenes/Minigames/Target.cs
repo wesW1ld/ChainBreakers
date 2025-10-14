@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Target : MonoBehaviour
+public class Target : MonoBehaviour, IPointerClickHandler
 {
     public float time;
 
@@ -19,7 +20,7 @@ public class Target : MonoBehaviour
 
     }
     
-    private void OnMouseDown()
+    public void OnPointerClick(PointerEventData eventData)
     {
         AimMinigameControl.score += 5;
         AimMinigameControl.targetsHit += 1;
