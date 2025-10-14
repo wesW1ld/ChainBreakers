@@ -12,8 +12,7 @@ public class hpBar : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        playerManager.instance.updateHealth += UpdateHP; //subscribe to updateHealth event, calls UpdateHP() when invoked
-        maxHP = playerManager.instance.maxHP;
+        StartCoroutine(Subscribe());
         HP = maxHP;
     }
 
@@ -27,5 +26,13 @@ public class hpBar : MonoBehaviour
     {
         HP = playerManager.instance.HP;
         gameObject.GetComponent<UnityEngine.UI.Image>().fillAmount = HP / maxHP; //updates bar image
+    }
+
+    IEnumerator Subscribe()
+    {
+        yield return new WaitForSeconds(.4f);
+        playerManager.instance.updateHealth += UpdateHP; //subscribe to updateHealth event, calls UpdateHP() when invoked
+        maxHP = playerManager.instance.maxHP;
+        UpdateHP();
     }
 }

@@ -35,6 +35,7 @@ public class playerManager : MonoBehaviour
         else
         {
             instance = this;
+            Debug.Log("playermanager awakened");
             //DontDestroyOnLoad(this); 
         }
 
