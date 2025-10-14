@@ -90,7 +90,7 @@ public class ObstaclesManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         scoreManager.instance.ChangeScore((int)((playerManager.instance.HP / playerManager.instance.maxHP) * perfectScore));
-        scoreManager.instance.MinigameEnd();
+        scoreManager.instance.MinigameEnd(1);
     }
 
     private void MakeObstacle(float offset, bool vertical)//x between 7 and -6, y between 3 and -4 (inclusive)

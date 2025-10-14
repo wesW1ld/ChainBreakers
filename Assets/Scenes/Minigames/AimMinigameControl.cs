@@ -108,7 +108,8 @@ public class AimMinigameControl : MonoBehaviour
         resultsScreen.SetActive(true);
         scoreText.text = "Score\n" + score;
         targetsChainedText.text = "Targets Chained\n" + targetsHit;
-        scoreManager.instance.ChangeScore(score);
+        scoreManager.instance.ChangeScore(score * 1000);
+        scoreManager.instance.MinigameEnd(2);
     }
 
     public void StartGetReadyCoroutine()

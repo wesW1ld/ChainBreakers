@@ -63,7 +63,7 @@ public class scoreManager : MonoBehaviour
     public void ComboEnd()
     {
         //minigame
-        int pick = Random.Range(0, 1);
+        int pick = Random.Range(0, 2);
         if (pick == 0)
         {
             minigame1.SetActive(true);
@@ -75,7 +75,7 @@ public class scoreManager : MonoBehaviour
         minigameMode = true;
     }
 
-    public void MinigameEnd()
+    public void MinigameEnd(int num)
     {
         //damage
         if (Score < 50000) //F
@@ -105,7 +105,14 @@ public class scoreManager : MonoBehaviour
         }
 
         minigameMode = false;
-        minigame1.SetActive(false);
+        if(num == 1)
+        {
+            minigame1.SetActive(false);
+        }
+        else if(num == 2)
+        {
+            minigame2.SetActive(false);
+        }
     }
 
     void OnSceneChanged(Scene oldScene, Scene newScene)
