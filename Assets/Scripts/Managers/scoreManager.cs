@@ -10,10 +10,11 @@ public class scoreManager : MonoBehaviour
     public static scoreManager instance;
 
     public int Score; //{ get; private set; }
-
+    public bool minigameMode = false;
     public TextMeshProUGUI text;
-
     public int baseDmg = 20;
+
+    public GameObject minigame1;
 
     public static scoreManager Instance
     {
@@ -51,11 +52,6 @@ public class scoreManager : MonoBehaviour
         SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
-    void OnClick(InputValue value)
-    {
-        ChangeScore(10000);
-    }
-
     public void ChangeScore(int amt)
     {
         Score += amt;
@@ -65,8 +61,14 @@ public class scoreManager : MonoBehaviour
 
     public void ComboEnd()
     {
-        //maybe ask the player to pick an enemy to hit
-        //call EnemyManager script
+        //minigame
+        minigame1.SetActive(true);
+        minigameMode = true;
+    }
+
+    public void MinigameEnd()
+    {
+        //damage
         if (Score < 50000) //F
         {
             EnemyManager.Instance.DealDamage((int)(baseDmg * .5));
@@ -85,12 +87,16 @@ public class scoreManager : MonoBehaviour
         }
         else if (Score < 500000) //A
         {
-            EnemyManager.Instance.DealDamage((int)(baseDmg * 4));
+            EnemyManager.Instance.DealDamage((int)(baseDmg * 5));
         }
         else //S
         {
             EnemyManager.Instance.DealDamage((int)(baseDmg * 5));
+            EnemyManager.Instance.DealDamage((int)(baseDmg * 5));
         }
+
+        minigameMode = false;
+        minigame1.SetActive(false);
     }
 
     void OnSceneChanged(Scene oldScene, Scene newScene)

@@ -15,7 +15,7 @@ public class ObstaclesManager : MonoBehaviour
     public float perfectScore = 150000;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(Waves());
     }
@@ -69,6 +69,6 @@ public class ObstaclesManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         scoreManager.instance.ChangeScore((int)((playerManager.instance.HP / playerManager.instance.maxHP) * perfectScore));
-        SceneManager.LoadScene(0);
+        scoreManager.instance.MinigameEnd();
     }
 }

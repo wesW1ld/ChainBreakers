@@ -10,7 +10,7 @@ public class hpBar : MonoBehaviour
     private float maxHP;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         playerManager.instance.updateHealth += UpdateHP; //subscribe to updateHealth event, calls UpdateHP() when invoked
         maxHP = playerManager.instance.maxHP;

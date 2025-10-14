@@ -35,12 +35,12 @@ public class playerManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(this); 
+            //DontDestroyOnLoad(this); 
         }
 
     }
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         maxHP = 3;
         HP = 3;
