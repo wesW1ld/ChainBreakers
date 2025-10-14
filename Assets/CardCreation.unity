@@ -353,7 +353,7 @@ PrefabInstance:
     - target: {fileID: 3310467374275151117, guid: 4062d16a41076394ebf00782e18611b3, type: 3}
       propertyPath: cardData
       value: 
-      objectReference: {fileID: 11400000, guid: 88d15c1600ef96042af4b516b4bfa925, type: 2}
+      objectReference: {fileID: 11400000, guid: 8c23a7736f3a499408289f418b1bf6f7, type: 2}
     - target: {fileID: 3432754449963310021, guid: 4062d16a41076394ebf00782e18611b3, type: 3}
       propertyPath: m_Layer
       value: 1

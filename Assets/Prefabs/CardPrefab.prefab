@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 3731935474231654951}
   - component: {fileID: 1460457495897322671}
   m_Layer: 0
-  m_Name: CardImage
+  m_Name: CardBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.07}
   m_SizeDelta: {x: 2.5, y: 3.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3731935474231654951
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fca16a7342e7945a5b4f660f30e3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardData: {fileID: 11400000, guid: 88d15c1600ef96042af4b516b4bfa925, type: 2}
+  cardData: {fileID: 11400000, guid: a3ac248e94298334b8dd69f4fce11d29, type: 2}
   cardImage: {fileID: 2452558743204016773}
   cardName: {fileID: 4513737561463752639}
   cardDescription: {fileID: 6862176794632911343}
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 7524927632290712137}
   - component: {fileID: 2452558743204016773}
   m_Layer: 0
-  m_Name: image
+  m_Name: CardImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,7 +440,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.004, y: 0.716}
+  m_AnchoredPosition: {x: 0.004, y: 0.73}
   m_SizeDelta: {x: 2.4, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7524927632290712137

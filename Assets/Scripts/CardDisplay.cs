@@ -12,6 +12,15 @@ public class CardDisplay : MonoBehaviour
     public TMP_Text cardName;
     public TMP_Text cardDescription;
 
+    public void Setupcard(Card card)
+    {
+        cardData = card;
+
+        if (cardName != null) cardName.text = card.cardName;
+        if (cardDescription != null) cardDescription.text = card.description;
+        if (cardImage != null) cardImage.sprite = card.artwork;
+    }
+
     void Start ()
     {
         if (cardData != null)
