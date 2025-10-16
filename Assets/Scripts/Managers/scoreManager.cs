@@ -64,7 +64,7 @@ public class scoreManager : MonoBehaviour
     {
         //minigame
         int pick = Random.Range(0, 2);
-        if (pick == 0)
+        if (pick < 1)
         {
             minigame1.SetActive(true);
         }
