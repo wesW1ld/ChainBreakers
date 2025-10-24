@@ -69,6 +69,7 @@ public class ObstaclesManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         scoreManager.instance.ChangeScore((int)((playerManager.instance.HP / playerManager.instance.maxHP) * perfectScore));
+        FindObjectOfType<EnemyDefeat>().OnDefeated();// erase me!!!!!!!!!!!!!1
         SceneManager.LoadScene(0);
     }
 }
