@@ -62,6 +62,7 @@ public class scoreManager : MonoBehaviour
 
     public void ComboEnd()
     {
+        EnemyManager.Instance.EnemyAttack();
         //minigame
         int pick = Random.Range(0, 2);
         if (pick < 1)

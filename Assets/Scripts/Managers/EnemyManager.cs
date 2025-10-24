@@ -158,4 +158,23 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(3);
     }
+
+    public void EnemyAttack()
+    {
+        int enemyIndex = 0;
+        bool enemyFound = false;
+        while (!enemyFound && (enemyIndex < enemies.Count))
+        {
+            if (enemies[enemyIndex] == null)
+            {
+                enemyIndex++;
+            }
+            else
+            {
+                enemyFound = true;
+            }
+        }
+
+        enemies[enemyIndex].GetComponent<Enemy>().EnemyAction();
+    }
 }
