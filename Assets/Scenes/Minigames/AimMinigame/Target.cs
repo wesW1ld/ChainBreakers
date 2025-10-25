@@ -22,7 +22,7 @@ public class Target : MonoBehaviour, IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        AimMinigameControl.score += 5;
+        AimMinigameControl.score += 5000;
         AimMinigameControl.targetsHit += 1;
         AimMinigameControl.check = 1;
         time -= 1f;

@@ -97,7 +97,7 @@ public class AimMinigameControl : MonoBehaviour
             score *= 2;
             if (targetsHit >= 12)
             {
-                score += 30;
+                score += 30000;
             }
         }
 
