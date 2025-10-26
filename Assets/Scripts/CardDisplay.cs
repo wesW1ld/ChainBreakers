@@ -7,31 +7,31 @@ using ChainBreakers;
 
 public class CardDisplay : MonoBehaviour
 {
-    public Card cardData;
+
+    public Card card;
     public Image cardImage;
     public TMP_Text cardName;
     public TMP_Text cardDescription;
+    public TMP_Text min;
+    public TMP_Text max;
+    public TMP_Text minTurn;
+    public TMP_Text maxTurn;
 
-    public void Setupcard(Card card)
+    public void Start()
     {
-        cardData = card;
-
-        if (cardName != null) cardName.text = card.cardName;
-        if (cardDescription != null) cardDescription.text = card.description;
-        if (cardImage != null) cardImage.sprite = card.artwork;
+        UpdateCardDisplay();
     }
 
-    void Start ()
+    public void UpdateCardDisplay()
     {
-        if (cardData != null)
-        {
-            cardName.text = cardData.cardName;
-            cardDescription.text = cardData.description;
-            cardImage.sprite = cardData.artwork;
-        }
-        else
-        {
-            Debug.LogWarning("Card data is not assigned.");
-        }
+    if (card == null) return;
+
+    cardName.text = card.cardName;
+    cardDescription.text = card.description;
+    cardImage.sprite = card.artwork;
+    if (card.min != 0)min.text = card.min.ToString();
+    if (card.max != 0)max.text = card.max.ToString();
+    if (card.minTurn != 0)minTurn.text = card.minTurn.ToString();
+    if (card.maxTurn != 0)maxTurn.text = card.maxTurn.ToString();
     }
 }

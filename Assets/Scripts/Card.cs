@@ -16,7 +16,7 @@ namespace ChainBreakers
         public List<CardType> cardTypes;
         public List<StatusEffect> statusEffects;
         public string description;
-        internal object transform;
+
 
         public enum CardType
         {
