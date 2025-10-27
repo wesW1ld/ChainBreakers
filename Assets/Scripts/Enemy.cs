@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public int currentHP;
     public int attackPower = 20;
     public int damageReceived = 10;
+    private bool defending = false;
 
     private int NumChoices = 3;
     private float[] ProbabiltyMatrix;//attack, defense, special weights
@@ -32,7 +33,16 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        currentHP -= amount;
+        if(defending)
+        {
+            currentHP -= amount / 2;
+            defending = false;
+        }
+        else
+        {
+            currentHP -= amount;
+        }
+        
 
         // Update score using your existing singleton ScoreManager
         if (scoreManager.Instance != null)
@@ -78,10 +88,12 @@ public class Enemy : MonoBehaviour
         switch(choice)
         {
             case 0:
-                //make new player manager and hp bar and deal damage to it
+                Debug.Log("Attacking");
+                PlayerManager.instance.TakeDamage(100f);
                 break;
             case 1:
-                //take less damage for a turn
+                Debug.Log("Defending");
+                defending = true;
                 break;
             default:
                 Debug.Log("Not implemented yet");
