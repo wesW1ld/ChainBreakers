@@ -89,7 +89,7 @@ public class ObstaclesManager : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        scoreManager.instance.ChangeScore((int)((playerManager.instance.HP / playerManager.instance.maxHP) * perfectScore));
+        scoreManager.instance.ChangeScore((int)((playerManagerM1.instance.HP / playerManagerM1.instance.maxHP) * perfectScore));
         scoreManager.instance.MinigameEnd(1);
     }
 
