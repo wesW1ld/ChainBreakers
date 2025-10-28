@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526137fc0f4cc1748a29fae76882fd59, type: 3}
   m_Name: Scout Scan
   m_EditorClassIdentifier: 
-  cardName: 
+  cardName: Scout Scan
   artwork: {fileID: 0}
-  minDam: 0
-  maxDam: 0
-  cardTypes: 
+  min: 0
+  max: 0
+  minTurn: 0
+  maxTurn: 0
+  cardTypes: 03000000
   statusEffects: 
-  description: 
+  description: Scans the enemy, Work in Progress(WIP)
