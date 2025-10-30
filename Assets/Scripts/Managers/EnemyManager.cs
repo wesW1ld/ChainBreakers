@@ -6,13 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
-    public GameObject enemyPrefab; // The enemy prefab to spawn
     public int maxEnemies = 5;      // Maximum number of enemies allowed
     public Vector3 spawnPosition = new Vector3(-0.4546244f, -0.1548468f, 0.04473706f); // Starting spawn position
     public float spacing = 0.5f;    // How far apart each enemy is placed (along X axis)
 
     private List<GameObject> enemies = new List<GameObject>(); // Track all active enemies
     private static EnemyManager instance;
+
+    public enum EnemyType
+    {
+        Goblin,
+        Assassin
+    }
+    public GameObject goblinPrefab;
+    public GameObject assassinPrefab;
 
     // Singleton pattern
     public static EnemyManager Instance
@@ -62,15 +69,29 @@ public class EnemyManager : MonoBehaviour
                 spawnPosition.y,
                 spawnPosition.z
             );
-
-            SpawnEnemy(offsetPosition);
+            if (i % 2 != 0)
+            {
+                SpawnEnemy(offsetPosition, EnemyType.Goblin);
+            }
+            else
+            {
+                SpawnEnemy(offsetPosition, EnemyType.Assassin);
+            }
         }
     }
 
     // Spawns a single enemy at the given position
-    public void SpawnEnemy(Vector3 position)
+    public void SpawnEnemy(Vector3 position, EnemyType type)
     {
-        GameObject newEnemy = Instantiate(enemyPrefab, position, Quaternion.identity);
+        GameObject newEnemy;
+        if (type == EnemyType.Goblin)
+        {
+            newEnemy = Instantiate(goblinPrefab, position, Quaternion.identity);
+        }
+        else
+        {
+            newEnemy = Instantiate(assassinPrefab, position, Quaternion.identity);
+        }
         enemies.Add(newEnemy);
         Debug.Log($"[EnemyManager] Spawned enemy #{enemies.Count} at {position}.");
     }

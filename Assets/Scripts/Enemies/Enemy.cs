@@ -14,12 +14,13 @@ public class Enemy : MonoBehaviour
     private bool defending = false;
 
     private int NumChoices = 3;
-    private float[] ProbabiltyMatrix;//attack, defense, special weights
+    protected float[] ProbabiltyMatrix;//attack, defense, special weights   protected:child can access
 
     private void Start()
     {
         currentHP = maxHP;
-        ProbabiltyMatrix = new float[] { .5f, .2f, .3f };
+        ProbabiltyMatrix = new float[] { .7f, .3f, .0f };
+        MakePMatrix();
         float sum = 0;
         for (int i = 0; i < NumChoices; i++)
         {
@@ -96,7 +97,7 @@ public class Enemy : MonoBehaviour
                 defending = true;
                 break;
             default:
-                Debug.Log("Not implemented yet");
+                SpecialAttack();
                 break;
         }
     }
@@ -112,6 +113,24 @@ public class Enemy : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public virtual void MakePMatrix()
+    {
+        float sum = 0;
+        for (int i = 0; i < ProbabiltyMatrix.Length; i++)
+        {
+            sum += ProbabiltyMatrix[i];
+        }
+        if(sum != 1f)
+        {
+            Debug.LogError("Probability Matrix doesn't add up to 1");
+        }
+    }
+
+    public virtual void SpecialAttack()
+    {
+        Debug.Log("Not implemented yet/No special");
     }
 }
 

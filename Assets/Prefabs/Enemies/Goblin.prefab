@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2450779016181275530}
   - component: {fileID: 884897713717172156}
-  - component: {fileID: 8487416110731425220}
+  - component: {fileID: 905605586340971077}
   m_Layer: 0
-  m_Name: Polaris
+  m_Name: Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8487416110731425220
+--- !u!114 &905605586340971077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2980808397589556802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e95233eb103c14e4996debbe74c661fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c6d232d2a962694f990b2446a462dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Polaris

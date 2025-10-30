@@ -56,4 +56,20 @@ public class PlayerManager : MonoBehaviour
     {
         return HP;
     }
+
+    public enum Status
+    {
+        normal,
+        poisoned,
+        fire,
+        weakend
+    }
+
+    private Status curStatus = Status.normal;
+
+    public void ChangeStatus(Status s)
+    {
+        curStatus = s;
+        Debug.Log($"Player status changed to {curStatus}");
+    }
 }
