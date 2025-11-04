@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     protected int NumChoices = 3;
     protected float[] ProbabiltyMatrix;//attack, defense, special weights   protected:child can access
 
-    private void Start()
+    public virtual void Start()
     {
         currentHP = maxHP;
         ProbabiltyMatrix = new float[] { .7f, .3f, .0f };

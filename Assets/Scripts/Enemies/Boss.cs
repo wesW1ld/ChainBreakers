@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss : Enemy
 {
+    public override void Start()
+    {
+        base.Start();
+        base.currentHP = 300;
+        base.maxHP = 300;
+    }
+
     public override void MakePMatrix()
     {
         base.NumChoices = 4;
