@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,7 +14,7 @@ public class Enemy : MonoBehaviour
     public int damageReceived = 10;
     private bool defending = false;
 
-    private int NumChoices = 3;
+    protected int NumChoices = 3;
     protected float[] ProbabiltyMatrix;//attack, defense, special weights   protected:child can access
 
     private void Start()
@@ -26,11 +27,17 @@ public class Enemy : MonoBehaviour
         {
             sum += ProbabiltyMatrix[i];
         }
-        if(sum != 1)
+        if (sum != 1)
         {
             Debug.Log($"Sum is equal to {sum}, not 1");
         }
+
+        var ui = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        textUI = ui.GetComponent<TextMeshProUGUI>();
+        textUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2);
     }
+    
+    protected TextMeshProUGUI textUI;
 
     public void TakeDamage(int amount)
     {
@@ -90,14 +97,15 @@ public class Enemy : MonoBehaviour
         {
             case 0:
                 Debug.Log("Attacking");
-                PlayerManager.instance.TakeDamage(100f);
+                Attack();
                 break;
             case 1:
                 Debug.Log("Defending");
                 defending = true;
+                textUI.text = "Defending";
                 break;
             default:
-                SpecialAttack();
+                SpecialAttack(choice);
                 break;
         }
     }
@@ -128,9 +136,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void SpecialAttack()
+    public virtual void SpecialAttack(int i)
     {
         Debug.Log("Not implemented yet/No special");
+        textUI.text = "Undefined";
+    }
+
+    public virtual void Attack()
+    {
+        PlayerManager.instance.TakeDamage(100f);
+        textUI.text = "Attacking for 100";
     }
 }
 

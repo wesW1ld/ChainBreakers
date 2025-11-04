@@ -10,9 +10,10 @@ public class Assassin : Enemy
         base.MakePMatrix();
     }
 
-    public override void SpecialAttack()
+    public override void SpecialAttack(int i)
     {
         //poison player
         PlayerManager.instance.ChangeStatus(PlayerManager.Status.poisoned);
+        base.textUI.text = "Poisoning Player";
     }
 }

@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
 {
     public int maxEnemies = 5;      // Maximum number of enemies allowed
     public Vector3 spawnPosition = new Vector3(-0.4546244f, -0.1548468f, 0.04473706f); // Starting spawn position
-    public float spacing = 0.5f;    // How far apart each enemy is placed (along X axis)
+    public float spacing = 2.5f;    // How far apart each enemy is placed (along X axis)
 
     private List<GameObject> enemies = new List<GameObject>(); // Track all active enemies
     private static EnemyManager instance;
@@ -16,10 +16,14 @@ public class EnemyManager : MonoBehaviour
     public enum EnemyType
     {
         Goblin,
-        Assassin
+        Assassin,
+        Boss
     }
     public GameObject goblinPrefab;
     public GameObject assassinPrefab;
+    public GameObject bossPrefab;
+
+    public GameObject textPrefab;
 
     // Singleton pattern
     public static EnemyManager Instance
@@ -69,14 +73,7 @@ public class EnemyManager : MonoBehaviour
                 spawnPosition.y,
                 spawnPosition.z
             );
-            if (i % 2 != 0)
-            {
-                SpawnEnemy(offsetPosition, EnemyType.Goblin);
-            }
-            else
-            {
-                SpawnEnemy(offsetPosition, EnemyType.Assassin);
-            }
+            SpawnEnemy(offsetPosition, EnemyType.Boss);
         }
     }
 
@@ -88,10 +85,14 @@ public class EnemyManager : MonoBehaviour
         {
             newEnemy = Instantiate(goblinPrefab, position, Quaternion.identity);
         }
-        else
+        else if (type == EnemyType.Assassin)
         {
             newEnemy = Instantiate(assassinPrefab, position, Quaternion.identity);
         }
+        else
+        {
+            newEnemy = Instantiate(bossPrefab, position, Quaternion.identity);
+        }        
         enemies.Add(newEnemy);
         Debug.Log($"[EnemyManager] Spawned enemy #{enemies.Count} at {position}.");
     }

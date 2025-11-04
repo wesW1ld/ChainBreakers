@@ -610,6 +610,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199174007853638486, guid: 4907af2977eb36a45bc9475c4e8b1e48, type: 3}
+      propertyPath: bossPrefab
+      value: 
+      objectReference: {fileID: 7003925888736956339, guid: f0d8794c5b2e7b6439df61a32de66755, type: 3}
+    - target: {fileID: 199174007853638486, guid: 4907af2977eb36a45bc9475c4e8b1e48, type: 3}
       propertyPath: maxEnemies
       value: 3
       objectReference: {fileID: 0}
