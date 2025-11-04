@@ -14,6 +14,10 @@ public class Assassin : Enemy
     {
         //poison player
         PlayerManager.instance.ChangeStatus(PlayerManager.Status.poisoned);
+    }
+    
+    public override void SpecialAttackPreview(int i)
+    {
         base.textUI.text = "Poisoning Player";
     }
 }

@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     public int damageReceived = 10;
     private bool defending = false;
 
+    private int choice;
+
     protected int NumChoices = 3;
     protected float[] ProbabiltyMatrix;//attack, defense, special weights   protected:child can access
 
@@ -35,6 +37,8 @@ public class Enemy : MonoBehaviour
         var ui = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
         textUI = ui.GetComponent<TextMeshProUGUI>();
         textUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2);
+
+        StartCoroutine(PickChoice());
     }
     
     protected TextMeshProUGUI textUI;
@@ -70,30 +74,7 @@ public class Enemy : MonoBehaviour
 
     public void EnemyAction()
     {
-        //turns {.5, .2, .3} into {.5, .7, 1} for ranges of options for random choice
-        float[] probabilities = new float[NumChoices];
-        float prev = 0;
-        for (int i = 0; i < NumChoices; i++)
-        {
-            probabilities[i] = prev + ProbabiltyMatrix[i];
-            prev += ProbabiltyMatrix[i];
-        }
-
-        // Debug.Log($"PMatrix: {ProbabiltyMatrix[0]} {ProbabiltyMatrix[1]} {ProbabiltyMatrix[2]}");
-        // Debug.Log($"probabilities: {probabilities[0]} {probabilities[1]} {probabilities[2]}");
-
-        float actionNum = Random.value;
-        int choice = 0;
-        for (int i = 0; i < NumChoices; i++)
-        {
-            if (probabilities[i] > actionNum)
-            {
-                choice = i;
-                i = NumChoices;
-            }
-        }
-    
-        switch(choice)
+        switch (choice)
         {
             case 0:
                 Debug.Log("Attacking");
@@ -102,12 +83,13 @@ public class Enemy : MonoBehaviour
             case 1:
                 Debug.Log("Defending");
                 defending = true;
-                textUI.text = "Defending";
                 break;
             default:
                 SpecialAttack(choice);
                 break;
         }
+        
+        StartCoroutine(PickChoice());
     }
 
     private void Die()
@@ -139,13 +121,62 @@ public class Enemy : MonoBehaviour
     public virtual void SpecialAttack(int i)
     {
         Debug.Log("Not implemented yet/No special");
-        textUI.text = "Undefined";
     }
 
     public virtual void Attack()
     {
         PlayerManager.instance.TakeDamage(100f);
+    }
+
+    IEnumerator PickChoice()
+    {
+        yield return new WaitForSeconds(1f);
+
+        //turns {.5, .2, .3} into {.5, .7, 1} for ranges of options for random choice
+        float[] probabilities = new float[NumChoices];
+        float prev = 0;
+        for (int i = 0; i < NumChoices; i++)
+        {
+            probabilities[i] = prev + ProbabiltyMatrix[i];
+            prev += ProbabiltyMatrix[i];
+        }
+
+        // Debug.Log($"PMatrix: {ProbabiltyMatrix[0]} {ProbabiltyMatrix[1]} {ProbabiltyMatrix[2]}");
+        // Debug.Log($"probabilities: {probabilities[0]} {probabilities[1]} {probabilities[2]}");
+
+        float actionNum = Random.value;
+        choice = 0;
+        for (int i = 0; i < NumChoices; i++)
+        {
+            if (probabilities[i] > actionNum)
+            {
+                choice = i;
+                i = NumChoices;
+            }
+        }
+
+        switch (choice)
+        {
+            case 0:
+                AttackPreview();
+                break;
+            case 1:
+                textUI.text = "Defending";
+                break;
+            default:
+                SpecialAttackPreview(choice);
+                break;
+        }
+    }
+
+    public virtual void AttackPreview()
+    {
         textUI.text = "Attacking for 100";
+    }
+    
+    public virtual void SpecialAttackPreview(int i)
+    {
+        textUI.text = "Undefined";
     }
 }
 

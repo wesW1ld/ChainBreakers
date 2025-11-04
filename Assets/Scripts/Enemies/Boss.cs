@@ -15,19 +15,33 @@ public class Boss : Enemy
     {
         //weaken player
         PlayerManager.instance.ChangeStatus(PlayerManager.Status.weakend);
-        base.textUI.text = "Weakening Player";
 
         if (i == 3)
         {
             Debug.Log("Special2");
             PlayerManager.instance.TakeDamage(200f);
-            base.textUI.text = "Weakening Player and Attacking for 200";
         }
     }
 
     public override void Attack()
     {
         PlayerManager.instance.TakeDamage(250f);
+    }
+
+    public override void AttackPreview()
+    {
         base.textUI.text = "Attacking for 250";
+    }
+    
+    public override void SpecialAttackPreview(int i)
+    {
+        if (i == 3)
+        {
+            base.textUI.text = "Weakening Player and Attacking for 200";
+        }
+        else
+        {
+            base.textUI.text = "Weakening Player";
+        }
     }
 }
