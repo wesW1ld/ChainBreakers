@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 526137fc0f4cc1748a29fae76882fd59, type: 3}
-  m_Name: Ask Chat
+  m_Name: Punji Pit
   m_EditorClassIdentifier: 
-  cardName: Ask Chat
+  cardName: Punji Pit
   artwork: {fileID: 0}
-  min: 0
-  max: 0
-  minTurn: 0
-  maxTurn: 0
-  cardTypes: 02000000
+  min: 5
+  max: 7
+  minTurn: 4
+  maxTurn: 6
+  cardTypes: 00000000
   statusEffects: 
-  description: Add up to 2 cards from a set of 3
+  description: Deal 5-10 damage plus the enemy will take 4-6 damage per attack for
+    the next two rounds

@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526137fc0f4cc1748a29fae76882fd59, type: 3}
   m_Name: Bag Boy
   m_EditorClassIdentifier: 
-  cardName: 
+  cardName: Bag Boy
   artwork: {fileID: 0}
-  minDam: 0
-  maxDam: 0
-  cardTypes: 
+  min: 4
+  max: 8
+  minTurn: 0
+  maxTurn: 0
+  cardTypes: 01000000
   statusEffects: 
-  description: 
+  description: Adds 4-8 armor plus, draw an extra card and adds an extra play card
+    slot.

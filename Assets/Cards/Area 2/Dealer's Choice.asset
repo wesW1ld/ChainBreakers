@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 526137fc0f4cc1748a29fae76882fd59, type: 3}
-  m_Name: Ask Chat
+  m_Name: Dealer's Choice
   m_EditorClassIdentifier: 
-  cardName: Ask Chat
+  cardName: Dealer's Choice
   artwork: {fileID: 0}
-  min: 0
-  max: 0
+  min: 2
+  max: 3
   minTurn: 0
   maxTurn: 0
-  cardTypes: 02000000
+  cardTypes: 03000000
   statusEffects: 
-  description: Add up to 2 cards from a set of 3
+  description: Choose 2-3 cards to be added, ignore the hand limit. Only can be played
+    twice.

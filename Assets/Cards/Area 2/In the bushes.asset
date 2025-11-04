@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 526137fc0f4cc1748a29fae76882fd59, type: 3}
-  m_Name: Ask Chat
+  m_Name: In the bushes
   m_EditorClassIdentifier: 
-  cardName: Ask Chat
+  cardName: In The Bushes
   artwork: {fileID: 0}
-  min: 0
-  max: 0
+  min: 6
+  max: 7
   minTurn: 0
   maxTurn: 0
-  cardTypes: 02000000
-  statusEffects: 
-  description: Add up to 2 cards from a set of 3
+  cardTypes: 01000000
+  statusEffects: 06000000
+  description: Gain 6-7 shield and gain "Blur"

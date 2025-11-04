@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526137fc0f4cc1748a29fae76882fd59, type: 3}
   m_Name: Now This Is A Knife
   m_EditorClassIdentifier: 
-  cardName: 
+  cardName: Now THIS is a knife!
   artwork: {fileID: 0}
-  minDam: 0
-  maxDam: 0
-  cardTypes: 
+  min: 7
+  max: 10
+  minTurn: 0
+  maxTurn: 0
+  cardTypes: 00000000
   statusEffects: 
-  description: 
+  description: Deal 7-10 damage plus adds a hand slot.

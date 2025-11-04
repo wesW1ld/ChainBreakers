@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: StimShot
   artwork: {fileID: 0}
-  min: 0
-  max: 0
+  min: 9
+  max: 13
   minTurn: 0
   maxTurn: 0
-  cardTypes: 
-  statusEffects: 
-  description: 
+  cardTypes: 01000000
+  statusEffects: 04000000
+  description: Heals 9-13 health plus a 50% chance to gain "Rage"

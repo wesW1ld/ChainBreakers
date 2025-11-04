@@ -35,7 +35,10 @@ namespace ChainBreakers
             Cloaked,
             Blur,
             Binded,
-            Regenerative 
+            Regenerative,
+            might,
+            poise,
+
         }
     }
 }

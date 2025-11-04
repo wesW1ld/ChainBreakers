@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Medical Training
   artwork: {fileID: 0}
-  min: 7
-  max: 10
+  min: 5
+  max: 7
   minTurn: 0
   maxTurn: 0
   cardTypes: 01000000

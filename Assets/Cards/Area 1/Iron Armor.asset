@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526137fc0f4cc1748a29fae76882fd59, type: 3}
   m_Name: Iron Armor
   m_EditorClassIdentifier: 
-  cardName: 
+  cardName: Iron Armor
   artwork: {fileID: 0}
-  minDam: 0
-  maxDam: 0
-  cardTypes: 
+  min: 4
+  max: 7
+  minTurn: 1
+  maxTurn: 2
+  cardTypes: 01000000
   statusEffects: 
-  description: 
+  description: 'Adds 4-7 armor, gives 1-2 poise '
