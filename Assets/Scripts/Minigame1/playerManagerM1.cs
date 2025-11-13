@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerManager : MonoBehaviour
+public class playerManagerM1 : MonoBehaviour
 {
-    public static playerManager instance;
+    public static playerManagerM1 instance;
 
     public float HP { get; private set; }
     public float maxHP { get; private set; }
 
     public event System.Action updateHealth;
 
-    //makes the script a singleton, call methods and get variables with playerManager.instance
-    public static playerManager Instance
+    //makes the script a singleton, call methods and get variables with playerManagerM1.instance
+    public static playerManagerM1 Instance
     {
         get
         {
@@ -35,12 +35,13 @@ public class playerManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(this); 
+            Debug.Log("playermanagerM1 awakened");
+            //DontDestroyOnLoad(this); 
         }
 
     }
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         maxHP = 3;
         HP = 3;
