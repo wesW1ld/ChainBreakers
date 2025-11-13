@@ -9,15 +9,15 @@ public class PlayList : MonoBehaviour
     Stack<Card> PlayedCards = new Stack<Card>();
     public int CardLimit = 10;
 
-    public void Push()
+    public void Push(Sprite sprite, Card card)
     {
         if(PlayedCards.Count == CardLimit)
         {
             Debug.Log("Max number of cards played");
             return;
         }
-        CardPics.Push(Sprite);
-        PlayedCards.Push(Card);
+        CardPics.Push(sprite);
+        PlayedCards.Push(card);
     }
 
     public void Pop()
@@ -39,7 +39,7 @@ public class PlayList : MonoBehaviour
 
     private void UpdateDisplay()
     {
-
+        
     }
     
     //singleton stuff
