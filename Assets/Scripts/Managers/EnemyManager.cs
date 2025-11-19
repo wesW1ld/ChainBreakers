@@ -6,13 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
-    public GameObject enemyPrefab; // The enemy prefab to spawn
     public int maxEnemies = 5;      // Maximum number of enemies allowed
     public Vector3 spawnPosition = new Vector3(-0.4546244f, -0.1548468f, 0.04473706f); // Starting spawn position
-    public float spacing = 0.5f;    // How far apart each enemy is placed (along X axis)
+    public float spacing = 2.5f;    // How far apart each enemy is placed (along X axis)
 
     private List<GameObject> enemies = new List<GameObject>(); // Track all active enemies
     private static EnemyManager instance;
+
+    public enum EnemyType
+    {
+        Goblin,
+        Assassin,
+        Boss
+    }
+    public GameObject goblinPrefab;
+    public GameObject assassinPrefab;
+    public GameObject bossPrefab;
+
+    public GameObject textPrefab;
 
     // Singleton pattern
     public static EnemyManager Instance
@@ -62,15 +73,26 @@ public class EnemyManager : MonoBehaviour
                 spawnPosition.y,
                 spawnPosition.z
             );
-
-            SpawnEnemy(offsetPosition);
+            SpawnEnemy(offsetPosition, EnemyType.Boss);
         }
     }
 
     // Spawns a single enemy at the given position
-    public void SpawnEnemy(Vector3 position)
+    public void SpawnEnemy(Vector3 position, EnemyType type)
     {
-        GameObject newEnemy = Instantiate(enemyPrefab, position, Quaternion.identity);
+        GameObject newEnemy;
+        if (type == EnemyType.Goblin)
+        {
+            newEnemy = Instantiate(goblinPrefab, position, Quaternion.identity);
+        }
+        else if (type == EnemyType.Assassin)
+        {
+            newEnemy = Instantiate(assassinPrefab, position, Quaternion.identity);
+        }
+        else
+        {
+            newEnemy = Instantiate(bossPrefab, position, Quaternion.identity);
+        }        
         enemies.Add(newEnemy);
         Debug.Log($"[EnemyManager] Spawned enemy #{enemies.Count} at {position}.");
     }
@@ -157,5 +179,24 @@ public class EnemyManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(3);
+    }
+
+    public void EnemyAttack()
+    {
+        int enemyIndex = 0;
+        bool enemyFound = false;
+        while (!enemyFound && (enemyIndex < enemies.Count))
+        {
+            if (enemies[enemyIndex] == null)
+            {
+                enemyIndex++;
+            }
+            else
+            {
+                enemyFound = true;
+            }
+        }
+
+        enemies[enemyIndex].GetComponent<Enemy>().EnemyAction();
     }
 }

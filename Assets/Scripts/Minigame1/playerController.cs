@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,12 +9,14 @@ public class playerController : MonoBehaviour
     public Rigidbody2D rb;
 
     private Vector2 direction;
+    private bool firstMove;
 
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
+        firstMove = true;
     }
 
     // Update is called once per frame
@@ -32,5 +33,10 @@ public class playerController : MonoBehaviour
     void OnMove(InputValue value) //calls from input system (On<action>)
     {
         direction = value.Get<Vector2>();
+        if(firstMove)
+        {
+            firstMove = false;
+            ObstaclesManager.Instance.StartWaves();
+        }
     }
 }

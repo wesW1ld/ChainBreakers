@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526137fc0f4cc1748a29fae76882fd59, type: 3}
+  m_Name: Now This Is A Knife
+  m_EditorClassIdentifier: 
+  cardName: Now THIS is a knife!
+  artwork: {fileID: 0}
+  min: 7
+  max: 10
+  minTurn: 0
+  maxTurn: 0
+  cardTypes: 00000000
+  statusEffects: 
+  description: Deal 7-10 damage plus adds a hand slot.
