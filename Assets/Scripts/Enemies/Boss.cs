@@ -52,4 +52,18 @@ public class Boss : Enemy
             base.textUI.text = "Weakening Player";
         }
     }
+
+    public override void UpdatePMatrix()
+    {
+        base.UpdatePMatrix();
+        if(base.currentHP < base.maxHP * 4) //if less than 1/4 of health, do more specials
+        {
+            if(ProbabiltyMatrix[0] > .3f)
+            {
+                ProbabiltyMatrix[2] += .2f;
+                ProbabiltyMatrix[3] += .1f;
+                ProbabiltyMatrix[0] -= .3f;
+            }
+        }
+    }
 }

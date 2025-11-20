@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ChainBreakers;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 public class Enemy : MonoBehaviour
 {
@@ -177,6 +179,109 @@ public class Enemy : MonoBehaviour
     public virtual void SpecialAttackPreview(int i)
     {
         textUI.text = "Undefined";
+    }
+
+    public virtual void UpdatePMatrix() //updates P matrix based on the cards the player plays
+    {
+        //player card types: attack, defend, status, special
+        //if player attacks alot, defend more
+        //if player defends alot, special more, attack if no special
+        //if player status alot, attack more
+        //if player specials, alot defend more?
+        //gonna start by checking if one card type was played much more often than other
+        //maybe see if the difference between most and 2nd most played is greater than a quarter of the total
+        //same for least
+        //also update these based on health for boss too
+
+        //fill Count array will number of each type from types enum in Card.cs
+        //index relates to type, ei Attack = 0
+        Card[] CardStack = PlayList.instance.SeeStack();
+        int size = CardStack.Length;
+        int[] Count = new int[4];
+        for(int i = 0; i < size; i++)
+        {
+            int j = 0;
+            foreach(Card.CardType type in CardStack[i].cardTypes)
+            {
+                Count[j] += 1;
+                j++;
+            }
+        }
+
+        //get array of sorted indexes for comparison
+        int[] sortedIndexes = Enumerable
+            .Range(0, Count.Length)
+            .OrderByDescending(i => Count[i])
+            .ToArray();
+
+        //get a quarter of the sum of types used
+        int qsum = 0;
+        for(int i = 0; i < 4; i++)
+        {
+            qsum += Count[i];
+        }
+        qsum /= 4;
+
+        //if one is used alot more than others, else if one is used alot less than others
+        if(Count[sortedIndexes[0]] > qsum + Count[sortedIndexes[1]])
+        {
+            UpdateBasedOnUsed((Card.CardType)sortedIndexes[0], true);
+        }
+        else if(Count[sortedIndexes[3]] > qsum + Count[sortedIndexes[4]])
+        {
+            UpdateBasedOnUsed((Card.CardType)sortedIndexes[4], false);
+        }
+    }
+
+    private void UpdateBasedOnUsed(Card.CardType type, bool most)
+    {
+        Card.CardType add;
+        Card.CardType remove;
+
+        //if theres alot of attacking, take away from attacking and add to defending
+        if(type == Card.CardType.Attack)
+        {
+            if(most)
+            {
+                remove = Card.CardType.Attack;
+                add = Card.CardType.Defend;
+            }
+            else//not alot of attacking, swap
+            {
+                remove = Card.CardType.Defend;
+                add = Card.CardType.Attack;
+            }
+            if(ProbabiltyMatrix[(int)remove] > .2f)
+            {
+                ProbabiltyMatrix[(int)add] += .2f;
+                ProbabiltyMatrix[(int)remove] -= .2f;
+            }
+        }
+        else if(type == Card.CardType.Defend || type == Card.CardType.Status) //if theres alot of defending or status, special or attack instead of defending
+        {
+            if(most)
+            {
+                remove = Card.CardType.Defend;
+                if(ProbabiltyMatrix[3] != 0) //if the enemy has a special attack
+                {
+                    add = Card.CardType.Special;
+                }
+                else
+                {
+                    add = Card.CardType.Attack;
+                }
+            }
+            else //if not alot of defending, attack
+            {
+                remove = Card.CardType.Defend;
+                add = Card.CardType.Attack;
+            }
+            if(ProbabiltyMatrix[(int)remove] > .2f)
+            {
+                ProbabiltyMatrix[(int)add] += .2f;
+                ProbabiltyMatrix[(int)remove] -= .2f;
+            }
+        }
     }
 }
 
