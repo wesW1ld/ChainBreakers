@@ -15,10 +15,13 @@ public class Enemy : MonoBehaviour
     public int attackPower = 20;
     public int damageReceived = 10;
     private bool defending = false;
+    public int[] Count;
 
     private int choice;
 
     protected int NumChoices = 3;
+
+    [SerializeField]
     protected float[] ProbabiltyMatrix;//attack, defense, special weights   protected:child can access
 
     public virtual void Start()
@@ -90,7 +93,8 @@ public class Enemy : MonoBehaviour
                 SpecialAttack(choice);
                 break;
         }
-        
+
+        UpdatePMatrix(); //testing
         StartCoroutine(PickChoice());
     }
 
@@ -197,14 +201,12 @@ public class Enemy : MonoBehaviour
         //index relates to type, ei Attack = 0
         Card[] CardStack = PlayList.instance.SeeStack();
         int size = CardStack.Length;
-        int[] Count = new int[4];
-        for(int i = 0; i < size; i++)
+        Count = new int[4];
+        foreach(Card card in CardStack)
         {
-            int j = 0;
-            foreach(Card.CardType type in CardStack[i].cardTypes)
+            foreach(Card.CardType type in card.cardTypes)
             {
-                Count[j] += 1;
-                j++;
+                Count[(int)type] += 1;
             }
         }
 
@@ -227,9 +229,9 @@ public class Enemy : MonoBehaviour
         {
             UpdateBasedOnUsed((Card.CardType)sortedIndexes[0], true);
         }
-        else if(Count[sortedIndexes[3]] > qsum + Count[sortedIndexes[4]])
+        else if(Count[sortedIndexes[2]] > qsum + Count[sortedIndexes[3]])
         {
-            UpdateBasedOnUsed((Card.CardType)sortedIndexes[4], false);
+            UpdateBasedOnUsed((Card.CardType)sortedIndexes[3], false);
         }
     }
 
@@ -243,11 +245,13 @@ public class Enemy : MonoBehaviour
         {
             if(most)
             {
+                Debug.Log("attack is most played");
                 remove = Card.CardType.Attack;
                 add = Card.CardType.Defend;
             }
             else//not alot of attacking, swap
             {
+                Debug.Log("attack is least played");
                 remove = Card.CardType.Defend;
                 add = Card.CardType.Attack;
             }
@@ -261,8 +265,9 @@ public class Enemy : MonoBehaviour
         {
             if(most)
             {
+                Debug.Log("defend or status is most played");
                 remove = Card.CardType.Defend;
-                if(ProbabiltyMatrix[3] != 0) //if the enemy has a special attack
+                if(ProbabiltyMatrix[2] != 0) //if the enemy has a special attack
                 {
                     add = Card.CardType.Special;
                 }
@@ -273,6 +278,7 @@ public class Enemy : MonoBehaviour
             }
             else //if not alot of defending, attack
             {
+                Debug.Log("defend or status is least played");
                 remove = Card.CardType.Defend;
                 add = Card.CardType.Attack;
             }

@@ -7,16 +7,16 @@ public class PlayList : MonoBehaviour
 {
     Stack<Sprite> CardPics = new Stack<Sprite>();
     Stack<Card> PlayedCards = new Stack<Card>();
-    public int CardLimit = 10;
+    private int CardLimit = 100;
 
-    public void Push(Sprite sprite, Card card)
+    public void Push(Card card)//took away sprite for testing
     {
         if(PlayedCards.Count == CardLimit)
         {
             Debug.Log("Max number of cards played");
             return;
         }
-        CardPics.Push(sprite);
+        //CardPics.Push(sprite);
         PlayedCards.Push(card);
     }
 

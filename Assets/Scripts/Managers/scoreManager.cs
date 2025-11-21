@@ -64,16 +64,16 @@ public class scoreManager : MonoBehaviour
     {
         EnemyManager.Instance.EnemyAttack();
         //minigame
-        int pick = Random.Range(0, 2);
-        if (pick < 1)
-        {
-            minigame1.SetActive(true);
-        }
-        else
-        {
-            minigame2.SetActive(true);
-        }        
-        minigameMode = true;
+        // int pick = Random.Range(0, 2);
+        // if (pick < 1)
+        // {
+        //     minigame1.SetActive(true);       //testing
+        // }
+        // else
+        // {
+        //     minigame2.SetActive(true);
+        // }        
+        // minigameMode = true;
     }
 
     public void MinigameEnd(int num)
