@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour
     public int damageReceived = 10;
     private bool defending = false;
     public int[] Count;
+    public float missChance = 0f;
+    public float damageMult = 1f;
+    public float enemyMissChance = 0f;
 
     private int choice;
 
@@ -23,11 +26,13 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     protected float[] ProbabiltyMatrix;//attack, defense, special weights   protected:child can access
+    protected float[] tProbabiltyMatrix; //for temp storage
 
     public virtual void Start()
     {
         currentHP = maxHP;
         ProbabiltyMatrix = new float[] { .7f, .3f, .0f };
+        tProbabiltyMatrix = (float[])ProbabiltyMatrix.Clone();
         MakePMatrix();
         float sum = 0;
         for (int i = 0; i < NumChoices; i++)
@@ -50,7 +55,11 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        if(defending)
+        if(Random.value < enemyMissChance)
+        {
+            Debug.Log("Player Missed");
+        }
+        else if(defending)
         {
             currentHP -= amount / 2;
             defending = false;
@@ -79,22 +88,37 @@ public class Enemy : MonoBehaviour
 
     public void EnemyAction()
     {
-        switch (choice)
+        if(Random.value >= missChance)
         {
-            case 0:
-                //Debug.Log("Attacking");
-                Attack();
-                break;
-            case 1:
-                //Debug.Log("Defending");
-                defending = true;
-                break;
-            default:
-                SpecialAttack(choice);
-                break;
+            switch (choice)
+            {
+                case 0:
+                    //Debug.Log("Attacking");
+                    Attack();
+                    break;
+                case 1:
+                    //Debug.Log("Defending");
+                    defending = true;
+                    break;
+                default:
+                    SpecialAttack(choice);
+                    break;
+            }
         }
+        else
+        {
+            Debug.Log("Missed");
+        }
+        
+        //reset status stuff
+        ProbabiltyMatrix = (float[])tProbabiltyMatrix.Clone(); //restore temp if different
+        missChance = 0f;
+        damageMult = 1f;
+        enemyMissChance = 0f;
 
-        UpdatePMatrix(); //testing
+        UpdatePMatrix();
+        tProbabiltyMatrix = (float[])ProbabiltyMatrix.Clone(); //make same
+        ApplyStatus();
         StartCoroutine(PickChoice());
     }
 
@@ -131,7 +155,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Attack()
     {
-        PlayerManager.instance.TakeDamage(100f);
+        PlayerManager.instance.TakeDamage(100f * damageMult);
     }
 
     IEnumerator PickChoice()
@@ -284,6 +308,118 @@ public class Enemy : MonoBehaviour
                 ProbabiltyMatrix[(int)add] += .2f;
                 ProbabiltyMatrix[(int)remove] -= .2f;
             }
+        }
+    }
+
+    //status stuff
+    private struct Status
+    {
+        public Card.StatusEffect effect;
+        public int timeLeft;
+
+        public Status(Card.StatusEffect status, int time)
+        {
+            effect = status;
+            timeLeft = time;
+        }
+    }
+    private List<Status> statusEffects;
+
+    public void GiveEnemyStatus(Card.StatusEffect status, int time)
+    {
+        statusEffects.Add(new Status(status, time));
+    }
+
+    //         Dazed, always defend
+    //         Enraged, always attack
+    //         Emboldened, always specials (attacks if no special), with chance to miss
+    //         Shocked, miss a turn
+    //         Rage, do more damage, % chance to miss
+    //         Cloaked, cant be hit
+    //         Blur, % chance to not be hit
+    //         Binded, % chance to do more damage, otherwise miss
+    //         Regenerative, heal % at end of turn
+    private void ApplyStatus()
+    {
+        foreach(Status status in statusEffects)
+        {
+            switch(status.effect)
+            {
+                case Card.StatusEffect.Dazed:
+                    //make Pmatrix always defend, save and restore outside after
+                    if(NumChoices == 4)
+                    {
+                        ProbabiltyMatrix = new float[] {0f, 1f, 0f, 0f};
+                    }
+                    else
+                    {
+                        ProbabiltyMatrix = new float[] {0f, 1f, 0f};
+                    }
+                    break;
+                case Card.StatusEffect.Enraged:
+                    if(NumChoices == 4)
+                    {
+                        ProbabiltyMatrix = new float[] {1f, 0f, 0f, 0f};
+                    }
+                    else
+                    {
+                        ProbabiltyMatrix = new float[] {1f, 0f, 0f};
+                    }
+                    break;
+                case Card.StatusEffect.Emboldened:
+                    if(NumChoices == 4)
+                    {
+                        ProbabiltyMatrix = new float[] {0f, 0f, .8f, .2f};
+                    }
+                    else
+                    {
+                        ProbabiltyMatrix = new float[] {0f, 0f, 1f};
+                    }
+                    missChance = .35f;
+                    break;
+                case Card.StatusEffect.Shocked:
+                    missChance = 1f;
+                    break;
+                case Card.StatusEffect.Rage:
+                    damageMult = 1.5f;
+                    missChance = .5f;
+                    break;
+                case Card.StatusEffect.Cloaked:
+                    enemyMissChance = 1f;
+                    break;
+                case Card.StatusEffect.Blur:
+                    enemyMissChance = .3f;
+                    break;
+                case Card.StatusEffect.Binded:
+                    //% chance to do more damage, otherwise miss
+                    if(Random.value < .3f)
+                    {
+                        damageMult = 1.75f;
+                    }
+                    else
+                    {
+                        missChance = 1f;
+                    }
+                    break;
+                case Card.StatusEffect.Regenerative:
+                    currentHP += (int)(maxHP * .2);//heal 20%
+                    if(currentHP > maxHP)
+                    {
+                        currentHP = maxHP;
+                    }
+                    break;
+            }
+            if(status.timeLeft < 2)
+            {
+                statusEffects.Remove(status);
+            }
+        }
+
+        for(int i = 0; i < statusEffects.Count; i++)
+        {
+            Status se = statusEffects[i];
+            se.timeLeft--;
+            statusEffects[i] = se;
         }
     }
 }
