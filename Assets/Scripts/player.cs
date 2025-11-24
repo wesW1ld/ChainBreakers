@@ -16,19 +16,19 @@ public class player : MonoBehaviour
 
     void OnQ()
     {
-        PlayList.instance.Push(attack);
+        PlayList.instance.Push(attack, null);
     }
     void OnW()
     {
-        PlayList.instance.Push(defense);
+        PlayList.instance.Push(defense, null);
     }
     void OnE()
     {
-        PlayList.instance.Push(status);
+        PlayList.instance.Push(status, null);
     }
     void OnR()
     {
-        PlayList.instance.Push(special);
+        PlayList.instance.Push(special, null);
     }
     void OnGo()
     {
