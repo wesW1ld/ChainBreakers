@@ -56,7 +56,7 @@ public class Boss : Enemy
     public override void UpdatePMatrix()
     {
         base.UpdatePMatrix();
-        if(base.currentHP < base.maxHP * 4) //if less than 1/4 of health, do more specials
+        if(base.currentHP * 4 < base.maxHP) //if less than 1/4 of health, do more specials
         {
             if(ProbabiltyMatrix[0] > .3f)
             {

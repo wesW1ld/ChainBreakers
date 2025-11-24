@@ -269,7 +269,7 @@ public class Enemy : MonoBehaviour
                 remove = Card.CardType.Defend;
                 if(ProbabiltyMatrix[2] != 0) //if the enemy has a special attack
                 {
-                    add = Card.CardType.Special;
+                    add = Card.CardType.Special - 1; //enemy has no status move
                 }
                 else
                 {
