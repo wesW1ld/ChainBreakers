@@ -204,10 +204,7 @@ public class Enemy : MonoBehaviour
         Count = new int[4];
         foreach(Card card in CardStack)
         {
-            foreach(Card.CardType type in card.cardTypes)
-            {
-                Count[(int)type] += 1;
-            }
+            Count[(int)card.cardType] += 1;
         }
 
         //get array of sorted indexes for comparison

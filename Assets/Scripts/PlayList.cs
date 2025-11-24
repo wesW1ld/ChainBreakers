@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ChainBreakers;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -68,5 +69,33 @@ public class PlayList : MonoBehaviour
         }
 
     }
-    
+
+    public void PlayAllCards()
+    {
+
+        Card[] items = SeeStack();
+
+        for (int i = items.Length - 1; i >= 0; i--)
+        {
+            Card card = items[i];
+
+            if(card.cardType == Card.CardType.Attack)
+            {
+                EnemyManager.Instance.DealDamage(UnityEngine.Random.Range(card.min, card.max), 0);
+            }
+            else if(card.cardType == Card.CardType.Defend)
+            {
+                //add min to max sheild
+            }
+            else
+            {
+                //depends on the card, not including status effects done below
+            }
+
+            foreach(Card.StatusEffect sta in card.statusEffects)
+            {
+                //apply to enemy
+            }
+        }
+    } 
 }

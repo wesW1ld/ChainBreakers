@@ -13,7 +13,7 @@ namespace ChainBreakers
         public int max;
         public int minTurn;
         public int maxTurn;
-        public List<CardType> cardTypes;
+        public CardType cardType;
         public List<StatusEffect> statusEffects;
         public string description;
 
