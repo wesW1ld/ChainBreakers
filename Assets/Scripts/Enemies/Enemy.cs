@@ -82,11 +82,11 @@ public class Enemy : MonoBehaviour
         switch (choice)
         {
             case 0:
-                Debug.Log("Attacking");
+                //Debug.Log("Attacking");
                 Attack();
                 break;
             case 1:
-                Debug.Log("Defending");
+                //Debug.Log("Defending");
                 defending = true;
                 break;
             default:
@@ -245,13 +245,13 @@ public class Enemy : MonoBehaviour
         {
             if(most)
             {
-                Debug.Log("attack is most played");
+                //Debug.Log("attack is most played");
                 remove = Card.CardType.Attack;
                 add = Card.CardType.Defend;
             }
             else//not alot of attacking, swap
             {
-                Debug.Log("attack is least played");
+                //Debug.Log("attack is least played");
                 remove = Card.CardType.Defend;
                 add = Card.CardType.Attack;
             }
@@ -265,7 +265,7 @@ public class Enemy : MonoBehaviour
         {
             if(most)
             {
-                Debug.Log("defend or status is most played");
+                //Debug.Log("defend or status is most played");
                 remove = Card.CardType.Defend;
                 if(ProbabiltyMatrix[2] != 0) //if the enemy has a special attack
                 {
@@ -278,7 +278,7 @@ public class Enemy : MonoBehaviour
             }
             else //if not alot of defending, attack
             {
-                Debug.Log("defend or status is least played");
+                //Debug.Log("defend or status is least played");
                 remove = Card.CardType.Defend;
                 add = Card.CardType.Attack;
             }

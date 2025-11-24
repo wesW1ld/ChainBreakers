@@ -26,7 +26,7 @@ public class Boss : Enemy
 
         if (i == 3)
         {
-            Debug.Log("Special2");
+            //Debug.Log("Special2");
             PlayerManager.instance.TakeDamage(200f);
         }
     }

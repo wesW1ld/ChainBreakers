@@ -99,7 +99,7 @@ public class EnemyManager : MonoBehaviour
             newEnemy = Instantiate(bossPrefab, position, Quaternion.identity);
         }        
         enemies.Add(newEnemy);
-        Debug.Log($"[EnemyManager] Spawned enemy #{enemies.Count} at {position}.");
+        //Debug.Log($"[EnemyManager] Spawned enemy #{enemies.Count} at {position}.");
     }
 
     // Deals damage to a specific enemy by index
