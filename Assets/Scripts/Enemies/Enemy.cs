@@ -408,6 +408,9 @@ public class Enemy : MonoBehaviour
                         currentHP = maxHP;
                     }
                     break;
+                default:
+                    Debug.Log("dont use might or poise");
+                    break;
             }
             if(status.timeLeft < 2)
             {
