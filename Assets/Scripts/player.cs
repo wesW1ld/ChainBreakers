@@ -14,24 +14,34 @@ public class player : MonoBehaviour
     public Card status;
     public Card special;
 
-    void OnQ()
+    void OnQkey(InputValue value)
     {
+        Debug.Log("Pressed");
         PlayList.instance.Push(attack, null);
     }
-    void OnW()
+    void OnWkey(InputValue value)
     {
+        Debug.Log("Pressed");
         PlayList.instance.Push(defense, null);
     }
-    void OnE()
+    void OnEkey(InputValue value)
     {
+        Debug.Log("Pressed");
         PlayList.instance.Push(status, null);
     }
-    void OnR()
+    void OnRkey(InputValue value)
     {
+        Debug.Log("Pressed");
         PlayList.instance.Push(special, null);
     }
-    void OnGo()
+    void OnGo(InputValue value)
     {
+        Debug.Log("Pressed");
         scoreManager.instance.ComboEnd();
+    }
+
+    void OnMove(InputValue value)
+    {
+        Debug.Log("movement");
     }
 }

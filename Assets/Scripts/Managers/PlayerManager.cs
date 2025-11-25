@@ -42,10 +42,12 @@ public class PlayerManager : MonoBehaviour
     private int Shield = 0;
 
     public event System.Action UpdateHealth;
+    public event System.Action UpdateShield;
 
     void Start()
     {
         UpdateHealth?.Invoke();
+        UpdateShield?.Invoke();
     }
     
     public void TakeDamage(int amt) //called from Telegraph.cs
@@ -57,7 +59,7 @@ public class PlayerManager : MonoBehaviour
         UpdateHealth?.Invoke(); //invokes updateHealth event, which tells the hpBar.cs to update the healthbar
     }
 
-    public float GetHp()
+    public int GetHp()
     {
         return HP;
     }
@@ -66,16 +68,24 @@ public class PlayerManager : MonoBehaviour
     {
         HP += amt;
         if(HP > maxHP){HP = maxHP;}
+        UpdateHealth?.Invoke();
+    }
+
+    public int GetShield()
+    {
+        return Shield;
     }
 
     public void AddShield(int amt)
     {
         Shield += amt;
+        UpdateShield?.Invoke();
     }
 
     public void RemoveShield()
     {
         Shield = 0;
+        UpdateShield?.Invoke();
     }
 
     public enum Status

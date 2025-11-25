@@ -324,19 +324,19 @@ PrefabInstance:
     - target: {fileID: 6004495167280515816, guid: 4a6f684dff0d4894d858b338851348c4, type: 3}
       propertyPath: attack
       value: 
-      objectReference: {fileID: 11400000, guid: 4716e1c90f1229c4890fd3d19c5f6279, type: 2}
+      objectReference: {fileID: 11400000, guid: a3ac248e94298334b8dd69f4fce11d29, type: 2}
     - target: {fileID: 6004495167280515816, guid: 4a6f684dff0d4894d858b338851348c4, type: 3}
       propertyPath: status
       value: 
-      objectReference: {fileID: 11400000, guid: bca0cd9484be05d47b87bddc8dbd6053, type: 2}
+      objectReference: {fileID: 11400000, guid: b1dfb67fc82e4384d9d547bfdf65ff1b, type: 2}
     - target: {fileID: 6004495167280515816, guid: 4a6f684dff0d4894d858b338851348c4, type: 3}
       propertyPath: defense
       value: 
-      objectReference: {fileID: 11400000, guid: da0bee4ce7061634ca0c1bb2fa3ad1d9, type: 2}
+      objectReference: {fileID: 11400000, guid: 14d89961bb8c2a94ab5c3148f3556f29, type: 2}
     - target: {fileID: 6004495167280515816, guid: 4a6f684dff0d4894d858b338851348c4, type: 3}
       propertyPath: special
       value: 
-      objectReference: {fileID: 11400000, guid: 8da74990c935f1e4e90ef256a4208c34, type: 2}
+      objectReference: {fileID: 11400000, guid: 6d6bdd0d6395b7444836c1b8d4d7ae0f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -733,7 +733,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 7084ce99-65b4-4b81-b4ff-186cad836156
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &1240372191

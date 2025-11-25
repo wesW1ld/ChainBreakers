@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: 'Short Strike '
   artwork: {fileID: 0}
-  minDam: 5
-  maxDam: 10
-  cardTypes: 00000000
+  min: 30
+  max: 50
+  minTurn: 0
+  maxTurn: 0
+  cardType: 0
   statusEffects: 
   description: 'Does x-y damage '

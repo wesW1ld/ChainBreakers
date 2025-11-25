@@ -87,13 +87,11 @@ public class PlayList : MonoBehaviour
             {
                 PlayerManager.instance.AddShield(Random.Range(card.min, card.max));
             }
-            else
+
+            //depends on the card, not including status effects done below
+            if(card.cardName == "Medical Training")
             {
-                //depends on the card, not including status effects done below
-                if(card.cardName == "Medical Training")
-                {
-                    PlayerManager.instance.Heal(Random.Range(card.min, card.max));
-                }
+                PlayerManager.instance.Heal(Random.Range(card.min, card.max));
             }
 
             foreach(Card.StatusEffect sta in card.statusEffects)
