@@ -131,6 +131,31 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    // Applies status to a specific enemy by index
+    public void ApplyStatus(ChainBreakers.Card.StatusEffect status, int time, int enemyIndex)
+    {
+        if (enemyIndex < 0 || enemyIndex >= enemies.Count)
+        {
+            Debug.LogWarning("[EnemyManager] Invalid enemy index.");
+            return;
+        }
+
+        GameObject targetEnemy = enemies[enemyIndex];
+        if (targetEnemy != null)
+        {
+            Enemy enemyScript = targetEnemy.GetComponent<Enemy>();
+            if (enemyScript != null)
+            {
+                enemyScript.GiveEnemyStatus(status, time);
+                Debug.Log($"[EnemyManager] Given {status} to enemy #{enemyIndex}.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[EnemyManager] Enemy reference is null.");
+        }
+    }
+
     public void DealDamage(int dmg)
     {
         int enemyIndex = 0;

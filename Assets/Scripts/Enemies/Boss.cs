@@ -27,13 +27,13 @@ public class Boss : Enemy
         if (i == 3)
         {
             //Debug.Log("Special2");
-            PlayerManager.instance.TakeDamage(200f * damageMult);
+            PlayerManager.instance.TakeDamage((int)(200f * damageMult));
         }
     }
 
     public override void Attack()
     {
-        PlayerManager.instance.TakeDamage(250f * damageMult);
+        PlayerManager.instance.TakeDamage((int)(250f * damageMult));
     }
 
     public override void AttackPreview()

@@ -155,7 +155,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Attack()
     {
-        PlayerManager.instance.TakeDamage(100f * damageMult);
+        PlayerManager.instance.TakeDamage((int)(100f * damageMult));
     }
 
     IEnumerator PickChoice()
