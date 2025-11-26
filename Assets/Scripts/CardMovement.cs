@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using ChainBreakers;
+using System.Collections.Generic;
 
 
 public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
@@ -47,6 +49,8 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
                 HandlePlayState();
                 if (!Input.GetMouseButton(0))
                 {
+                    // Check if card was dropped on PlayArea
+                    CheckPlayAreaDrop();
                     TransitionToState0();
                 }
                 break;
@@ -137,5 +141,29 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         }
     }
 
+    private void CheckPlayAreaDrop()
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = Input.mousePosition;
 
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            PlayArea playArea = result.gameObject.GetComponent<PlayArea>();
+            if (playArea != null)
+            {
+                CardDisplay cardDisplay = GetComponent<CardDisplay>();
+                if (cardDisplay != null && cardDisplay.card != null)
+                {
+                    playArea.AddCard(cardDisplay.card);
+                    Debug.Log($"Card '{cardDisplay.card.cardName}' dropped on PlayArea and removed.");
+                    Destroy(gameObject);
+                    return;
+                }
+                break;
+            }
+        }
+    }
 }
