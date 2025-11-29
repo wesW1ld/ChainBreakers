@@ -37,8 +37,8 @@ public class PlayerManager : MonoBehaviour
     }
 
     
-    private int HP = 1000;
-    private int maxHP = 1000;
+    private int HP = 250;
+    private int maxHP = 250;
 
     private int Shield = 0;
     private bool might = false;

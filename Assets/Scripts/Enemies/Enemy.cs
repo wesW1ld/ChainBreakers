@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     public float missChance = 0f;
     public float damageMult = 1f;
     public float enemyMissChance = 0f;
+    protected bool dazed = false;
 
     private int choice;
 
@@ -136,6 +137,7 @@ public class Enemy : MonoBehaviour
         missChance = 0f;
         damageMult = 1f;
         enemyMissChance = 0f;
+        dazed = false;
 
         UpdatePMatrix();
         tProbabiltyMatrix = (float[])ProbabiltyMatrix.Clone(); //make same
@@ -180,7 +182,15 @@ public class Enemy : MonoBehaviour
 
     public virtual void Attack()
     {
-        PlayerManager.instance.TakeDamage((int)(100f * damageMult));
+        if(dazed)
+        {
+            if(Random.Range(0, 2) == 1)
+            {
+                TakeDamage((int)(25f * damageMult));
+                return;
+            }
+        }
+        PlayerManager.instance.TakeDamage((int)(25f * damageMult));
     }
 
     IEnumerator PickChoice()
@@ -354,13 +364,18 @@ public class Enemy : MonoBehaviour
 
     public void GiveEnemyStatus(Card.StatusEffect status, int time)
     {
-        if (statusEffects.Any(s => s.effect == status))
+        int index = statusEffects.FindIndex(s => s.effect == status);
+        if (index != -1)
         {
-            // already exists
-            Debug.Log($"enemy already has {status}");
-            return;
+            // Get the struct, modify it, then write it back
+            Status s = statusEffects[index];
+            if(s.timeLeft < time){s.timeLeft = time;}
+            statusEffects[index] = s;  //assign back
         }
-        statusEffects.Add(new Status(status, time));
+        else
+        {
+            statusEffects.Add(new Status(status, time));
+        }
         UpdateStaText();
     }
 
@@ -378,15 +393,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //         Dazed, always defend
+    //         Dazed, chance to hit self
     //         Enraged, always attack
-    //         Emboldened, always specials (attacks if no special), with chance to miss
+    //         Emboldened, more damage
     //         Shocked, miss a turn
     //         Rage, do more damage, % chance to miss
     //         Cloaked, cant be hit
     //         Blur, % chance to not be hit
     //         Binded, % chance to do more damage, otherwise miss
-    //         Regenerative, heal % at end of turn
     private void ApplyStatus()
     {
         foreach(Status status in statusEffects)
@@ -394,15 +408,7 @@ public class Enemy : MonoBehaviour
             switch(status.effect)
             {
                 case Card.StatusEffect.Dazed:
-                    //make Pmatrix always defend, save and restore outside after
-                    if(NumChoices == 4)
-                    {
-                        ProbabiltyMatrix = new float[] {0f, 1f, 0f, 0f};
-                    }
-                    else
-                    {
-                        ProbabiltyMatrix = new float[] {0f, 1f, 0f};
-                    }
+                    dazed = true;
                     break;
                 case Card.StatusEffect.Enraged:
                     if(NumChoices == 4)
@@ -413,36 +419,29 @@ public class Enemy : MonoBehaviour
                     {
                         ProbabiltyMatrix = new float[] {1f, 0f, 0f};
                     }
+                    if(missChance < .5f){missChance = .5f;}
                     break;
                 case Card.StatusEffect.Emboldened:
-                    if(NumChoices == 4)
-                    {
-                        ProbabiltyMatrix = new float[] {0f, 0f, .8f, .2f};
-                    }
-                    else
-                    {
-                        ProbabiltyMatrix = new float[] {0f, 0f, 1f};
-                    }
-                    missChance = .35f;
+                    damageMult += .2f;
                     break;
                 case Card.StatusEffect.Shocked:
                     missChance = 1f;
                     break;
                 case Card.StatusEffect.Rage:
-                    damageMult = 1.5f;
-                    missChance = .5f;
+                    damageMult += .5f;
+                    if(missChance < .5f){missChance = .5f;}
                     break;
                 case Card.StatusEffect.Cloaked:
                     enemyMissChance = 1f;
                     break;
                 case Card.StatusEffect.Blur:
-                    enemyMissChance = .3f;
+                    if(enemyMissChance < .3f){enemyMissChance = .3f;}
                     break;
                 case Card.StatusEffect.Binded:
                     //% chance to do more damage, otherwise miss
                     if(Random.value < .3f)
                     {
-                        damageMult = 1.75f;
+                        damageMult += .7f;
                     }
                     else
                     {
