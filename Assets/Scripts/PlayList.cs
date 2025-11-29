@@ -1,29 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using ChainBreakers;
+using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayList : MonoBehaviour
 {
-    Stack<Sprite> CardPics = new Stack<Sprite>();
-    Stack<Card> PlayedCards = new Stack<Card>();
+    private Stack<Card> PlayedCards = new Stack<Card>();
+    private Stack<GameObject> CardObjects = new Stack<GameObject>();
     private int CardLimit = 100;
 
-    public void Push(Card card)//took away sprite for testing
+    public int enemyNum = 0;
+
+    public void Push(Card card, GameObject cardO) //hand is gonna move cards, then when turn is over, push them all in order
     {
         if(PlayedCards.Count == CardLimit)
         {
             Debug.Log("Max number of cards played");
             return;
         }
-        //CardPics.Push(sprite);
         PlayedCards.Push(card);
+        CardObjects.Push(cardO);
     }
 
     public void Pop()
     {
-        CardPics.Pop();
         PlayedCards.Pop();
+        CardObjects.Pop();
     }
 
     public Card[] SeeStack() //see current stack with top being index 0
@@ -35,11 +39,6 @@ public class PlayList : MonoBehaviour
     public Card Top()
     {
         return PlayedCards.Peek();
-    }
-
-    private void UpdateDisplay()
-    {
-        
     }
     
     //singleton stuff
@@ -72,5 +71,35 @@ public class PlayList : MonoBehaviour
         }
 
     }
-    
+
+    public void PlayAllCards()
+    {
+
+        Card[] items = SeeStack();
+
+        for (int i = items.Length - 1; i >= 0; i--)
+        {
+            Card card = items[i];
+
+            if(card.cardType == Card.CardType.Attack)
+            {
+                EnemyManager.Instance.DealDamage(Random.Range(card.min, card.max), enemyNum);
+            }
+            else if(card.cardType == Card.CardType.Defend)
+            {
+                PlayerManager.instance.AddShield(Random.Range(card.min, card.max));
+            }
+
+            //depends on the card, not including status effects done below
+            if(card.cardName == "Medical Training")
+            {
+                PlayerManager.instance.Heal(Random.Range(card.min, card.max));
+            }
+
+            foreach(Card.StatusEffect sta in card.statusEffects)
+            {
+                EnemyManager.Instance.ApplyStatus(sta, Random.Range(card.minTurn, card.maxTurn), enemyNum);
+            }
+        }
+    } 
 }

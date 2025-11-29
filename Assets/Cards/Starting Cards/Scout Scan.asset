@@ -18,6 +18,6 @@ MonoBehaviour:
   max: 0
   minTurn: 0
   maxTurn: 0
-  cardTypes: 03000000
+  cardType: 3
   statusEffects: 
   description: Scans the enemy, Work in Progress(WIP)

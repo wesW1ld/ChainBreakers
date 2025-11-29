@@ -16,8 +16,8 @@ MonoBehaviour:
   artwork: {fileID: 0}
   min: 0
   max: 0
-  minTurn: 0
-  maxTurn: 0
-  cardTypes: 03000000
+  minTurn: 1
+  maxTurn: 2
+  cardType: 3
   statusEffects: 0100000002000000
   description: Makes the enemy(ies) Enraged and Emboldend

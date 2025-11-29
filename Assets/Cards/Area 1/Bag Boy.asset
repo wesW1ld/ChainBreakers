@@ -18,7 +18,7 @@ MonoBehaviour:
   max: 8
   minTurn: 0
   maxTurn: 0
-  cardTypes: 01000000
+  cardType: 1
   statusEffects: 
   description: Adds 4-8 armor plus, draw an extra card and adds an extra play card
     slot.

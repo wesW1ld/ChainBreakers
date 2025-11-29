@@ -735,7 +735,7 @@
             "id": "7084ce99-65b4-4b81-b4ff-186cad836156",
             "actions": [
                 {
-                    "name": "Q",
+                    "name": "Qkey",
                     "type": "Button",
                     "id": "87966b66-1ba1-411e-b916-63487af38c58",
                     "expectedControlType": "",
@@ -744,7 +744,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "W",
+                    "name": "Wkey",
                     "type": "Button",
                     "id": "fbef93fa-156f-4a19-b687-6b857152a426",
                     "expectedControlType": "",
@@ -753,7 +753,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "E",
+                    "name": "Ekey",
                     "type": "Button",
                     "id": "d971e70b-59a7-4974-841f-10730f72a087",
                     "expectedControlType": "",
@@ -762,7 +762,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "R",
+                    "name": "Rkey",
                     "type": "Button",
                     "id": "9b8a4a08-117e-42b5-8762-c40acfbf4b22",
                     "expectedControlType": "",
@@ -788,7 +788,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Q",
+                    "action": "Qkey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -799,7 +799,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "W",
+                    "action": "Wkey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -810,7 +810,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "E",
+                    "action": "Ekey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -821,7 +821,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "R",
+                    "action": "Rkey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -10,6 +10,7 @@ public class Boss : Enemy
         base.Start();
         base.currentHP = 300;
         base.maxHP = 300;
+        textUIHP.text = $"{currentHP} / {maxHP}";
     }
 
     public override void MakePMatrix()
@@ -27,13 +28,13 @@ public class Boss : Enemy
         if (i == 3)
         {
             //Debug.Log("Special2");
-            PlayerManager.instance.TakeDamage(200f);
+            PlayerManager.instance.TakeDamage((int)(200f * damageMult));
         }
     }
 
     public override void Attack()
     {
-        PlayerManager.instance.TakeDamage(250f);
+        PlayerManager.instance.TakeDamage((int)(250f * damageMult));
     }
 
     public override void AttackPreview()

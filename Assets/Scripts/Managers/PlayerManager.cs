@@ -36,32 +36,62 @@ public class PlayerManager : MonoBehaviour
     }
 
     
+    public int HP = 1000;
+    public int maxHP = 1000;
 
-    private float HP = 1000f;
+    private int Shield = 0;
 
     public event System.Action UpdateHealth;
+    public event System.Action UpdateShield;
 
     void Start()
     {
         UpdateHealth?.Invoke();
+        UpdateShield?.Invoke();
     }
     
-    public void TakeDamage(float amt) //called from Telegraph.cs
+    public void TakeDamage(int amt) //called from Telegraph.cs
     {
+        amt -= Shield;
+        if(amt < 0){amt = 0;}
         HP -= amt;
+        if(HP < 0){HP = 0;}
         UpdateHealth?.Invoke(); //invokes updateHealth event, which tells the hpBar.cs to update the healthbar
     }
 
-    public float GetHp()
+    public int GetHp()
     {
         return HP;
+    }
+
+    public void Heal(int amt)
+    {
+        HP += amt;
+        if(HP > maxHP){HP = maxHP;}
+        UpdateHealth?.Invoke();
+    }
+
+    public int GetShield()
+    {
+        return Shield;
+    }
+
+    public void AddShield(int amt)
+    {
+        Shield += amt;
+        UpdateShield?.Invoke();
+    }
+
+    public void RemoveShield()
+    {
+        Shield = 0;
+        UpdateShield?.Invoke();
     }
 
     public enum Status
     {
         normal,
         poisoned,
-        fire,
         weakend
     }
 
