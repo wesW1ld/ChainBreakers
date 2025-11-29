@@ -11,6 +11,8 @@ public class PlayList : MonoBehaviour
     private Stack<GameObject> CardObjects = new Stack<GameObject>();
     private int CardLimit = 100;
 
+    public int enemyNum = 0;
+
     public void Push(Card card, GameObject cardO) //hand is gonna move cards, then when turn is over, push them all in order
     {
         if(PlayedCards.Count == CardLimit)
@@ -81,7 +83,7 @@ public class PlayList : MonoBehaviour
 
             if(card.cardType == Card.CardType.Attack)
             {
-                EnemyManager.Instance.DealDamage(Random.Range(card.min, card.max), 0);
+                EnemyManager.Instance.DealDamage(Random.Range(card.min, card.max), enemyNum);
             }
             else if(card.cardType == Card.CardType.Defend)
             {
@@ -96,7 +98,7 @@ public class PlayList : MonoBehaviour
 
             foreach(Card.StatusEffect sta in card.statusEffects)
             {
-                EnemyManager.Instance.ApplyStatus(sta, Random.Range(card.minTurn, card.maxTurn), 0);
+                EnemyManager.Instance.ApplyStatus(sta, Random.Range(card.minTurn, card.maxTurn), enemyNum);
             }
         }
     } 

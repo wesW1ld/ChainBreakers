@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using ChainBreakers;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class player : MonoBehaviour
 {
@@ -14,34 +13,31 @@ public class player : MonoBehaviour
     public Card status;
     public Card special;
 
-    void OnQkey(InputValue value)
+    void Update()
     {
-        Debug.Log("Pressed");
-        PlayList.instance.Push(attack, null);
-    }
-    void OnWkey(InputValue value)
-    {
-        Debug.Log("Pressed");
-        PlayList.instance.Push(defense, null);
-    }
-    void OnEkey(InputValue value)
-    {
-        Debug.Log("Pressed");
-        PlayList.instance.Push(status, null);
-    }
-    void OnRkey(InputValue value)
-    {
-        Debug.Log("Pressed");
-        PlayList.instance.Push(special, null);
-    }
-    void OnGo(InputValue value)
-    {
-        Debug.Log("Pressed");
-        scoreManager.instance.ComboEnd();
-    }
+        if (Input.GetKeyDown(KeyCode.Slash))
+        {
+            scoreManager.instance.ComboEnd();
+        }
 
-    void OnMove(InputValue value)
-    {
-        Debug.Log("movement");
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            PlayList.instance.Push(attack, null);
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            PlayList.instance.Push(defense, null);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            PlayList.instance.Push(status, null);
+        }
+        
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            PlayList.instance.Push(special, null);
+        }
     }
 }

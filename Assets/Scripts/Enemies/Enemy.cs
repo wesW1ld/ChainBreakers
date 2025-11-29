@@ -48,10 +48,16 @@ public class Enemy : MonoBehaviour
         textUI = ui.GetComponent<TextMeshProUGUI>();
         textUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2);
 
+        var uiHP = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        textUIHP = uiHP.GetComponent<TextMeshProUGUI>();
+        textUIHP.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 3);
+        textUIHP.text = $"{currentHP} / {maxHP}";
+
         StartCoroutine(PickChoice());
     }
     
     protected TextMeshProUGUI textUI;
+    protected TextMeshProUGUI textUIHP;
 
     public void TakeDamage(int amount)
     {
@@ -68,6 +74,8 @@ public class Enemy : MonoBehaviour
         {
             currentHP -= amount;
         }
+
+        textUIHP.text = $"{currentHP} / {maxHP}";
         
 
         // Update score using your existing singleton ScoreManager
@@ -132,6 +140,7 @@ public class Enemy : MonoBehaviour
             scoreManager.Instance.ChangeScore(50);
         }
 
+        EnemyManager.Instance.EnemyDestroyed(gameObject);
         Destroy(gameObject);
     }
 
@@ -163,11 +172,13 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         //turns {.5, .2, .3} into {.5, .7, 1} for ranges of options for random choice
+        NumChoices = ProbabiltyMatrix.Length;
         float[] probabilities = new float[NumChoices];
         float prev = 0;
         for (int i = 0; i < NumChoices; i++)
         {
-            probabilities[i] = prev + ProbabiltyMatrix[i];
+            float num = prev + ProbabiltyMatrix[i];
+            probabilities[i] = num;
             prev += ProbabiltyMatrix[i];
         }
 
@@ -323,7 +334,7 @@ public class Enemy : MonoBehaviour
             timeLeft = time;
         }
     }
-    private List<Status> statusEffects;
+    private List<Status> statusEffects = new List<Status>();
 
     public void GiveEnemyStatus(Card.StatusEffect status, int time)
     {
@@ -407,6 +418,7 @@ public class Enemy : MonoBehaviour
                     {
                         currentHP = maxHP;
                     }
+                    textUIHP.text = $"{currentHP} / {maxHP}";
                     break;
                 default:
                     Debug.Log("dont use might or poise");

@@ -10,6 +10,7 @@ public class Boss : Enemy
         base.Start();
         base.currentHP = 300;
         base.maxHP = 300;
+        textUIHP.text = $"{currentHP} / {maxHP}";
     }
 
     public override void MakePMatrix()

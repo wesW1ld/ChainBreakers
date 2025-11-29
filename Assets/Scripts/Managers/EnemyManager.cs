@@ -227,8 +227,9 @@ public class EnemyManager : MonoBehaviour
         //     }
         // }
 
-        enemies[0].GetComponent<Enemy>().EnemyAction();
-        enemies[1].GetComponent<Enemy>().EnemyAction();
-        enemies[2].GetComponent<Enemy>().EnemyAction();
+        foreach(GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Enemy>().EnemyAction();
+        }
     }
 }

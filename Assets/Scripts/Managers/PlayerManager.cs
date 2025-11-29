@@ -36,9 +36,9 @@ public class PlayerManager : MonoBehaviour
     }
 
     
+    public int HP = 1000;
+    public int maxHP = 1000;
 
-    private int HP = 1000;
-    private int maxHP = 1000;
     private int Shield = 0;
 
     public event System.Action UpdateHealth;
