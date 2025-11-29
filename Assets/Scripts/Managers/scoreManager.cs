@@ -64,6 +64,7 @@ public class scoreManager : MonoBehaviour
     {
         PlayList.instance.PlayAllCards();
         EnemyManager.Instance.EnemyAttack();
+        PlayerManager.instance.Timer();
         //minigame
         // int pick = Random.Range(0, 2);
         // if (pick < 1)

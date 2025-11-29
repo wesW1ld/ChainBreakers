@@ -83,7 +83,12 @@ public class PlayList : MonoBehaviour
 
             if(card.cardType == Card.CardType.Attack)
             {
-                EnemyManager.Instance.DealDamage(Random.Range(card.min, card.max + 1), enemyNum);
+                float mult = 1;
+                if(PlayerManager.instance.MightCheck())
+                {
+                    mult = 1.5f;
+                }
+                EnemyManager.Instance.DealDamage((int)(mult * Random.Range(card.min, card.max + 1)), enemyNum);
             }
             else if(card.cardType == Card.CardType.Defend)
             {
@@ -98,7 +103,15 @@ public class PlayList : MonoBehaviour
 
             foreach(Card.StatusEffect sta in card.statusEffects)
             {
-                EnemyManager.Instance.ApplyStatus(sta, Random.Range(card.minTurn, card.maxTurn + 1), enemyNum);
+                if(sta == Card.StatusEffect.might || sta == Card.StatusEffect.poise || sta == Card.StatusEffect.Regenerative)
+                {
+                    PlayerManager.instance.Buff(sta, Random.Range(card.minTurn, card.maxTurn + 1));
+                }
+                else
+                {
+                    EnemyManager.Instance.ApplyStatus(sta, Random.Range(card.minTurn, card.maxTurn + 1), enemyNum);
+                }
+                
             }
         }
     } 

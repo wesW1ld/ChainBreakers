@@ -449,16 +449,8 @@ public class Enemy : MonoBehaviour
                         missChance = 1f;
                     }
                     break;
-                case Card.StatusEffect.Regenerative:
-                    currentHP += (int)(maxHP * .2);//heal 20%
-                    if(currentHP > maxHP)
-                    {
-                        currentHP = maxHP;
-                    }
-                    textUIHP.text = $"{currentHP} / {maxHP}";
-                    break;
                 default:
-                    Debug.Log("dont use might or poise");
+                    Debug.Log("dont use might or poise or regenerative");
                     break;
             }
             if(status.timeLeft < 2)
