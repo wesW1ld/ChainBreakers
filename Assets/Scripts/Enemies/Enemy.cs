@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class Enemy : MonoBehaviour
 {
@@ -44,20 +45,32 @@ public class Enemy : MonoBehaviour
             Debug.Log($"Sum is equal to {sum}, not 1");
         }
 
-        var ui = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        //action ui
+        ui = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
         textUI = ui.GetComponent<TextMeshProUGUI>();
         textUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2);
 
-        var uiHP = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        //hp ui
+        uiHP = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
         textUIHP = uiHP.GetComponent<TextMeshProUGUI>();
         textUIHP.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 3);
         textUIHP.text = $"{currentHP} / {maxHP}";
+
+        //status ui
+        uiSta = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        textUISta = uiSta.GetComponent<TextMeshProUGUI>();
+        textUISta.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * -3);
+        textUISta.text = "no status";
 
         StartCoroutine(PickChoice());
     }
     
     protected TextMeshProUGUI textUI;
     protected TextMeshProUGUI textUIHP;
+    protected TextMeshProUGUI textUISta;
+    GameObject ui;
+    GameObject uiHP;
+    GameObject uiSta;
 
     public void TakeDamage(int amount)
     {
@@ -140,6 +153,9 @@ public class Enemy : MonoBehaviour
             scoreManager.Instance.ChangeScore(50);
         }
 
+        Destroy(ui);
+        Destroy(uiHP);
+        Destroy(uiSta);
         EnemyManager.Instance.EnemyDestroyed(gameObject);
         Destroy(gameObject);
     }
@@ -338,7 +354,26 @@ public class Enemy : MonoBehaviour
 
     public void GiveEnemyStatus(Card.StatusEffect status, int time)
     {
+        if (statusEffects.Any(s => s.effect == status))
+        {
+            // already exists
+            return;
+        }
         statusEffects.Add(new Status(status, time));
+        UpdateStaText();
+    }
+
+    private void UpdateStaText()
+    {
+        textUISta.text = "";
+        foreach(Status s in statusEffects)
+        {
+            textUISta.text += s.effect.ToString();
+        }
+        if(statusEffects.Count == 0)
+        {
+            textUISta.text = "no status";
+        }
     }
 
     //         Dazed, always defend
@@ -427,6 +462,7 @@ public class Enemy : MonoBehaviour
             if(status.timeLeft < 2)
             {
                 statusEffects.Remove(status);
+                UpdateStaText();
             }
         }
 
