@@ -328,7 +328,7 @@ PrefabInstance:
     - target: {fileID: 6004495167280515816, guid: 4a6f684dff0d4894d858b338851348c4, type: 3}
       propertyPath: status
       value: 
-      objectReference: {fileID: 11400000, guid: b1dfb67fc82e4384d9d547bfdf65ff1b, type: 2}
+      objectReference: {fileID: 11400000, guid: 8a4ef1cf3724c144e87c6cb503a07093, type: 2}
     - target: {fileID: 6004495167280515816, guid: 4a6f684dff0d4894d858b338851348c4, type: 3}
       propertyPath: defense
       value: 
@@ -909,6 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6db9bd9ca21da4380b18745ba25f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyNum: 0
 --- !u!4 &1934412345
 Transform:
   m_ObjectHideFlags: 0

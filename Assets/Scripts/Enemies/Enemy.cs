@@ -357,6 +357,7 @@ public class Enemy : MonoBehaviour
         if (statusEffects.Any(s => s.effect == status))
         {
             // already exists
+            Debug.Log($"enemy already has {status}");
             return;
         }
         statusEffects.Add(new Status(status, time));
@@ -369,6 +370,7 @@ public class Enemy : MonoBehaviour
         foreach(Status s in statusEffects)
         {
             textUISta.text += s.effect.ToString();
+            textUISta.text +=s.timeLeft;
         }
         if(statusEffects.Count == 0)
         {
@@ -472,6 +474,7 @@ public class Enemy : MonoBehaviour
             se.timeLeft--;
             statusEffects[i] = se;
         }
+        UpdateStaText();
     }
 }
 

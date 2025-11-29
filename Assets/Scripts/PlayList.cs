@@ -83,22 +83,22 @@ public class PlayList : MonoBehaviour
 
             if(card.cardType == Card.CardType.Attack)
             {
-                EnemyManager.Instance.DealDamage(Random.Range(card.min, card.max), enemyNum);
+                EnemyManager.Instance.DealDamage(Random.Range(card.min, card.max + 1), enemyNum);
             }
             else if(card.cardType == Card.CardType.Defend)
             {
-                PlayerManager.instance.AddShield(Random.Range(card.min, card.max));
+                PlayerManager.instance.AddShield(Random.Range(card.min, card.max + 1));
             }
 
             //depends on the card, not including status effects done below
             if(card.cardName == "Medical Training")
             {
-                PlayerManager.instance.Heal(Random.Range(card.min, card.max));
+                PlayerManager.instance.Heal(Random.Range(card.min, card.max + 1));
             }
 
             foreach(Card.StatusEffect sta in card.statusEffects)
             {
-                EnemyManager.Instance.ApplyStatus(sta, Random.Range(card.minTurn, card.maxTurn), enemyNum);
+                EnemyManager.Instance.ApplyStatus(sta, Random.Range(card.minTurn, card.maxTurn + 1), enemyNum);
             }
         }
     } 
