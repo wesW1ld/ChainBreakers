@@ -122,11 +122,19 @@ public class PlayerManager : MonoBehaviour
     //call every cycle to update buff timers
     public void Timer()
     {
+        //health stuff
         if(regenerative)
         {
             Heal((int)(HP*.2f)); //heal 20%
         }
+        if(curStatus == Status.poisoned)
+        {
+            HP -= (int)(maxHP * .2f);//take 20% of max
+            if(HP < 0){HP = 0;}
+            UpdateHealth?.Invoke();
+        }
 
+        //buff stuff
         mTimer--;
         pTimer--;
         rTimer--;
@@ -145,6 +153,14 @@ public class PlayerManager : MonoBehaviour
             regenerative = false;
         }
         else if(rTimer < 0){rTimer = 0;}
+
+        //negative status stuff
+        statusTimer--;
+        if(statusTimer == 0)
+        {
+            curStatus = Status.normal;
+        }
+        else if(statusTimer < 0){statusTimer = 0;}
     }
 
     public bool MightCheck()
@@ -160,10 +176,17 @@ public class PlayerManager : MonoBehaviour
     }
 
     private Status curStatus = Status.normal;
+    private int statusTimer = 0;
 
     public void ChangeStatus(Status s)
     {
         curStatus = s;
+        statusTimer = 3;
         Debug.Log($"Player status changed to {curStatus}");
+    }
+
+    public bool WeakendCheck()
+    {
+        return curStatus == Status.weakend;
     }
 }

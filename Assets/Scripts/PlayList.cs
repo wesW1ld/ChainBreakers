@@ -84,9 +84,13 @@ public class PlayList : MonoBehaviour
             if(card.cardType == Card.CardType.Attack)
             {
                 float mult = 1;
-                if(PlayerManager.instance.MightCheck())
+                if(PlayerManager.instance.MightCheck() && !PlayerManager.instance.WeakendCheck())
                 {
                     mult = 1.5f;
+                }
+                else if(PlayerManager.instance.WeakendCheck() && PlayerManager.instance.MightCheck())
+                {
+                    mult = .75f;
                 }
                 EnemyManager.Instance.DealDamage((int)(mult * Random.Range(card.min, card.max + 1)), enemyNum);
             }
