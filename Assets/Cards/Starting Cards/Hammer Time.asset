@@ -16,8 +16,8 @@ MonoBehaviour:
   artwork: {fileID: 0}
   min: 3
   max: 6
-  minTurn: 0
-  maxTurn: 0
-  cardTypes: 00000000
+  minTurn: 5
+  maxTurn: 6
+  cardType: 0
   statusEffects: 00000000
   description: Does x-y damage plus Dazed for a-b turns

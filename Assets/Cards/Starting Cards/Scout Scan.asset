@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Scout Scan
   artwork: {fileID: 0}
-  min: 0
-  max: 0
-  minTurn: 0
-  maxTurn: 0
+  min: 10
+  max: 20
+  minTurn: 3
+  maxTurn: 3
   cardType: 3
-  statusEffects: 
+  statusEffects: 0700000001000000
   description: Scans the enemy, Work in Progress(WIP)

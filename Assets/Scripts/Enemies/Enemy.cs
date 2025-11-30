@@ -6,19 +6,21 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class Enemy : MonoBehaviour
 {
     public string enemyName = "Polaris";
     public int maxHP = 100;
     public int currentHP;
-    public int attackPower = 20;
+    public float attackPower = 25f;
     public int damageReceived = 10;
     private bool defending = false;
     public int[] Count;
     public float missChance = 0f;
     public float damageMult = 1f;
     public float enemyMissChance = 0f;
+    protected bool dazed = false;
 
     private int choice;
 
@@ -44,20 +46,32 @@ public class Enemy : MonoBehaviour
             Debug.Log($"Sum is equal to {sum}, not 1");
         }
 
-        var ui = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        //action ui
+        ui = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
         textUI = ui.GetComponent<TextMeshProUGUI>();
         textUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2);
 
-        var uiHP = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        //hp ui
+        uiHP = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
         textUIHP = uiHP.GetComponent<TextMeshProUGUI>();
         textUIHP.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 3);
         textUIHP.text = $"{currentHP} / {maxHP}";
+
+        //status ui
+        uiSta = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        textUISta = uiSta.GetComponent<TextMeshProUGUI>();
+        textUISta.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * -3);
+        textUISta.text = "no status";
 
         StartCoroutine(PickChoice());
     }
     
     protected TextMeshProUGUI textUI;
     protected TextMeshProUGUI textUIHP;
+    protected TextMeshProUGUI textUISta;
+    GameObject ui;
+    GameObject uiHP;
+    GameObject uiSta;
 
     public void TakeDamage(int amount)
     {
@@ -103,6 +117,7 @@ public class Enemy : MonoBehaviour
                 case 0:
                     //Debug.Log("Attacking");
                     Attack();
+                    Debug.Log($"attacking with mult {damageMult} and miss chance of {missChance}");
                     break;
                 case 1:
                     //Debug.Log("Defending");
@@ -123,6 +138,7 @@ public class Enemy : MonoBehaviour
         missChance = 0f;
         damageMult = 1f;
         enemyMissChance = 0f;
+        dazed = false;
 
         UpdatePMatrix();
         tProbabiltyMatrix = (float[])ProbabiltyMatrix.Clone(); //make same
@@ -140,6 +156,9 @@ public class Enemy : MonoBehaviour
             scoreManager.Instance.ChangeScore(50);
         }
 
+        Destroy(ui);
+        Destroy(uiHP);
+        Destroy(uiSta);
         EnemyManager.Instance.EnemyDestroyed(gameObject);
         Destroy(gameObject);
     }
@@ -164,12 +183,21 @@ public class Enemy : MonoBehaviour
 
     public virtual void Attack()
     {
-        PlayerManager.instance.TakeDamage((int)(100f * damageMult));
+        if(dazed)
+        {
+            if(Random.Range(0, 2) == 1)
+            {
+                TakeDamage((int)(25f * damageMult));
+                Debug.Log("hit self");
+                return;
+            }
+        }
+        PlayerManager.instance.TakeDamage((int)(attackPower * damageMult));
     }
 
     IEnumerator PickChoice()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0f);
 
         //turns {.5, .2, .3} into {.5, .7, 1} for ranges of options for random choice
         NumChoices = ProbabiltyMatrix.Length;
@@ -212,7 +240,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void AttackPreview()
     {
-        textUI.text = "Attacking for 100";
+        textUI.text = $"Attacking for {attackPower}";
     }
     
     public virtual void SpecialAttackPreview(int i)
@@ -338,18 +366,43 @@ public class Enemy : MonoBehaviour
 
     public void GiveEnemyStatus(Card.StatusEffect status, int time)
     {
-        statusEffects.Add(new Status(status, time));
+        int index = statusEffects.FindIndex(s => s.effect == status);
+        if (index != -1)
+        {
+            // Get the struct, modify it, then write it back
+            Status s = statusEffects[index];
+            if(s.timeLeft < time){s.timeLeft = time;}
+            statusEffects[index] = s;  //assign back
+        }
+        else
+        {
+            statusEffects.Add(new Status(status, time));
+        }
+        UpdateStaText();
     }
 
-    //         Dazed, always defend
+    private void UpdateStaText()
+    {
+        textUISta.text = "";
+        foreach(Status s in statusEffects)
+        {
+            textUISta.text += s.effect.ToString();
+            textUISta.text +=s.timeLeft;
+        }
+        if(statusEffects.Count == 0)
+        {
+            textUISta.text = "no status";
+        }
+    }
+
+    //         Dazed, chance to hit self
     //         Enraged, always attack
-    //         Emboldened, always specials (attacks if no special), with chance to miss
+    //         Emboldened, more damage
     //         Shocked, miss a turn
     //         Rage, do more damage, % chance to miss
     //         Cloaked, cant be hit
     //         Blur, % chance to not be hit
     //         Binded, % chance to do more damage, otherwise miss
-    //         Regenerative, heal % at end of turn
     private void ApplyStatus()
     {
         foreach(Status status in statusEffects)
@@ -357,17 +410,10 @@ public class Enemy : MonoBehaviour
             switch(status.effect)
             {
                 case Card.StatusEffect.Dazed:
-                    //make Pmatrix always defend, save and restore outside after
-                    if(NumChoices == 4)
-                    {
-                        ProbabiltyMatrix = new float[] {0f, 1f, 0f, 0f};
-                    }
-                    else
-                    {
-                        ProbabiltyMatrix = new float[] {0f, 1f, 0f};
-                    }
+                    dazed = true;
                     break;
                 case Card.StatusEffect.Enraged:
+                    choice = 0;
                     if(NumChoices == 4)
                     {
                         ProbabiltyMatrix = new float[] {1f, 0f, 0f, 0f};
@@ -376,57 +422,36 @@ public class Enemy : MonoBehaviour
                     {
                         ProbabiltyMatrix = new float[] {1f, 0f, 0f};
                     }
+                    if(missChance < .5f){missChance = .5f;}
                     break;
                 case Card.StatusEffect.Emboldened:
-                    if(NumChoices == 4)
-                    {
-                        ProbabiltyMatrix = new float[] {0f, 0f, .8f, .2f};
-                    }
-                    else
-                    {
-                        ProbabiltyMatrix = new float[] {0f, 0f, 1f};
-                    }
-                    missChance = .35f;
+                    damageMult += .2f;
                     break;
                 case Card.StatusEffect.Shocked:
                     missChance = 1f;
                     break;
                 case Card.StatusEffect.Rage:
-                    damageMult = 1.5f;
-                    missChance = .5f;
+                    damageMult += .5f;
+                    if(missChance < .5f){missChance = .5f;}
                     break;
                 case Card.StatusEffect.Cloaked:
                     enemyMissChance = 1f;
                     break;
                 case Card.StatusEffect.Blur:
-                    enemyMissChance = .3f;
+                    if(enemyMissChance < .3f){enemyMissChance = .3f;}
                     break;
                 case Card.StatusEffect.Binded:
-                    //% chance to do more damage, otherwise miss
-                    if(Random.value < .3f)
-                    {
-                        damageMult = 1.75f;
-                    }
-                    else
-                    {
-                        missChance = 1f;
-                    }
-                    break;
-                case Card.StatusEffect.Regenerative:
-                    currentHP += (int)(maxHP * .2);//heal 20%
-                    if(currentHP > maxHP)
-                    {
-                        currentHP = maxHP;
-                    }
-                    textUIHP.text = $"{currentHP} / {maxHP}";
+                    damageMult += .3f;
+                    if(missChance < .3f){missChance = .3f;}
                     break;
                 default:
-                    Debug.Log("dont use might or poise");
+                    Debug.Log("dont use might or poise or regenerative");
                     break;
             }
             if(status.timeLeft < 2)
             {
                 statusEffects.Remove(status);
+                UpdateStaText();
             }
         }
 
@@ -436,6 +461,7 @@ public class Enemy : MonoBehaviour
             se.timeLeft--;
             statusEffects[i] = se;
         }
+        UpdateStaText();
     }
 }
 
