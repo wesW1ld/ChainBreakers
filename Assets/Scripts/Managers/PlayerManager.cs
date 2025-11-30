@@ -67,6 +67,7 @@ public class PlayerManager : MonoBehaviour
         if(amt < 0){amt = 0;}
         HP -= amt;
         if(HP < 0){HP = 0;}
+        DeathCheck();
         UpdateHealth?.Invoke(); //invokes updateHealth event, which tells the hpBar.cs to update the healthbar
     }
 
@@ -131,6 +132,7 @@ public class PlayerManager : MonoBehaviour
         {
             HP -= (int)(maxHP * .2f);//take 20% of max
             if(HP < 0){HP = 0;}
+            DeathCheck();
             UpdateHealth?.Invoke();
         }
 
@@ -188,5 +190,14 @@ public class PlayerManager : MonoBehaviour
     public bool WeakendCheck()
     {
         return curStatus == Status.weakend;
+    }
+
+    private void DeathCheck()
+    {
+        if(HP <= 0)
+        {
+            Debug.Log("player died");
+            //change scene or something
+        }
     }
 }

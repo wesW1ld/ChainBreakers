@@ -18,7 +18,7 @@ MonoBehaviour:
   max: 0
   minTurn: 0
   maxTurn: 0
-  cardTypes: 03000000
-  statusEffects: 0000000000000000
+  cardType: 0
+  statusEffects: 090000000a000000
   description: Choose between getting +1 might or poise at the beginning of each
     turn, starting next round

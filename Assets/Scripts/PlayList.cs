@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayList : MonoBehaviour
 {
     private Stack<Card> PlayedCards = new Stack<Card>();
-    private Stack<GameObject> CardObjects = new Stack<GameObject>();
+    //private Stack<GameObject> CardObjects = new Stack<GameObject>();
     private int CardLimit = 100;
 
     public int enemyNum = 0;
@@ -21,13 +21,13 @@ public class PlayList : MonoBehaviour
             return;
         }
         PlayedCards.Push(card);
-        CardObjects.Push(cardO);
+        //CardObjects.Push(cardO);
     }
 
     public void Pop()
     {
         PlayedCards.Pop();
-        CardObjects.Pop();
+        //CardObjects.Pop();
     }
 
     public Card[] SeeStack() //see current stack with top being index 0
@@ -39,6 +39,14 @@ public class PlayList : MonoBehaviour
     public Card Top()
     {
         return PlayedCards.Peek();
+    }
+
+    public void Clear()
+    {
+        foreach(Card c in PlayedCards)
+        {
+            Pop();
+        }
     }
     
     //singleton stuff
@@ -109,11 +117,11 @@ public class PlayList : MonoBehaviour
             {
                 if(sta == Card.StatusEffect.might || sta == Card.StatusEffect.poise || sta == Card.StatusEffect.Regenerative)
                 {
-                    PlayerManager.instance.Buff(sta, Random.Range(card.minTurn, card.maxTurn + 1));
+                    PlayerManager.instance.Buff(sta, Random.Range(card.minTurn + 1, card.maxTurn + 1));
                 }
                 else
                 {
-                    EnemyManager.Instance.ApplyStatus(sta, Random.Range(card.minTurn, card.maxTurn + 1), enemyNum);
+                    EnemyManager.Instance.ApplyStatus(sta, Random.Range(card.minTurn + 1, card.maxTurn + 1), enemyNum);
                 }
                 
             }

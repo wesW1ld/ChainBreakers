@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public string enemyName = "Polaris";
     public int maxHP = 100;
     public int currentHP;
-    public int attackPower = 20;
+    public float attackPower = 25f;
     public int damageReceived = 10;
     private bool defending = false;
     public int[] Count;
@@ -117,6 +117,7 @@ public class Enemy : MonoBehaviour
                 case 0:
                     //Debug.Log("Attacking");
                     Attack();
+                    Debug.Log($"attacking with mult {damageMult} and miss chance of {missChance}");
                     break;
                 case 1:
                     //Debug.Log("Defending");
@@ -187,15 +188,16 @@ public class Enemy : MonoBehaviour
             if(Random.Range(0, 2) == 1)
             {
                 TakeDamage((int)(25f * damageMult));
+                Debug.Log("hit self");
                 return;
             }
         }
-        PlayerManager.instance.TakeDamage((int)(25f * damageMult));
+        PlayerManager.instance.TakeDamage((int)(attackPower * damageMult));
     }
 
     IEnumerator PickChoice()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0f);
 
         //turns {.5, .2, .3} into {.5, .7, 1} for ranges of options for random choice
         NumChoices = ProbabiltyMatrix.Length;
@@ -238,7 +240,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void AttackPreview()
     {
-        textUI.text = "Attacking for 100";
+        textUI.text = $"Attacking for {attackPower}";
     }
     
     public virtual void SpecialAttackPreview(int i)
@@ -411,6 +413,7 @@ public class Enemy : MonoBehaviour
                     dazed = true;
                     break;
                 case Card.StatusEffect.Enraged:
+                    choice = 0;
                     if(NumChoices == 4)
                     {
                         ProbabiltyMatrix = new float[] {1f, 0f, 0f, 0f};
@@ -438,15 +441,8 @@ public class Enemy : MonoBehaviour
                     if(enemyMissChance < .3f){enemyMissChance = .3f;}
                     break;
                 case Card.StatusEffect.Binded:
-                    //% chance to do more damage, otherwise miss
-                    if(Random.value < .3f)
-                    {
-                        damageMult += .7f;
-                    }
-                    else
-                    {
-                        missChance = 1f;
-                    }
+                    damageMult += .3f;
+                    if(missChance < .3f){missChance = .3f;}
                     break;
                 default:
                     Debug.Log("dont use might or poise or regenerative");

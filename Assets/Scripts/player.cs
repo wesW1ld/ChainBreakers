@@ -15,11 +15,6 @@ public class player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Slash))
-        {
-            scoreManager.instance.ComboEnd();
-        }
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             PlayList.instance.Push(attack, null);
@@ -39,5 +34,10 @@ public class player : MonoBehaviour
         {
             PlayList.instance.Push(special, null);
         }
+    }
+
+    public void EndTurnButton()
+    {
+        scoreManager.instance.ComboEnd();
     }
 }

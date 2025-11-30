@@ -36,7 +36,7 @@ public class Boss : Enemy
                     return;
                 }
             }
-            PlayerManager.instance.TakeDamage((int)(25f * damageMult));
+            PlayerManager.instance.TakeDamage((int)(attackPower * damageMult));
         }
     }
 
@@ -47,22 +47,23 @@ public class Boss : Enemy
             if(Random.Range(0, 2) == 1)
             {
                 TakeDamage((int)(50f * damageMult));
+                Debug.Log("hit self");
                 return;
             }
         }
-        PlayerManager.instance.TakeDamage((int)(50f * damageMult));
+        PlayerManager.instance.TakeDamage((int)(attackPower* 2 * damageMult));
     }
 
     public override void AttackPreview()
     {
-        base.textUI.text = "Attacking for 250";
+        base.textUI.text = $"Attacking for {attackPower} * 2";
     }
     
     public override void SpecialAttackPreview(int i)
     {
         if (i == 3)
         {
-            base.textUI.text = "Weakening Player and Attacking for 200";
+            base.textUI.text = $"Weakening Player and Attacking for {attackPower}";
         }
         else
         {
