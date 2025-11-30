@@ -84,10 +84,24 @@ public class PlayList : MonoBehaviour
     {
 
         Card[] items = SeeStack();
+        Card.CardType prev = Card.CardType.Attack;//default, but gets changed before use
+        int streak = -1;
 
         for (int i = items.Length - 1; i >= 0; i--)
         {
             Card card = items[i];
+            if(streak == -1)
+            {
+                prev = card.cardType;
+            }
+            if(card.cardType == prev)
+            {
+                streak += 1;
+            }
+            else
+            {
+                streak = 0;
+            }
 
             if(card.cardType == Card.CardType.Attack)
             {
@@ -100,17 +114,31 @@ public class PlayList : MonoBehaviour
                 {
                     mult = .75f;
                 }
+                for(int j = 0; j < streak; j++)
+                {
+                    mult += .1f;
+                }
                 EnemyManager.Instance.DealDamage((int)(mult * Random.Range(card.min, card.max + 1)), enemyNum);
             }
             else if(card.cardType == Card.CardType.Defend)
             {
-                PlayerManager.instance.AddShield(Random.Range(card.min, card.max + 1));
+                float mult = 1f;
+                for(int j = 0; j < streak; j++)
+                {
+                    mult += .1f;
+                }
+                PlayerManager.instance.AddShield((int)(mult * Random.Range(card.min, card.max + 1)));
             }
 
             //depends on the card, not including status effects done below
             if(card.cardName == "Medical Training")
             {
-                PlayerManager.instance.Heal(Random.Range(card.min, card.max + 1));
+                float mult = 1f;
+                for(int j = 0; j < streak; j++)
+                {
+                    mult += .1f;
+                }
+                PlayerManager.instance.Heal((int)(mult * Random.Range(card.min, card.max + 1)));
             }
 
             foreach(Card.StatusEffect sta in card.statusEffects)
@@ -125,6 +153,8 @@ public class PlayList : MonoBehaviour
                 }
                 
             }
+
+            prev = card.cardType;
         }
     } 
 }
