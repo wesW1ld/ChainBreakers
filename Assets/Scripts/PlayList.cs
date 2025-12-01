@@ -9,8 +9,8 @@ public class PlayList : MonoBehaviour
 {
     private List<Card> PlayedCards = new List<Card>();
     private List<GameObject> CardObjects = new List<GameObject>();
-    private int CardLimit = 2;
-    private int BaseCardLimit = 2;
+    private int CardLimit = 3;
+    private int BaseCardLimit = 3;
 
     public int enemyNum = 0;
 

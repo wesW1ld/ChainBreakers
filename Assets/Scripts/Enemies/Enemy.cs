@@ -416,14 +416,7 @@ public class Enemy : MonoBehaviour
                     break;
                 case Card.StatusEffect.Enraged:
                     choice = 0;
-                    if(NumChoices == 4)
-                    {
-                        ProbabiltyMatrix = new float[] {1f, 0f, 0f, 0f};
-                    }
-                    else
-                    {
-                        ProbabiltyMatrix = new float[] {1f, 0f, 0f};
-                    }
+                    Enrage();
                     if(missChance < .5f){missChance = .5f;}
                     break;
                 case Card.StatusEffect.Emboldened:
@@ -465,6 +458,11 @@ public class Enemy : MonoBehaviour
         }
         UpdateStaText();
     
+    }
+
+    public virtual void Enrage()
+    {
+        ProbabiltyMatrix = new float[] {1f, 0f, 0f};
     }
 }
 

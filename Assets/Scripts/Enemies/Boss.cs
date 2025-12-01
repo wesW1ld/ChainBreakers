@@ -84,4 +84,9 @@ public class Boss : Enemy
             }
         }
     }
+
+    public override void Enrage()
+    {
+        ProbabiltyMatrix = new float[] {1f, 0f, 0f, 0f};
+    }
 }

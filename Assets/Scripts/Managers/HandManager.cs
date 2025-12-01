@@ -11,16 +11,12 @@ public class HandManager : MonoBehaviour
     public float fanSpread = 9.15f;
     public List<GameObject> cardsInHand = new List<GameObject>();
     public float cardSpacing = 230f;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
+    private int maxHandSize = 7;
+    private int curHandSize = 0;
 
     public void DrawCardToHand(Card cardData)
     {
+        if(curHandSize >= maxHandSize){return;}
         GameObject newCard = Instantiate(cardPrefab, handTransform.position, Quaternion.identity, handTransform);
         cardsInHand.Add(newCard);
 
@@ -31,12 +27,14 @@ public class HandManager : MonoBehaviour
 
     public void RemoveCard(GameObject card)
     {
+        curHandSize--;
         cardsInHand.Remove(card);
         UpdateHandLayout();
     }
 
     public void AddCard(GameObject card)
     {
+        curHandSize++;
         cardsInHand.Add(card);
         UpdateHandLayout();
     }
