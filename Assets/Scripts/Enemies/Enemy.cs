@@ -444,7 +444,7 @@ public class Enemy : MonoBehaviour
                     break;
                 case Card.StatusEffect.Binded:
                     damageMult += .3f;
-                    if(missChance < .3f){missChance = .3f;}
+                    if(missChance < .6f){missChance = .6f;}
                     break;
                 default:
                     Debug.Log("dont use might or poise or regenerative");

@@ -18,6 +18,6 @@ MonoBehaviour:
   max: 0
   minTurn: 0
   maxTurn: 0
-  cardTypes: 02000000
+  cardType: 3
   statusEffects: 
-  description: Add up to 2 cards from a set of 3
+  description: Draw 2 cards

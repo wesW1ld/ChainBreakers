@@ -18,6 +18,6 @@ MonoBehaviour:
   max: 20
   minTurn: 3
   maxTurn: 3
-  cardType: 3
-  statusEffects: 0700000001000000
-  description: Scans the enemy, Work in Progress(WIP)
+  cardType: 2
+  statusEffects: 07000000
+  description: Binds the enemy

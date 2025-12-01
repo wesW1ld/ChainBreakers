@@ -18,6 +18,6 @@ MonoBehaviour:
   max: 0
   minTurn: 5
   maxTurn: 6
-  cardType: 3
+  cardType: 2
   statusEffects: 0100000002000000
-  description: Makes the enemy(ies) Enraged and Emboldend
+  description: Makes the enemy Enraged and Emboldend

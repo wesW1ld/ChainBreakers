@@ -10,6 +10,7 @@ public class PlayList : MonoBehaviour
     private List<Card> PlayedCards = new List<Card>();
     private List<GameObject> CardObjects = new List<GameObject>();
     private int CardLimit = 2;
+    private int BaseCardLimit = 2;
 
     public int enemyNum = 0;
 
@@ -52,6 +53,8 @@ public class PlayList : MonoBehaviour
         }
 
         PlayedCards.Clear(); // optional if you want to clear card data too
+
+        CardLimit = BaseCardLimit;
 
         return ret;
     }
@@ -156,6 +159,53 @@ public class PlayList : MonoBehaviour
                     mult += .1f;
                 }
                 PlayerManager.instance.Heal((int)(mult * Random.Range(card.min, card.max + 1)));
+            }
+            else if(card.cardName == "Ask Chat")
+            {
+                DeckManager.instance.DrawCard();
+                DeckManager.instance.DrawCard();
+            }
+            else if(card.cardName == "Bag Boy")
+            {
+                CardLimit++;
+            }
+            else if(card.cardName == "Flame Shot")
+            {
+                EnemyManager.Instance.DealDamage((int)(Random.Range(card.min, card.max + 1)), enemyNum);
+                EnemyManager.Instance.DealDamage((int)(Random.Range(card.min, card.max + 1)), enemyNum + 1);
+                EnemyManager.Instance.DealDamage((int)(Random.Range(card.min, card.max + 1)), enemyNum + 2);
+            }
+            else if(card.cardName == "Healing Aura")
+            {
+                float mult = 1f;
+                for(int j = 0; j < streak; j++)
+                {
+                    mult += .1f;
+                }
+                PlayerManager.instance.Heal((int)(mult * Random.Range(card.min, card.max + 1)));
+                PlayerManager.instance.AddShield((int)(mult * Random.Range(card.minTurn, card.maxTurn + 1)));
+            }
+            else if(card.cardName == "Stim Shot")
+            {
+                PlayerManager.instance.Buff(Card.StatusEffect.might, Random.Range(card.minTurn + 1, card.maxTurn + 1));
+            }
+            else if(card.cardName == "All Of The Lights")
+            {
+                BaseCardLimit += Random.Range(card.minTurn, card.maxTurn + 1);
+            }
+            else if(card.cardName == "Dealer's Choice")
+            {
+                DeckManager.instance.DrawCard();
+                DeckManager.instance.DrawCard();
+                DeckManager.instance.DrawCard();
+                BaseCardLimit--;
+            }
+            else if(card.cardName == "Lightning Cast")
+            {
+                EnemyManager.Instance.ApplyStatus(Card.StatusEffect.Shocked, Random.Range(card.minTurn + 1, card.maxTurn + 1), enemyNum);
+                EnemyManager.Instance.ApplyStatus(Card.StatusEffect.Shocked, Random.Range(card.minTurn + 1, card.maxTurn + 1), enemyNum + 1);
+                EnemyManager.Instance.ApplyStatus(Card.StatusEffect.Shocked, Random.Range(card.minTurn + 1, card.maxTurn + 1), enemyNum + 2);
+                PlayerManager.instance.TakeDamage(Random.Range(card.min, card.max + 1));
             }
 
             foreach(Card.StatusEffect sta in card.statusEffects)

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: In The Bushes
   artwork: {fileID: 0}
-  min: 6
-  max: 7
-  minTurn: 0
-  maxTurn: 0
-  cardTypes: 01000000
-  statusEffects: 06000000
-  description: Gain 6-7 shield and gain "Blur"
+  min: 90
+  max: 100
+  minTurn: 1
+  maxTurn: 2
+  cardType: 1
+  statusEffects: 04000000
+  description: Gain x-y shield and give enemy Rage

@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: From The Top!
   artwork: {fileID: 0}
-  min: 4
-  max: 6
+  min: 30
+  max: 50
   minTurn: 0
   maxTurn: 0
-  cardTypes: 00000000
-  statusEffects: 
-  description: Deal 4-6 damage based on how many attack cards are currently in your
-    hand
+  cardType: 0
+  statusEffects: 01000000
+  description: Deal x-y damage, enrage enemy

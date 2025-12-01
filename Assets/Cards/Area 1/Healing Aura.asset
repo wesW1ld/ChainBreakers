@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Healing Aura
   artwork: {fileID: 0}
-  min: 3
-  max: 5
-  minTurn: 0
-  maxTurn: 0
-  cardTypes: 01000000
+  min: 30
+  max: 50
+  minTurn: 100
+  maxTurn: 150
+  cardType: 3
   statusEffects: 
-  description: Heals 3-5% of the player's health, plus adds a hand slot
+  description: Heal x-y and gain a-b shield

@@ -16,8 +16,8 @@ MonoBehaviour:
   artwork: {fileID: 0}
   min: 3
   max: 4
-  minTurn: 1
-  maxTurn: 3
-  cardTypes: 01000000
+  minTurn: 2
+  maxTurn: 4
+  cardType: 2
   statusEffects: 08000000
-  description: 'Gain 3-4 regenerative buff for 1-3 turns '
+  description: 'Gain regenerative buff for 2-4 turns '

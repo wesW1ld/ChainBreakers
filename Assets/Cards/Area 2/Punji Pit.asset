@@ -16,9 +16,8 @@ MonoBehaviour:
   artwork: {fileID: 0}
   min: 5
   max: 7
-  minTurn: 4
-  maxTurn: 6
-  cardTypes: 00000000
-  statusEffects: 
-  description: Deal 5-10 damage plus the enemy will take 4-6 damage per attack for
-    the next two rounds
+  minTurn: 1
+  maxTurn: 1
+  cardType: 2
+  statusEffects: 00000000
+  description: Give enemy dazed for 1 turn
