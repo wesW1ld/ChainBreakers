@@ -10,19 +10,27 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     bool inPlay = false;
     public void OnPointerDown(PointerEventData eventData)
     {
-        inPlay = !inPlay;
-        if(inPlay)
+        if(!inPlay) //put into play
         {
-            MoveCardToLeftSide();//move to area
-            PlayList.instance.Push(gameObject.GetComponent<CardDisplay>().card, gameObject);
-            HandManager.instance.RemoveCard(gameObject);
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            if(!PlayList.instance.IsFull())
+            {
+                MoveCardToLeftSide();//move to area
+                PlayList.instance.Push(gameObject.GetComponent<CardDisplay>().card, gameObject);
+                HandManager.instance.RemoveCard(gameObject);
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
+            else
+            {
+                inPlay = !inPlay; //don't put into play
+            }
+            
         }
-        else
+        else //remove from play
         {
             PlayList.instance.Pop(gameObject.GetComponent<CardDisplay>().card, gameObject);
             HandManager.instance.AddCard(gameObject);
         }
+        inPlay = !inPlay;
     }
 
     private float displacementMult = 20;

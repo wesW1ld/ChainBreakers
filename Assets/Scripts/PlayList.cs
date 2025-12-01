@@ -9,7 +9,7 @@ public class PlayList : MonoBehaviour
 {
     private List<Card> PlayedCards = new List<Card>();
     private List<GameObject> CardObjects = new List<GameObject>();
-    private int CardLimit = 100;
+    private int CardLimit = 2;
 
     public int enemyNum = 0;
 
@@ -36,9 +36,9 @@ public class PlayList : MonoBehaviour
         return ret;
     }
 
-    public void ClearList()
+    public int ClearList()
     {
-        Debug.Log("Clearing list");
+        int ret = CardObjects.Count;
 
         // Iterate backwards to avoid collection modification issues
         for (int i = CardObjects.Count - 1; i >= 0; i--)
@@ -46,19 +46,24 @@ public class PlayList : MonoBehaviour
             GameObject obj = CardObjects[i];
             if (obj != null)
             {
-                Debug.Log($"Destroying {obj.name}");
                 Destroy(obj);
             }
             CardObjects.RemoveAt(i); // safely remove from list
         }
 
         PlayedCards.Clear(); // optional if you want to clear card data too
-    }
 
+        return ret;
+    }
 
     public int GetSize()
     {
         return PlayedCards.Count;
+    }
+
+    public bool IsFull()
+    {
+        return CardObjects.Count >= CardLimit;
     }
     
     //singleton stuff
