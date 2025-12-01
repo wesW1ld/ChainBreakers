@@ -189,9 +189,7 @@ MonoBehaviour:
   telegraphPrefab: {fileID: 69750789094826633, guid: 055450c16e01ea9479fd6429e7429922, type: 3}
   startPosX: 0
   startPosY: 0
-  vlength: 8
-  hlength: 15
-  perfectScore: 150000
+  length: 9
 --- !u!4 &183119212
 Transform:
   m_ObjectHideFlags: 0

@@ -23,15 +23,15 @@ public class hpBar : MonoBehaviour
 
     private void UpdateHP()
     {
-        HP = playerManager.instance.HP;
+        HP = playerManagerM1.instance.HP;
         gameObject.GetComponent<UnityEngine.UI.Image>().fillAmount = HP / maxHP; //updates bar image
     }
 
     IEnumerator Subscribe()
     {
         yield return new WaitForSeconds(.4f);
-        playerManager.instance.updateHealth += UpdateHP; //subscribe to updateHealth event, calls UpdateHP() when invoked
-        maxHP = playerManager.instance.maxHP;
+        playerManagerM1.instance.updateHealth += UpdateHP; //subscribe to updateHealth event, calls UpdateHP() when invoked
+        maxHP = playerManagerM1.instance.maxHP;
         UpdateHP();
     }
 }
