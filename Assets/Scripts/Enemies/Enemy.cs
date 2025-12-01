@@ -47,20 +47,20 @@ public class Enemy : MonoBehaviour
         }
 
         //action ui
-        ui = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        ui = Instantiate(EnemyManager.Instance.textPrefab, UIManager.instance.UICanvas.transform);
         textUI = ui.GetComponent<TextMeshProUGUI>();
-        textUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2);
+        textUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 1);
 
         //hp ui
-        uiHP = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        uiHP = Instantiate(EnemyManager.Instance.textPrefab, UIManager.instance.UICanvas.transform);
         textUIHP = uiHP.GetComponent<TextMeshProUGUI>();
-        textUIHP.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 3);
+        textUIHP.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2);
         textUIHP.text = $"{currentHP} / {maxHP}";
 
         //status ui
-        uiSta = Instantiate(EnemyManager.Instance.textPrefab, FindObjectOfType<Canvas>().transform);
+        uiSta = Instantiate(EnemyManager.Instance.textPrefab, UIManager.instance.UICanvas.transform);
         textUISta = uiSta.GetComponent<TextMeshProUGUI>();
-        textUISta.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * -3);
+        textUISta.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * -2);
         textUISta.text = "no status";
 
         StartCoroutine(PickChoice());

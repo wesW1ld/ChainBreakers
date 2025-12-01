@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class PlayList : MonoBehaviour
 {
-    private Stack<Card> PlayedCards = new Stack<Card>();
-    //private Stack<GameObject> CardObjects = new Stack<GameObject>();
+    private List<Card> PlayedCards = new List<Card>();
+    private List<GameObject> CardObjects = new List<GameObject>();
     private int CardLimit = 100;
 
     public int enemyNum = 0;
@@ -20,14 +20,14 @@ public class PlayList : MonoBehaviour
             Debug.Log("Max number of cards played");
             return;
         }
-        PlayedCards.Push(card);
-        //CardObjects.Push(cardO);
+        PlayedCards.Add(card);
+        CardObjects.Add(cardO);
     }
 
-    public void Pop()
+    public void Pop(Card card, GameObject cardO)
     {
-        PlayedCards.Pop();
-        //CardObjects.Pop();
+        PlayedCards.Remove(card);
+        CardObjects.Remove(cardO);
     }
 
     public Card[] SeeStack() //see current stack with top being index 0
@@ -36,17 +36,19 @@ public class PlayList : MonoBehaviour
         return ret;
     }
 
-    public Card Top()
+    public void ClearList()
     {
-        return PlayedCards.Peek();
+        foreach(GameObject obj in CardObjects)
+        {
+            Destroy(obj);
+        }
+        PlayedCards.Clear();
+        CardObjects.Clear();
     }
 
-    public void Clear()
+    public int GetSize()
     {
-        foreach(Card c in PlayedCards)
-        {
-            Pop();
-        }
+        return PlayedCards.Count;
     }
     
     //singleton stuff
