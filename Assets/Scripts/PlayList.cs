@@ -1,29 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using ChainBreakers;
+using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayList : MonoBehaviour
 {
-    Stack<Sprite> CardPics = new Stack<Sprite>();
-    Stack<Card> PlayedCards = new Stack<Card>();
-    public int CardLimit = 10;
+    private Stack<Card> PlayedCards = new Stack<Card>();
+    //private Stack<GameObject> CardObjects = new Stack<GameObject>();
+    private int CardLimit = 100;
 
-    public void Push(Sprite sprite, Card card)
+    public int enemyNum = 0;
+
+    public void Push(Card card, GameObject cardO) //hand is gonna move cards, then when turn is over, push them all in order
     {
         if(PlayedCards.Count == CardLimit)
         {
             Debug.Log("Max number of cards played");
             return;
         }
-        CardPics.Push(sprite);
         PlayedCards.Push(card);
+        //CardObjects.Push(cardO);
     }
 
     public void Pop()
     {
-        CardPics.Pop();
         PlayedCards.Pop();
+        //CardObjects.Pop();
     }
 
     public Card[] SeeStack() //see current stack with top being index 0
@@ -37,9 +41,12 @@ public class PlayList : MonoBehaviour
         return PlayedCards.Peek();
     }
 
-    private void UpdateDisplay()
+    public void Clear()
     {
-        
+        foreach(Card c in PlayedCards)
+        {
+            Pop();
+        }
     }
     
     //singleton stuff
@@ -72,5 +79,82 @@ public class PlayList : MonoBehaviour
         }
 
     }
-    
+
+    public void PlayAllCards()
+    {
+
+        Card[] items = SeeStack();
+        Card.CardType prev = Card.CardType.Attack;//default, but gets changed before use
+        int streak = -1;
+
+        for (int i = items.Length - 1; i >= 0; i--)
+        {
+            Card card = items[i];
+            if(streak == -1)
+            {
+                prev = card.cardType;
+            }
+            if(card.cardType == prev)
+            {
+                streak += 1;
+            }
+            else
+            {
+                streak = 0;
+            }
+
+            if(card.cardType == Card.CardType.Attack)
+            {
+                float mult = 1;
+                if(PlayerManager.instance.MightCheck() && !PlayerManager.instance.WeakendCheck())
+                {
+                    mult = 1.5f;
+                }
+                else if(PlayerManager.instance.WeakendCheck() && PlayerManager.instance.MightCheck())
+                {
+                    mult = .75f;
+                }
+                for(int j = 0; j < streak; j++)
+                {
+                    mult += .1f;
+                }
+                EnemyManager.Instance.DealDamage((int)(mult * Random.Range(card.min, card.max + 1)), enemyNum);
+            }
+            else if(card.cardType == Card.CardType.Defend)
+            {
+                float mult = 1f;
+                for(int j = 0; j < streak; j++)
+                {
+                    mult += .1f;
+                }
+                PlayerManager.instance.AddShield((int)(mult * Random.Range(card.min, card.max + 1)));
+            }
+
+            //depends on the card, not including status effects done below
+            if(card.cardName == "Medical Training")
+            {
+                float mult = 1f;
+                for(int j = 0; j < streak; j++)
+                {
+                    mult += .1f;
+                }
+                PlayerManager.instance.Heal((int)(mult * Random.Range(card.min, card.max + 1)));
+            }
+
+            foreach(Card.StatusEffect sta in card.statusEffects)
+            {
+                if(sta == Card.StatusEffect.might || sta == Card.StatusEffect.poise || sta == Card.StatusEffect.Regenerative)
+                {
+                    PlayerManager.instance.Buff(sta, Random.Range(card.minTurn + 1, card.maxTurn + 1));
+                }
+                else
+                {
+                    EnemyManager.Instance.ApplyStatus(sta, Random.Range(card.minTurn + 1, card.maxTurn + 1), enemyNum);
+                }
+                
+            }
+
+            prev = card.cardType;
+        }
+    } 
 }

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Hunker Down
   artwork: {fileID: 0}
-  min: 5
-  max: 8
+  min: 100
+  max: 200
   minTurn: 0
   maxTurn: 0
-  cardTypes: 01000000
+  cardType: 1
   statusEffects: 
   description: Apply x-y amount of shield

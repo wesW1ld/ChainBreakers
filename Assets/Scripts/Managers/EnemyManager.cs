@@ -73,7 +73,12 @@ public class EnemyManager : MonoBehaviour
                 spawnPosition.y,
                 spawnPosition.z
             );
-            SpawnEnemy(offsetPosition, EnemyType.Boss);
+            if (i == 0)
+                SpawnEnemy(offsetPosition, EnemyType.Goblin);
+            else if (i == 1)
+                SpawnEnemy(offsetPosition, EnemyType.Boss);
+            else
+                SpawnEnemy(offsetPosition, EnemyType.Assassin);
         }
     }
 
@@ -94,7 +99,7 @@ public class EnemyManager : MonoBehaviour
             newEnemy = Instantiate(bossPrefab, position, Quaternion.identity);
         }        
         enemies.Add(newEnemy);
-        Debug.Log($"[EnemyManager] Spawned enemy #{enemies.Count} at {position}.");
+        //Debug.Log($"[EnemyManager] Spawned enemy #{enemies.Count} at {position}.");
     }
 
     // Deals damage to a specific enemy by index
@@ -118,6 +123,31 @@ public class EnemyManager : MonoBehaviour
             else
             {
                 Debug.LogWarning("[EnemyManager] Enemy script missing TakeDamage().");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[EnemyManager] Enemy reference is null.");
+        }
+    }
+
+    // Applies status to a specific enemy by index
+    public void ApplyStatus(ChainBreakers.Card.StatusEffect status, int time, int enemyIndex)
+    {
+        if (enemyIndex < 0 || enemyIndex >= enemies.Count)
+        {
+            Debug.LogWarning("[EnemyManager] Invalid enemy index.");
+            return;
+        }
+
+        GameObject targetEnemy = enemies[enemyIndex];
+        if (targetEnemy != null)
+        {
+            Enemy enemyScript = targetEnemy.GetComponent<Enemy>();
+            if (enemyScript != null)
+            {
+                enemyScript.GiveEnemyStatus(status, time);
+                Debug.Log($"[EnemyManager] Given {status} to enemy #{enemyIndex}.");
             }
         }
         else
@@ -183,20 +213,23 @@ public class EnemyManager : MonoBehaviour
 
     public void EnemyAttack()
     {
-        int enemyIndex = 0;
-        bool enemyFound = false;
-        while (!enemyFound && (enemyIndex < enemies.Count))
-        {
-            if (enemies[enemyIndex] == null)
-            {
-                enemyIndex++;
-            }
-            else
-            {
-                enemyFound = true;
-            }
-        }
+        // int enemyIndex = 0;
+        // bool enemyFound = false;
+        // while (!enemyFound && (enemyIndex < enemies.Count))
+        // {
+        //     if (enemies[enemyIndex] == null)
+        //     {
+        //         enemyIndex++;
+        //     }
+        //     else                         testing
+        //     {
+        //         enemyFound = true;
+        //     }
+        // }
 
-        enemies[enemyIndex].GetComponent<Enemy>().EnemyAction();
+        foreach(GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Enemy>().EnemyAction();
+        }
     }
 }

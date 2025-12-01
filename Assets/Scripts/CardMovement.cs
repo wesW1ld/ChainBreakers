@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using ChainBreakers;
+using System.Collections.Generic;
 
 
 public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
@@ -47,6 +49,8 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
                 HandlePlayState();
                 if (!Input.GetMouseButton(0))
                 {
+                    // Check if card was dropped on PlayArea
+                    CheckPlayAreaDrop();
                     TransitionToState0();
                 }
                 break;
@@ -89,26 +93,43 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         if (currentState == 1)
         {
             currentState = 2;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out originalLocalPointerPosition);
-            originalLocalPointerPosition = rectTransform.localPosition;
+            // Store the offset between the pointer position and the card's current position
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvas.GetComponent<RectTransform>(), 
+                eventData.position, 
+                eventData.pressEventCamera, 
+                out originalLocalPointerPosition);
         }
     }
     
     public void OnDrag(PointerEventData eventData)
     {
-        if (currentState ==2)
+        if (currentState == 2 || currentState == 3)
         {
-            Vector2 localPointerPosition;
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPointerPosition))
-            {
-                rectTransform.position = Vector3.Lerp(rectTransform.position, Input.mousePosition, lerpFactor);
+            // Convert screen position to canvas-local position
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvas.GetComponent<RectTransform>(), 
+                eventData.position, 
+                eventData.pressEventCamera, 
+                out Vector2 localPointerPosition);
+            
+            // Calculate offset from where you initially clicked
+            Vector2 offset = localPointerPosition - originalLocalPointerPosition;
+            
+            // Set card position to follow cursor with the calculated offset
+            rectTransform.localPosition = Vector3.Lerp(rectTransform.localPosition, orginalPosition + (Vector3)offset, lerpFactor);
 
-                if(rectTransform.localPosition.y > cardPlay.y)
-                {
-                    currentState = 3;
-                    playArrow.SetActive(true);
-                    rectTransform.localPosition = Vector3.Lerp(rectTransform.position, playPosition, lerpFactor);
-                }
+            // Check if card is above the play threshold to enter play state
+            if (currentState == 2 && rectTransform.localPosition.y > cardPlay.y)
+            {
+                currentState = 3;
+                playArrow.SetActive(true);
+            }
+            // Check if card drops below threshold to exit play state
+            else if (currentState == 3 && rectTransform.localPosition.y < cardPlay.y)
+            {
+                currentState = 2;
+                playArrow.SetActive(false);
             }
         }
     }
@@ -127,15 +148,32 @@ public class CardMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
     
     private void HandlePlayState()
     {
-        rectTransform.localEulerAngles = playPosition;
         rectTransform.localRotation = Quaternion.identity;
-
-        if (Input.mousePosition.y < cardPlay.y)
-        {
-            currentState = 2;
-            playArrow.SetActive(false);
-        }
     }
 
+    private void CheckPlayAreaDrop()
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = Input.mousePosition;
 
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            PlayArea playArea = result.gameObject.GetComponent<PlayArea>();
+            if (playArea != null)
+            {
+                CardDisplay cardDisplay = GetComponent<CardDisplay>();
+                if (cardDisplay != null && cardDisplay.card != null)
+                {
+                    playArea.AddCard(cardDisplay.card);
+                    Debug.Log($"Card '{cardDisplay.card.cardName}' dropped on PlayArea and removed.");
+                    Destroy(gameObject);
+                    return;
+                }
+                break;
+            }
+        }
+    }
 }

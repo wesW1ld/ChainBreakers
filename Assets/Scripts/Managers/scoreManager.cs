@@ -62,18 +62,21 @@ public class scoreManager : MonoBehaviour
 
     public void ComboEnd()
     {
+        PlayList.instance.PlayAllCards();
         EnemyManager.Instance.EnemyAttack();
+        PlayerManager.instance.Timer();
+        PlayList.instance.Clear();
         //minigame
-        int pick = Random.Range(0, 2);
-        if (pick < 1)
-        {
-            minigame1.SetActive(true);
-        }
-        else
-        {
-            minigame2.SetActive(true);
-        }        
-        minigameMode = true;
+        // int pick = Random.Range(0, 2);
+        // if (pick < 1)
+        // {
+        //     minigame1.SetActive(true);       //testing
+        // }
+        // else
+        // {
+        //     minigame2.SetActive(true);
+        // }        
+        // minigameMode = true;
     }
 
     public void MinigameEnd(int num)
