@@ -17,7 +17,7 @@ MonoBehaviour:
   min: 0
   max: 2
   minTurn: 0
-  maxTurn: 0
-  cardTypes: 02000000
+  maxTurn: 2
+  cardType: 2
   statusEffects: 07000000
   description: Inflict an enemy with "Binded" for 0-2 turns

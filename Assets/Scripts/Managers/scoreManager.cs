@@ -56,7 +56,7 @@ public class scoreManager : MonoBehaviour
     public void ChangeScore(int amt)
     {
         Score += amt;
-        text.text = $"Score: {Score}";
+        //text.text = $"Score: {Score}";
         Debug.Log($"[ScoreManager] Score changed by {amt}. New Score = {Score}");
     }
 
@@ -65,7 +65,11 @@ public class scoreManager : MonoBehaviour
         PlayList.instance.PlayAllCards();
         EnemyManager.Instance.EnemyAttack();
         PlayerManager.instance.Timer();
-        PlayList.instance.ClearList();
+        int draw = PlayList.instance.ClearList();
+        for(int i = 0; i < draw; i++)
+        {
+            DeckManager.instance.DrawCard();
+        }
         //minigame
         // int pick = Random.Range(0, 2);
         // if (pick < 1)

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Grub Up
   artwork: {fileID: 0}
-  min: 2
-  max: 7
+  min: 30
+  max: 50
   minTurn: 1
   maxTurn: 2
-  cardTypes: 01000000
-  statusEffects: 
-  description: Heal 2-7 health and draw 1-2 cards next turn
+  cardType: 1
+  statusEffects: 08000000
+  description: Gain x-y shield and regen

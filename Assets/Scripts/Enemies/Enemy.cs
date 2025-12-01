@@ -405,8 +405,10 @@ public class Enemy : MonoBehaviour
     //         Binded, % chance to do more damage, otherwise miss
     private void ApplyStatus()
     {
-        foreach(Status status in statusEffects)
+        for (int i = statusEffects.Count - 1; i >= 0; i--)
         {
+
+            Status status = statusEffects[i];
             switch(status.effect)
             {
                 case Card.StatusEffect.Dazed:
@@ -414,14 +416,7 @@ public class Enemy : MonoBehaviour
                     break;
                 case Card.StatusEffect.Enraged:
                     choice = 0;
-                    if(NumChoices == 4)
-                    {
-                        ProbabiltyMatrix = new float[] {1f, 0f, 0f, 0f};
-                    }
-                    else
-                    {
-                        ProbabiltyMatrix = new float[] {1f, 0f, 0f};
-                    }
+                    Enrage();
                     if(missChance < .5f){missChance = .5f;}
                     break;
                 case Card.StatusEffect.Emboldened:
@@ -442,7 +437,7 @@ public class Enemy : MonoBehaviour
                     break;
                 case Card.StatusEffect.Binded:
                     damageMult += .3f;
-                    if(missChance < .3f){missChance = .3f;}
+                    if(missChance < .6f){missChance = .6f;}
                     break;
                 default:
                     Debug.Log("dont use might or poise or regenerative");
@@ -455,13 +450,19 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < statusEffects.Count; i++)
+        for(int j = 0; j < statusEffects.Count; j++)
         {
-            Status se = statusEffects[i];
+            Status se = statusEffects[j];
             se.timeLeft--;
-            statusEffects[i] = se;
+            statusEffects[j] = se;
         }
         UpdateStaText();
+    
+    }
+
+    public virtual void Enrage()
+    {
+        ProbabiltyMatrix = new float[] {1f, 0f, 0f};
     }
 }
 

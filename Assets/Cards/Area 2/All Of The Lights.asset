@@ -17,8 +17,8 @@ MonoBehaviour:
   min: 0
   max: 2
   minTurn: 0
-  maxTurn: 0
-  cardTypes: 02000000
+  maxTurn: 2
+  cardType: 3
   statusEffects: 
   description: Next round, increase the playing card count by 0-2 for the rest of
     the combat

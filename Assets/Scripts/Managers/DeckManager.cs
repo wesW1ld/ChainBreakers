@@ -13,14 +13,13 @@ public class DeckManager : MonoBehaviour
     {
         Card[] cards = Resources.LoadAll<Card>("Cards");
         allCards.AddRange(cards);
-        HandManager hand = FindObjectOfType<HandManager>();
         for (int i = 0; i < 5; i++)
         {
-            DrawCard(hand);
+            DrawCard();
         }
     }
 
-    public void DrawCard(HandManager handManager)
+    public void DrawCard()
     {
         if (allCards.Count == 0)
         {
@@ -29,7 +28,35 @@ public class DeckManager : MonoBehaviour
         }
 
         Card nextCard = allCards[currentIndex];
-        handManager.DrawCardToHand(nextCard);
+        HandManager.instance.DrawCardToHand(nextCard);
         currentIndex = (currentIndex + 1) % allCards.Count;
+    }
+
+    public static DeckManager instance;
+    public static DeckManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                Debug.LogError("DeckManager is Null");
+            }
+            return instance;
+        }
+
+    }
+    private void Awake()
+    {
+
+        if (instance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            //DontDestroyOnLoad(this); //stay over scene
+        }
+
     }
 }

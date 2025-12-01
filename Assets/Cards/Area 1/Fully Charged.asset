@@ -16,9 +16,8 @@ MonoBehaviour:
   artwork: {fileID: 0}
   min: 0
   max: 0
-  minTurn: 0
-  maxTurn: 0
-  cardType: 0
+  minTurn: 2
+  maxTurn: 2
+  cardType: 2
   statusEffects: 090000000a000000
-  description: Choose between getting +1 might or poise at the beginning of each
-    turn, starting next round
+  description: Gain Might and Poise for 2 rounds

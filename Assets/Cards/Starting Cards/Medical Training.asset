@@ -18,6 +18,6 @@ MonoBehaviour:
   max: 150
   minTurn: 0
   maxTurn: 0
-  cardType: 2
+  cardType: 3
   statusEffects: 
   description: Heals x-y amount of health

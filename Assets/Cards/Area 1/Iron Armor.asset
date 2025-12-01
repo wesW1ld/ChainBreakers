@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Iron Armor
   artwork: {fileID: 0}
-  min: 4
-  max: 7
+  min: 50
+  max: 100
   minTurn: 1
   maxTurn: 2
-  cardTypes: 01000000
-  statusEffects: 
-  description: 'Adds 4-7 armor, gives 1-2 poise '
+  cardType: 1
+  statusEffects: 0a000000
+  description: Adds x-y armor and gives poise for a-b rounds

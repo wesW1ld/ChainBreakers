@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Flame Shot
   artwork: {fileID: 0}
-  min: 3
-  max: 5
+  min: 20
+  max: 35
   minTurn: 0
   maxTurn: 0
-  cardTypes: 00000000
+  cardType: 3
   statusEffects: 
-  description: Deal 3-5 amount of damage for enemies are in combat
+  description: Deal x-y damage to all enemies

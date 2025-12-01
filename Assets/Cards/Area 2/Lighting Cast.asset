@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Lightning Cast
   artwork: {fileID: 0}
-  min: 5
-  max: 6
+  min: 20
+  max: 30
   minTurn: 0
   maxTurn: 2
-  cardTypes: 00000000
+  cardType: 2
   statusEffects: 
-  description: Deal 5-6 damage to all enemies plus grab 0-2 random cards from the
-    discard pile
+  description: Enemies all get shocked, take x-y damage

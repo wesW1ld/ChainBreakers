@@ -17,8 +17,7 @@ MonoBehaviour:
   min: -5
   max: 5
   minTurn: 2
-  maxTurn: 2
-  cardTypes: 03000000
-  statusEffects: 00000000
-  description: 'Make the damage output of the player be impactedby -5% to 5% for
-    turns '
+  maxTurn: 4
+  cardType: 1
+  statusEffects: 0a000000
+  description: Gain poise for 2-4 turns
