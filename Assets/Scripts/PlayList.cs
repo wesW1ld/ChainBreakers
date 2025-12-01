@@ -36,8 +36,12 @@ public class PlayList : MonoBehaviour
         return ret;
     }
 
-    public void Clear()
+    public void ClearList()
     {
+        foreach(GameObject obj in CardObjects)
+        {
+            Destroy(obj);
+        }
         PlayedCards.Clear();
         CardObjects.Clear();
     }
