@@ -68,7 +68,7 @@ public class ShapesMinigameControl : MonoBehaviour
         shapesChained = 0;
         GameObject[] shapes = {shape1, shape2, shape3, shape4, shape5};
 
-        float startTime = Time.time; // Record the time when the loop starts
+        float time = 3f;
 
         for (int a = shapeNum; a > 0; a--)
         {
@@ -125,7 +125,17 @@ public class ShapesMinigameControl : MonoBehaviour
             shapeWrong1.transform.localScale = new UnityEngine.Vector3(shapeScale, shapeScale, 1);
             shapeWrong2.transform.localScale = new UnityEngine.Vector3(shapeScale, shapeScale, 1);
             
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(time);
+            if (time > 1)
+            {
+                time -= 0.2f;
+            }
+
+            Shape1.correct = 0;
+            Shape2.correct = 0;
+            Shape3.correct = 0;
+            Shape4.correct = 0;
+            Shape5.correct = 0;
 
             if (check >= 1)
             {
@@ -160,7 +170,7 @@ public class ShapesMinigameControl : MonoBehaviour
         scoreText.text = "Score\n" + score;
         shapesChainedText.text = "Shapes Chained\n" + shapesChained;
         scoreManager.instance.ChangeScore(score * 1000);
-        //scoreManager.instance.MinigameEnd(3);
+        scoreManager.instance.MinigameEnd(3);
 
         yield return new WaitForSeconds(1);
     }

@@ -16,6 +16,7 @@ public class scoreManager : MonoBehaviour
 
     public GameObject minigame1;
     public GameObject minigame2;
+    public GameObject minigame3;
 
     public static scoreManager Instance
     {
@@ -113,13 +114,19 @@ public class scoreManager : MonoBehaviour
         }
 
         minigameMode = false;
-        if(num == 1)
+        switch (num)
         {
-            minigame1.SetActive(false);
-        }
-        else if(num == 2)
-        {
-            minigame2.SetActive(false);
+            case 1:
+                minigame1.SetActive(false);
+                break;
+            case 2:
+                minigame2.SetActive(false);
+                break;
+            case 3:
+                minigame3.SetActive(false);
+                break;
+            default:
+                break;
         }
     }
 

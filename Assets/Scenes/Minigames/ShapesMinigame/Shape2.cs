@@ -25,12 +25,16 @@ public class Shape2 : MonoBehaviour, IPointerClickHandler
         {
             ShapesMinigameControl.score += 5000;
             ShapesMinigameControl.shapesChained += 1;
-            ShapesMinigameControl.check = 1;
+            if (ShapesMinigameControl.check == 0)
+            {
+                ShapesMinigameControl.check = 1;
+                Destroy(gameObject);
+            }
         }
         else
         {
             ShapesMinigameControl.check = 2;
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }
