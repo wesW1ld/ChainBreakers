@@ -29,9 +29,16 @@ public class HandManager : MonoBehaviour
         UpdateHandLayout();
     }
 
-    void Update ()
+    public void RemoveCard(GameObject card)
     {
-        //UpdateHandLayout();
+        cardsInHand.Remove(card);
+        UpdateHandLayout();
+    }
+
+    public void AddCard(GameObject card)
+    {
+        cardsInHand.Add(card);
+        UpdateHandLayout();
     }
 
     public void UpdateHandLayout()
@@ -62,5 +69,33 @@ public class HandManager : MonoBehaviour
             cardsInHand[i].transform.localPosition = new Vector3(xPos, yPos, 0f);
             cardsInHand[i].transform.localRotation = Quaternion.Euler(0f, 0f, -angle); // Negative angle
         }
+    }
+
+    public static HandManager instance;
+    public static HandManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                Debug.LogError("GameManager is Null");
+            }
+            return instance;
+        }
+
+    }
+    private void Awake()
+    {
+
+        if (instance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            //DontDestroyOnLoad(this); //stay over scene
+        }
+
     }
 }

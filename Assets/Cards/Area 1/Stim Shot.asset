@@ -18,6 +18,6 @@ MonoBehaviour:
   max: 13
   minTurn: 0
   maxTurn: 0
-  cardTypes: 01000000
+  cardType: 3
   statusEffects: 04000000
   description: Heals 9-13 health plus a 50% chance to gain "Rage"
