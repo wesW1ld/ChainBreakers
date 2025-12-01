@@ -38,13 +38,23 @@ public class PlayList : MonoBehaviour
 
     public void ClearList()
     {
-        foreach(GameObject obj in CardObjects)
+        Debug.Log("Clearing list");
+
+        // Iterate backwards to avoid collection modification issues
+        for (int i = CardObjects.Count - 1; i >= 0; i--)
         {
-            Destroy(obj);
+            GameObject obj = CardObjects[i];
+            if (obj != null)
+            {
+                Debug.Log($"Destroying {obj.name}");
+                Destroy(obj);
+            }
+            CardObjects.RemoveAt(i); // safely remove from list
         }
-        PlayedCards.Clear();
-        CardObjects.Clear();
+
+        PlayedCards.Clear(); // optional if you want to clear card data too
     }
+
 
     public int GetSize()
     {

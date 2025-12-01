@@ -405,8 +405,10 @@ public class Enemy : MonoBehaviour
     //         Binded, % chance to do more damage, otherwise miss
     private void ApplyStatus()
     {
-        foreach(Status status in statusEffects)
+        for (int i = statusEffects.Count - 1; i >= 0; i--)
         {
+
+            Status status = statusEffects[i];
             switch(status.effect)
             {
                 case Card.StatusEffect.Dazed:
@@ -455,13 +457,14 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < statusEffects.Count; i++)
+        for(int j = 0; j < statusEffects.Count; j++)
         {
-            Status se = statusEffects[i];
+            Status se = statusEffects[j];
             se.timeLeft--;
-            statusEffects[i] = se;
+            statusEffects[j] = se;
         }
         UpdateStaText();
+    
     }
 }
 
