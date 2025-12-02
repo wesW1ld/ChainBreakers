@@ -5,17 +5,28 @@ using UnityEngine.UI;
 using TMPro;
 using ChainBreakers;
 
+[System.Serializable]
+public class CardTypeImage
+{
+    public Card.CardType cardType;
+    public Sprite backgroundSprite;
+}
+
 public class CardDisplay : MonoBehaviour
 {
 
     public Card card;
     public Image cardImage;
+    public Image cardBackgroundImage;
     public TMP_Text cardName;
     public TMP_Text cardDescription;
     public TMP_Text min;
     public TMP_Text max;
     public TMP_Text minTurn;
     public TMP_Text maxTurn;
+
+    [SerializeField] private List<CardTypeImage> cardTypeImages = new List<CardTypeImage>();
+
 
     public void Start()
     {
@@ -28,6 +39,16 @@ public class CardDisplay : MonoBehaviour
         {
             Debug.LogWarning("CardDisplay: 'card' is not assigned on " + gameObject.name + ". Assign a Card ScriptableObject in the inspector.");
             return;
+        }
+
+        // Update card background image based on card type
+        if (cardBackgroundImage != null)
+        {
+            CardTypeImage typeImage = cardTypeImages.Find(x => x.cardType == card.cardType);
+            if (typeImage != null && typeImage.backgroundSprite != null)
+                cardBackgroundImage.sprite = typeImage.backgroundSprite;
+            else
+                Debug.LogWarning($"CardDisplay: No background sprite found for card type '{card.cardType}' on {gameObject.name}.");
         }
 
         // Update UI fields only if they are assigned to avoid NullReferenceExceptions

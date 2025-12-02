@@ -409,12 +409,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 0}
   cardImage: {fileID: 2452558743204016773}
+  cardBackgroundImage: {fileID: 0}
   cardName: {fileID: 4513737561463752639}
   cardDescription: {fileID: 6862176794632911343}
   min: {fileID: 0}
   max: {fileID: 0}
   minTurn: {fileID: 0}
   maxTurn: {fileID: 0}
+  cardTypeImages:
+  - cardType: 0
+    backgroundSprite: {fileID: 0}
+  - cardType: 1
+    backgroundSprite: {fileID: 0}
+  - cardType: 2
+    backgroundSprite: {fileID: 0}
+  - cardType: 3
+    backgroundSprite: {fileID: 0}
 --- !u!61 &329146407454548103
 BoxCollider2D:
   m_ObjectHideFlags: 0

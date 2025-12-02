@@ -20,4 +20,4 @@ MonoBehaviour:
   maxTurn: 2
   cardType: 3
   statusEffects: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a000000
-  description: Give enemy every status and get every buff
+  description: 'Get 1-2 buffs for 1-2 turns '

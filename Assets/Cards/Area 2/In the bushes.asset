@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: In the bushes
   m_EditorClassIdentifier: 
   cardName: In The Bushes
-  artwork: {fileID: 0}
-  min: 90
-  max: 100
-  minTurn: 1
-  maxTurn: 2
+  artwork: {fileID: 21300000, guid: 289b652b3d47f3641bcc96cda89d1064, type: 3}
+  min: 3
+  max: 7
+  minTurn: 0
+  maxTurn: 0
   cardType: 1
-  statusEffects: 04000000
-  description: Gain x-y shield and give enemy Rage
+  statusEffects: 06000000
+  description: Gain 3-7 shield and gain blur

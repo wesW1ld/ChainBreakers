@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Nature's Glitch
   m_EditorClassIdentifier: 
   cardName: 'Nature''s Glitch '
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 9b521996204957a4abacbc77efa94f43, type: 3}
   min: 0
   max: 2
   minTurn: 0
   maxTurn: 2
   cardType: 2
   statusEffects: 07000000
-  description: Inflict an enemy with "Binded" for 0-2 turns
+  description: Inflict an enemy with Binded for 0-2 turns

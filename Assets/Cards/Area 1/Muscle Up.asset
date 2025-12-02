@@ -20,4 +20,4 @@ MonoBehaviour:
   maxTurn: 1
   cardType: 2
   statusEffects: 09000000
-  description: Gain might for 3 turns
+  description: Gain 3 might for 1 turns

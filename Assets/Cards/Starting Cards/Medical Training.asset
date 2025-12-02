@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Medical Training
   artwork: {fileID: 21300000, guid: c7f91a97f2c10c34da719392ec3baf11, type: 3}
-  min: 100
-  max: 150
+  min: 7
+  max: 13
   minTurn: 0
   maxTurn: 0
-  cardType: 3
+  cardType: 1
   statusEffects: 
-  description: Heals x-y amount of health
+  description: Heals 7-13 amount of health

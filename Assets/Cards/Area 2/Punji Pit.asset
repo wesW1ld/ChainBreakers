@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Punji Pit
   m_EditorClassIdentifier: 
   cardName: Punji Pit
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 5f9b9c9f1796d1148975cf876ab014ca, type: 3}
   min: 5
   max: 7
-  minTurn: 1
-  maxTurn: 1
+  minTurn: 4
+  maxTurn: 7
   cardType: 2
-  statusEffects: 00000000
-  description: Give enemy dazed for 1 turn
+  statusEffects: 
+  description: 'Deal 5-7 damage plus when the enemy this turn it will take 4-7 damage '

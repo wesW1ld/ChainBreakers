@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Bag Boy
   artwork: {fileID: 21300000, guid: 52c281bd6518d4f4295bc57ef25c042c, type: 3}
-  min: 50
-  max: 100
+  min: 5
+  max: 8
   minTurn: 0
   maxTurn: 0
   cardType: 1
   statusEffects: 
-  description: Adds x-y armor plus, draw an extra card and adds an extra play card
+  description: Adds 5-8 armor plus, draw an extra card and adds an extra play card
     slot for this turn

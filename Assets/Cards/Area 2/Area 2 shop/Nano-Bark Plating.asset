@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: 'Nano-Bark Plating '
   artwork: {fileID: 21300000, guid: bb2143cfde4ba574bb21b041f2699174, type: 3}
-  min: 3
-  max: 4
+  min: 0
+  max: 0
   minTurn: 2
   maxTurn: 4
   cardType: 2

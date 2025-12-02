@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Lightning Cast
   artwork: {fileID: 21300000, guid: 6093527390043104fa0694f58bf28b0a, type: 3}
-  min: 20
-  max: 30
+  min: 10
+  max: 13
   minTurn: 0
-  maxTurn: 2
+  maxTurn: 0
   cardType: 2
-  statusEffects: 
-  description: Enemies all get shocked, take x-y damage
+  statusEffects: 03000000
+  description: Enemies all get shocked, take 10-13 damage

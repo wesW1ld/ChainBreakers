@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Dealer's Choice
   artwork: {fileID: 21300000, guid: 0ebb9434406e2a44d9fe4df856394713, type: 3}
-  min: 2
-  max: 3
+  min: 0
+  max: 0
   minTurn: 0
   maxTurn: 0
   cardType: 3

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Grub Up
   m_EditorClassIdentifier: 
   cardName: Grub Up
-  artwork: {fileID: 0}
-  min: 30
-  max: 50
-  minTurn: 1
+  artwork: {fileID: 21300000, guid: 11b4c40dafdb97743a872c42dce8d28c, type: 3}
+  min: 4
+  max: 8
+  minTurn: 0
   maxTurn: 2
   cardType: 1
   statusEffects: 08000000
-  description: Gain x-y shield and regen
+  description: Gain 4-8 shield and regen for 0-2 turns
