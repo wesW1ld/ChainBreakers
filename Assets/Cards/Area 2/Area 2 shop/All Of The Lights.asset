@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: All Of The Lights
   m_EditorClassIdentifier: 
   cardName: 'All Of The Lights '
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: e2d30251374d3d5459ad76ed1f63900a, type: 3}
   min: 0
   max: 2
   minTurn: 0

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 526137fc0f4cc1748a29fae76882fd59, type: 3}
-  m_Name: Nano-Bark Plating
+  m_Name: Dealer's Choice
   m_EditorClassIdentifier: 
-  cardName: 'Nano-Bark Plating '
-  artwork: {fileID: 0}
-  min: 3
-  max: 4
-  minTurn: 2
-  maxTurn: 4
-  cardType: 2
-  statusEffects: 08000000
-  description: 'Gain regenerative buff for 2-4 turns '
+  cardName: Dealer's Choice
+  artwork: {fileID: 21300000, guid: 0ebb9434406e2a44d9fe4df856394713, type: 3}
+  min: 2
+  max: 3
+  minTurn: 0
+  maxTurn: 0
+  cardType: 3
+  statusEffects: 
+  description: Draw 3, 1 less play size for rest of combat
