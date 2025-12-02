@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Iron Armor
   m_EditorClassIdentifier: 
   cardName: Iron Armor
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 3d510b744d7adaa4598a7c2dd0c5d08e, type: 3}
   min: 50
   max: 100
   minTurn: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bag Boy
   m_EditorClassIdentifier: 
   cardName: Bag Boy
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 52c281bd6518d4f4295bc57ef25c042c, type: 3}
   min: 50
   max: 100
   minTurn: 0

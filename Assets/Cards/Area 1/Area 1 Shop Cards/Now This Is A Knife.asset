@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Now This Is A Knife
   m_EditorClassIdentifier: 
   cardName: Now THIS is a knife!
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: cf86aff896f8d714c89453eb27d8492d, type: 3}
   min: 40
   max: 50
   minTurn: 0

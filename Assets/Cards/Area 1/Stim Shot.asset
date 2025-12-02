@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stim Shot
   m_EditorClassIdentifier: 
   cardName: Stim Shot
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 37a1fd5cad48cca46bffd347a8830e83, type: 3}
   min: 9
   max: 13
   minTurn: 1

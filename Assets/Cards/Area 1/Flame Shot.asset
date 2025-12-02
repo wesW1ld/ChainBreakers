@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Flame Shot
   m_EditorClassIdentifier: 
   cardName: Flame Shot
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 6a3ca026e95647b40a100c4e4028507f, type: 3}
   min: 20
   max: 35
   minTurn: 0

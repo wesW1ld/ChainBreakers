@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Short Strike
   m_EditorClassIdentifier: 
   cardName: 'Short Strike '
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: c9997522abfcbc54ab13047df9cbd9ea, type: 3}
   min: 30
   max: 50
   minTurn: 0
   maxTurn: 0
   cardType: 0
   statusEffects: 
-  description: 'Does x-y damage '
+  description: 'Does 30-50 damage '

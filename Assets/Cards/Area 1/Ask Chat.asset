@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ask Chat
   m_EditorClassIdentifier: 
   cardName: Ask Chat
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: cb3210bf9c013dc4997c7812af7e13d2, type: 3}
   min: 0
   max: 0
   minTurn: 0

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: TaserSpear
   m_EditorClassIdentifier: 
   cardName: Taser Spear
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 0283b1bdd03300744b32883a4044c676, type: 3}
   min: 6
   max: 9
   minTurn: 0
   maxTurn: 2
-  cardTypes: 00000000
+  cardType: 0
   statusEffects: 03000000
   description: 'Shocks the enemy for 6-9 damage plus inflicts "Shocked" for 0-2 turns '

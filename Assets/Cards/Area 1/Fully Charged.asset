@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fully Charged
   m_EditorClassIdentifier: 
   cardName: Fully Charged
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 34632fdf2ca297d438ede9b02d818297, type: 3}
   min: 0
   max: 0
   minTurn: 2

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rage Bait
   m_EditorClassIdentifier: 
   cardName: Rage Bait
-  artwork: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 7646108060c2cc84c8d6b1daa3efa464, type: 3}
   min: 0
   max: 0
   minTurn: 5
