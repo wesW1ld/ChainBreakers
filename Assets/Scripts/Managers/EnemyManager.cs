@@ -1,15 +1,29 @@
+using System.Collections;
+using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
-    public GameObject enemyPrefab; // The enemy prefab to spawn
     public int maxEnemies = 5;      // Maximum number of enemies allowed
     public Vector3 spawnPosition = new Vector3(-0.4546244f, -0.1548468f, 0.04473706f); // Starting spawn position
-    public float spacing = 0.5f;    // How far apart each enemy is placed (along X axis)
+    public float spacing = 2.5f;    // How far apart each enemy is placed (along X axis)
 
     private List<GameObject> enemies = new List<GameObject>(); // Track all active enemies
     private static EnemyManager instance;
+
+    public enum EnemyType
+    {
+        Goblin,
+        Assassin,
+        Boss
+    }
+    public GameObject goblinPrefab;
+    public GameObject assassinPrefab;
+    public GameObject bossPrefab;
+
+    public GameObject textPrefab;
 
     // Singleton pattern
     public static EnemyManager Instance
@@ -59,17 +73,33 @@ public class EnemyManager : MonoBehaviour
                 spawnPosition.y,
                 spawnPosition.z
             );
-
-            SpawnEnemy(offsetPosition);
+            if (i == 0)
+                SpawnEnemy(offsetPosition, EnemyType.Goblin);
+            else if (i == 1)
+                SpawnEnemy(offsetPosition, EnemyType.Boss);
+            else
+                SpawnEnemy(offsetPosition, EnemyType.Assassin);
         }
     }
 
     // Spawns a single enemy at the given position
-    public void SpawnEnemy(Vector3 position)
+    public void SpawnEnemy(Vector3 position, EnemyType type)
     {
-        GameObject newEnemy = Instantiate(enemyPrefab, position, Quaternion.identity);
+        GameObject newEnemy;
+        if (type == EnemyType.Goblin)
+        {
+            newEnemy = Instantiate(goblinPrefab, position, Quaternion.identity);
+        }
+        else if (type == EnemyType.Assassin)
+        {
+            newEnemy = Instantiate(assassinPrefab, position, Quaternion.identity);
+        }
+        else
+        {
+            newEnemy = Instantiate(bossPrefab, position, Quaternion.identity);
+        }        
         enemies.Add(newEnemy);
-        Debug.Log($"[EnemyManager] Spawned enemy #{enemies.Count} at {position}.");
+        //Debug.Log($"[EnemyManager] Spawned enemy #{enemies.Count} at {position}.");
     }
 
     // Deals damage to a specific enemy by index
@@ -101,6 +131,57 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    // Applies status to a specific enemy by index
+    public void ApplyStatus(ChainBreakers.Card.StatusEffect status, int time, int enemyIndex)
+    {
+        if (enemyIndex < 0 || enemyIndex >= enemies.Count)
+        {
+            Debug.LogWarning("[EnemyManager] Invalid enemy index.");
+            return;
+        }
+
+        GameObject targetEnemy = enemies[enemyIndex];
+        if (targetEnemy != null)
+        {
+            Enemy enemyScript = targetEnemy.GetComponent<Enemy>();
+            if (enemyScript != null)
+            {
+                enemyScript.GiveEnemyStatus(status, time);
+                Debug.Log($"[EnemyManager] Given {status} to enemy #{enemyIndex}.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[EnemyManager] Enemy reference is null.");
+        }
+    }
+
+    public void DealDamage(int dmg)
+    {
+        int enemyIndex = 0;
+        bool enemyFound = false;
+        while (!enemyFound && (enemyIndex < enemies.Count))
+        {
+            if (enemies[enemyIndex] == null)
+            {
+                enemyIndex++;
+            }
+            else
+            {
+                enemyFound = true;
+            }
+        }
+
+        if ((enemyIndex >= enemies.Count))
+        {
+            StartCoroutine(GoToEnd());
+        }
+        else
+        {
+            enemies[enemyIndex].GetComponent<Enemy>().TakeDamage(dmg);
+        }
+    }
+
     // Called when an enemy dies
     public void EnemyDestroyed(GameObject enemy)
     {
@@ -122,5 +203,33 @@ public class EnemyManager : MonoBehaviour
 
         enemies.Clear();
         Debug.Log("[EnemyManager] All enemies cleared.");
+    }
+
+    IEnumerator GoToEnd()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(3);
+    }
+
+    public void EnemyAttack()
+    {
+        // int enemyIndex = 0;
+        // bool enemyFound = false;
+        // while (!enemyFound && (enemyIndex < enemies.Count))
+        // {
+        //     if (enemies[enemyIndex] == null)
+        //     {
+        //         enemyIndex++;
+        //     }
+        //     else                         testing
+        //     {
+        //         enemyFound = true;
+        //     }
+        // }
+
+        foreach(GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Enemy>().EnemyAction();
+        }
     }
 }

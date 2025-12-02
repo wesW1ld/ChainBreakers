@@ -30,7 +30,7 @@ public class Telegraph : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("hit player");
-            playerManager.instance.TakeDamage(1);
+            playerManagerM1.instance.TakeDamage(1);
             Destroy(gameObject);
         }
     }

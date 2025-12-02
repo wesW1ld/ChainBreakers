@@ -1,19 +1,45 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChainBreakers;
 
 public class DeckManager : MonoBehaviour
 {
-    public static DeckManager instance;
+    public List<Card> allCards = new List<Card>();
 
+    private int currentIndex = 0;
+
+    public void Start()
+    {
+        Card[] cards = Resources.LoadAll<Card>("Cards");
+        allCards.AddRange(cards);
+        for (int i = 0; i < 5; i++)
+        {
+            DrawCard();
+        }
+    }
+
+    public void DrawCard()
+    {
+        if (allCards.Count == 0)
+        {
+            Debug.Log("No more cards in the deck!");
+            return;
+        }
+
+        Card nextCard = allCards[currentIndex];
+        HandManager.instance.DrawCardToHand(nextCard);
+        currentIndex = (currentIndex + 1) % allCards.Count;
+    }
+
+    public static DeckManager instance;
     public static DeckManager Instance
     {
         get
         {
             if (instance == null)
             {
-                Debug.LogError("GameManager is Null");
+                Debug.LogError("DeckManager is Null");
             }
             return instance;
         }
@@ -24,79 +50,13 @@ public class DeckManager : MonoBehaviour
 
         if (instance)
         {
-            Debug.LogError("GameManager is already in the scene");
             Destroy(gameObject);
         }
         else
         {
             instance = this;
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this); //stay over scene
         }
 
-    }
-
-
-    public enum CardType
-    {
-        Atk,
-        Def,
-        Status,
-        Spec
-    }
-
-    public enum CardName
-    {
-        ShortStrike,
-        HunkerDown,
-        RageBait,
-        ScoutScan
-    }
-
-    public struct Card
-    {
-        public CardName name;
-        public CardType type;
-        public int lower;
-        public int higher;
-
-        public Card(CardName name, CardType type)
-        {
-            this.name = name;
-            this.type = type;
-            this.lower = 0;
-            this.higher = 0;
-        }
-        public Card(CardName name, CardType type, int lower, int upper)
-        {
-            this.name = name;
-            this.type = type;
-            this.lower = lower;
-            this.higher = upper;
-        }
-    }
-
-    public void UseCard(Card card)
-    {
-        switch (card.name)
-        {
-            case CardName.ShortStrike:
-                //based on score do card.lower to card.higher damage
-                break;
-            default:
-                Debug.Log("Card not found");
-                break;
-        }
-    }
-
-    public List<Card> deck = new List<Card>();
-
-    void Start()
-    {
-        MakeDeck();
-    }
-
-    private void MakeDeck()
-    {
-        deck.Add(new Card(CardName.ShortStrike, CardType.Atk, 5, 10));
     }
 }

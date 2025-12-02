@@ -6,21 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Score.unity
-    guid: 5fecb4718590ae748a61ab8706083964
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Minigame1.unity
-    guid: 86d1cf8b243c5824b924d494849e6d75
-  - enabled: 1
-    path: Assets/Scenes/LevelView.unity
-    guid: 3a89f85c369c3bb41915599b4e0bb275
-  - enabled: 1
-    path: Assets/Monster_Blue.unity
-    guid: a88c245244b4afd458217d69211a3932
-  - enabled: 1
-    path: Assets/Scenes/startScreen.unity
-    guid: 0401b4b39b6d8ca41a5ff5e38f62e01c
+    path: Assets/Scenes/PrototypeCopy.unity
+    guid: 22a8dd3a60fd98b4cb8cc518f19a3ce1
   m_configObjects: {}

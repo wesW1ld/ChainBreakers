@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 6cb12ac7dfc37b348a3e2adbdf84fb65
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - shape1: {fileID: 9146365584711220755, guid: 91cf28e2fbd46e344a562399c17671b3, type: 3}
+  - shape2: {fileID: 582416680852943603, guid: fe452b79ec26fe046b4c5b17e1ea68b8, type: 3}
+  - shape3: {fileID: 2478272529211043743, guid: b0097e4195a7dbb46b5edcb29251e699, type: 3}
+  - shape4: {fileID: 711358866585312207, guid: 10f6878c2bc0f4d419414ce72aefa54d, type: 3}
+  - shape5: {fileID: 5261301530039624473, guid: a2cd806daa3b69840b34e78a6cddcfc2, type: 3}
+  - cursorTexture: {instanceID: 0}
+  - startText: {instanceID: 0}
+  - resultsScreen: {instanceID: 0}
+  - scoreText: {instanceID: 0}
+  - shapesChainedText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
