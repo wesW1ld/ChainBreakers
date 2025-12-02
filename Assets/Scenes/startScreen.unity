@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01386c4a0e956434580f99390704279e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: LevelView
+  sceneToLoad: map
 --- !u!114 &1166005064
 MonoBehaviour:
   m_ObjectHideFlags: 0
