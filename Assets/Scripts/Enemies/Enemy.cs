@@ -49,18 +49,18 @@ public class Enemy : MonoBehaviour
         //action ui
         ui = Instantiate(EnemyManager.Instance.textPrefab, UIManager.instance.UICanvas.transform);
         textUI = ui.GetComponent<TextMeshProUGUI>();
-        textUI.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 1);
+        textUI.transform.position = transform.position + Vector3.up;
 
         //hp ui
         uiHP = Instantiate(EnemyManager.Instance.textPrefab, UIManager.instance.UICanvas.transform);
         textUIHP = uiHP.GetComponent<TextMeshProUGUI>();
-        textUIHP.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2);
+        textUIHP.transform.position = transform.position + Vector3.up * 2;
         textUIHP.text = $"{currentHP} / {maxHP}";
 
         //status ui
         uiSta = Instantiate(EnemyManager.Instance.textPrefab, UIManager.instance.UICanvas.transform);
         textUISta = uiSta.GetComponent<TextMeshProUGUI>();
-        textUISta.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * -2);
+        textUISta.transform.position = transform.position + Vector3.up * -2;
         textUISta.text = "no status";
 
         StartCoroutine(PickChoice());
