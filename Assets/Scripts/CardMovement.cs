@@ -33,7 +33,7 @@ public class CardMovement : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
         inPlay = !inPlay;
     }
 
-    private float displacementMult = 20;
+    private float displacementMult = .8f;
 
     private void MoveCardToLeftSide()
     {
