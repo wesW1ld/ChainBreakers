@@ -12,7 +12,7 @@ public class CardPlacementArea : MonoBehaviour
         
     }
 
-    private void OnTriggerStay2D(Collider card)
+    private void OnTriggerStay2D(Collider2D card)
     {
 
     }

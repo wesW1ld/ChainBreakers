@@ -65,8 +65,8 @@ RectTransform:
   m_Children:
   - {fileID: 7286365795865167470}
   - {fileID: 5507102755085965868}
-  - {fileID: 7777527850700098356}
   - {fileID: 8195234969906255161}
+  - {fileID: 7777527850700098356}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -238,6 +238,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e1456e66542b8541b4bb893d1e56753, type: 2}
   - {fileID: 11400000, guid: da0bee4ce7061634ca0c1bb2fa3ad1d9, type: 2}
   - {fileID: 11400000, guid: 4716e1c90f1229c4890fd3d19c5f6279, type: 2}
+  maxHandSize: 0
+  currentHandSize: 0
 --- !u!114 &6759809428125658170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,12 +332,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 883a9427efb46f744a0d4bbe920fea71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deckManager: {fileID: 0}
   cardPrefab: {fileID: 2998149350578599229, guid: 4062d16a41076394ebf00782e18611b3, type: 3}
   handTransform: {fileID: 5507102755085965868}
   fanSpread: 9.15
   cardsInHand: []
   cardSpacing: 230
+  maxHandSize: 7
 --- !u!1 &7415117439202747471
 GameObject:
   m_ObjectHideFlags: 0

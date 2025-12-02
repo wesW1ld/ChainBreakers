@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ChainBreakers;
+using Unity.VisualScripting;
 
 public class HandManager : MonoBehaviour
 {
-    public DeckManager deckManager;
     public GameObject cardPrefab;
     public Transform handTransform;
     public float fanSpread = 9.15f;
     public List<GameObject> cardsInHand = new List<GameObject>();
     public float cardSpacing = 230f;
-    private int maxHandSize = 7;
+    public int maxHandSize = 7;
     private int curHandSize = 0;
 
     public void DrawCardToHand(Card cardData)
