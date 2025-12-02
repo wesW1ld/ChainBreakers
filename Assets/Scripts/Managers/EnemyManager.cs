@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class EnemyManager : MonoBehaviour
 {
     public int maxEnemies = 5;      // Maximum number of enemies allowed
-    public Vector3 spawnPosition = new Vector3(-0.4546244f, -0.1548468f, 0.04473706f); // Starting spawn position
+    public Vector3 spawnPosition = new Vector3(-0.4546244f, 2f, 0.04473706f); // Starting spawn position
     public float spacing = 2.5f;    // How far apart each enemy is placed (along X axis)
 
     private List<GameObject> enemies = new List<GameObject>(); // Track all active enemies

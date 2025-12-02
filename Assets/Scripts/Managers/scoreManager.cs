@@ -49,7 +49,7 @@ public class scoreManager : MonoBehaviour
     void Start()
     {
         Score = 0;
-        text.text = $"Score: {Score}";
+        //text.text = $"Score: {Score}";
         Debug.Log($"[ScoreManager] Initialized with Score = {Score}");
         SceneManager.activeSceneChanged += OnSceneChanged;
     }
