@@ -17,6 +17,7 @@ public class Boss : Enemy
     {
         base.NumChoices = 4;
         ProbabiltyMatrix = new float[] { .6f, .0f, .3f, .1f};
+        tProbabiltyMatrix = (float[])ProbabiltyMatrix.Clone();
         base.MakePMatrix();
     }
 
