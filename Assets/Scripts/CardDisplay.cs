@@ -18,6 +18,7 @@ public class CardDisplay : MonoBehaviour
     public Card card;
     public Image cardImage;
     public Image cardBackgroundImage;
+    public Image cardBackground;
     public TMP_Text cardName;
     public TMP_Text cardDescription;
     public TMP_Text min;
@@ -66,6 +67,28 @@ public class CardDisplay : MonoBehaviour
             cardImage.sprite = card.artwork;
         else
             Debug.LogWarning($"CardDisplay: 'cardImage' Image is not assigned on {gameObject.name}.");
+
+        if (cardBackground != null)
+        {
+            if(card.cardType == Card.CardType.Attack)
+            {
+                cardBackground.color = new Color32(119, 41, 41, 255);
+            }
+            else if(card.cardType == Card.CardType.Defend)
+            {
+                cardBackground.color = new Color32(98, 131, 172, 255);
+            }
+            else if(card.cardType == Card.CardType.Special)
+            {
+                cardBackground.color = new Color32(187, 173, 70, 255);
+            }
+            else
+            {
+                cardBackground.color = new Color32(77, 199, 80, 255);
+            }
+        }
+        else
+            Debug.LogWarning($"CardDisplay: 'cardBackground' Image is not assigned on {gameObject.name}.");
 
         if (min != null)
             min.text = card.min.ToString();

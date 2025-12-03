@@ -410,6 +410,7 @@ MonoBehaviour:
   card: {fileID: 0}
   cardImage: {fileID: 2452558743204016773}
   cardBackgroundImage: {fileID: 0}
+  cardBackground: {fileID: 1460457495897322671}
   cardName: {fileID: 4513737561463752639}
   cardDescription: {fileID: 6862176794632911343}
   min: {fileID: 0}
