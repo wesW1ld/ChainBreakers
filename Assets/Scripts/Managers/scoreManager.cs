@@ -144,7 +144,7 @@ public class scoreManager : MonoBehaviour
 
     void OnSceneChanged(Scene oldScene, Scene newScene)
     {
-        text.text = $"Score: {Score}";
+        //text.text = $"Score: {Score}";
         Debug.Log($"[ScoreManager] Scene changed to {newScene.name}. Current Score = {Score}");
     }
 

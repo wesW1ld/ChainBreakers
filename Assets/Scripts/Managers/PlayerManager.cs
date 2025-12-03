@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ChainBreakers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -197,7 +198,7 @@ public class PlayerManager : MonoBehaviour
         if(HP <= 0)
         {
             Debug.Log("player died");
-            //change scene or something
+            SceneManager.LoadScene(3);
         }
     }
 }
