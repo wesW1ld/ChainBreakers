@@ -170,8 +170,7 @@ public class PlayList : MonoBehaviour
             }
             else if(card.cardName == "Ask Chat")
             {
-                DeckManager.instance.DrawCard();
-                DeckManager.instance.DrawCard();
+                scoreManager.instance.AddToDrawQueue(2);
             }
             else if(card.cardName == "Bag Boy")
             {
@@ -203,9 +202,7 @@ public class PlayList : MonoBehaviour
             }
             else if(card.cardName == "Dealer's Choice")
             {
-                DeckManager.instance.DrawCard();
-                DeckManager.instance.DrawCard();
-                DeckManager.instance.DrawCard();
+                scoreManager.instance.AddToDrawQueue(3);
                 BaseCardLimit--;
             }
             else if(card.cardName == "Lightning Cast")

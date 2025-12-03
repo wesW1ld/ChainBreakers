@@ -71,6 +71,12 @@ public class scoreManager : MonoBehaviour
         {
             DeckManager.instance.DrawCard();
         }
+        while(HandManager.instance.HandSizeDif() >= 0 && DrawQueue > 0)
+        {
+            DrawQueue--;
+            DeckManager.instance.DrawCard();
+        }
+        DrawQueue = 0;
         //minigame
         // int pick = Random.Range(0, 2);
         // if (pick < 1)
@@ -82,6 +88,12 @@ public class scoreManager : MonoBehaviour
         //     minigame2.SetActive(true);
         // }        
         // minigameMode = true;
+    }
+
+    private int DrawQueue = 0;
+    public void AddToDrawQueue(int num)
+    {
+        DrawQueue = num;
     }
 
     public void MinigameEnd(int num)
