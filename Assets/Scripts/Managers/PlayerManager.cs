@@ -61,6 +61,7 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage(int amt) //called from Telegraph.cs
     {
         amt -= Shield;
+        Shield -= amt;
         if(poise)
         {
             amt = (int)(amt / 1.5f);

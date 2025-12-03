@@ -100,7 +100,7 @@ public class DeckManager : MonoBehaviour
         else
         {
             instance = this;
-            //DontDestroyOnLoad(this); //stay over scene
+            DontDestroyOnLoad(this); //stay over scene
         }
 
     }
