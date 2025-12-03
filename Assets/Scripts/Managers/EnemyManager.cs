@@ -156,7 +156,7 @@ public class EnemyManager : MonoBehaviour
 
         if ((enemyIndex >= enemies.Count))
         {
-            StartCoroutine(GoToEnd());
+            StartCoroutine(GoToNextScene());
         }
         else
         {
@@ -171,6 +171,11 @@ public class EnemyManager : MonoBehaviour
         {
             enemies.Remove(enemy);
             Debug.Log("[EnemyManager] Enemy removed from list.");
+        }
+
+        if(enemies.Count == 0)
+        {
+            StartCoroutine(GoToNextScene());
         }
     }
 
@@ -187,10 +192,10 @@ public class EnemyManager : MonoBehaviour
         Debug.Log("[EnemyManager] All enemies cleared.");
     }
 
-    IEnumerator GoToEnd()
+    IEnumerator GoToNextScene()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void EnemyAttack()

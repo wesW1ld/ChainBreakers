@@ -4,10 +4,10 @@ using UnityEngine.SceneManagement;
 public class StartGame : MonoBehaviour
 {
     [Header("Scene Name To Load")]
-    public string nextScene;
+    public int nextScene;
 
     public void LoadScene()
     {
-        SceneManager.LoadScene(nextScene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

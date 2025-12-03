@@ -15,7 +15,6 @@ public class DeckManager : MonoBehaviour
 
     public int maxHandSize;
     public int currentHandSize;
-    private HandManager handManager;
 
     public void Start()
     {
@@ -30,34 +29,16 @@ public class DeckManager : MonoBehaviour
         #endif
         allCards.AddRange(cards);
         Debug.Log("allCards loaded: " + allCards.Count);
-        handManager = FindObjectOfType<HandManager>();
-        if (handManager == null)
-        {
-            Debug.LogError("DeckManager: HandManager not found in scene!");
-            return;
-        }
-        maxHandSize = handManager.maxHandSize;
-        for (int i = 0; i < 5; i++)
-        {
-            DrawCard();
-        }
+        maxHandSize = HandManager.instance.maxHandSize;
     }
 
     void Update()
     {
-        if (handManager != null)
-        {
-            currentHandSize = handManager.cardsInHand.Count;
-        }
+        currentHandSize = HandManager.instance.cardsInHand.Count;
     } 
 
     public void DrawCard()
     {
-        if (handManager == null)
-        {
-            Debug.LogError("DeckManager: HandManager is null!");
-            return;
-        }
         if (allCards.Count == 0)
         {
             Debug.Log("No more cards in the deck!");
@@ -67,7 +48,7 @@ public class DeckManager : MonoBehaviour
         if (currentHandSize < maxHandSize)
         {
             Card nextCard = allCards[currentIndex];
-            handManager.DrawCardToHand(nextCard);
+            HandManager.instance.DrawCardToHand(nextCard);
             currentIndex = (currentIndex + 1) % allCards.Count;
         }
     }

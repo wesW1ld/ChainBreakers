@@ -62,6 +62,7 @@ public class PlayerManager : MonoBehaviour
     {
         amt -= Shield;
         Shield -= amt;
+        if(Shield < 0){Shield = 0;}
         if(poise)
         {
             amt = (int)(amt / 1.5f);
@@ -199,7 +200,7 @@ public class PlayerManager : MonoBehaviour
         if(HP <= 0)
         {
             Debug.Log("player died");
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene("DefeatScene");
         }
     }
 }

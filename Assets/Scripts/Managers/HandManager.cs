@@ -74,6 +74,20 @@ public class HandManager : MonoBehaviour
         return maxHandSize - curHandSize;
     }
 
+    public void Start()
+    {
+        StartCoroutine(StartDraw());
+    }
+
+    IEnumerator StartDraw()
+    {
+        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < 5; i++)
+        {
+            DeckManager.instance.DrawCard();
+        }
+    }
+
     public static HandManager instance;
     public static HandManager Instance
     {
