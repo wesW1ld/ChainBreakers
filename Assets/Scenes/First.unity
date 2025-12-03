@@ -1336,6 +1336,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2605990585080031735, guid: 6d23fe5562266b54aaecad1a88c12cd9, type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 2998149350578599229, guid: 4062d16a41076394ebf00782e18611b3, type: 3}
     - target: {fileID: 4752028128600584022, guid: 6d23fe5562266b54aaecad1a88c12cd9, type: 3}
       propertyPath: m_Name
       value: Canvas (1)

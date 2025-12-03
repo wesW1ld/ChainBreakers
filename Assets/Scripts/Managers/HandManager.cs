@@ -69,6 +69,11 @@ public class HandManager : MonoBehaviour
         }
     }
 
+    public int HandSizeDif()
+    {
+        return maxHandSize - curHandSize;
+    }
+
     public static HandManager instance;
     public static HandManager Instance
     {

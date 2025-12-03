@@ -56,7 +56,15 @@ public class PlayList : MonoBehaviour
 
         CardLimit = BaseCardLimit;
 
-        return ret;
+        if(HandManager.instance.HandSizeDif() < ret)
+        {
+            return HandManager.instance.HandSizeDif();
+        }
+        else
+        {
+            return ret;
+        }
+        
     }
 
     public int GetSize()
