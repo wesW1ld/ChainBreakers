@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using ChainBreakers;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class DeckManager : MonoBehaviour
 {
     public List<Card> allCards = new List<Card>();
@@ -15,8 +19,17 @@ public class DeckManager : MonoBehaviour
 
     public void Start()
     {
+        allCards.Clear();
         Card[] cards = Resources.LoadAll<Card>("Cards/Starting_Cards");
+        Debug.Log("Cards loaded: " + cards.Length);
+        #if UNITY_EDITOR
+            foreach (var c in cards)
+            {
+                Debug.Log($"Loaded: {c.name} from {AssetDatabase.GetAssetPath(c)}");
+            }
+        #endif
         allCards.AddRange(cards);
+        Debug.Log("allCards loaded: " + allCards.Count);
         handManager = FindObjectOfType<HandManager>();
         if (handManager == null)
         {
@@ -87,7 +100,7 @@ public class DeckManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(this); //stay over scene
+            //DontDestroyOnLoad(this); //stay over scene
         }
 
     }
