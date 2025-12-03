@@ -70,15 +70,21 @@ public class scoreManager : MonoBehaviour
     
     public void ComboEnd()
     {
-        if(timer < 1f)
+        StartCoroutine(Loop());
+    }
+
+    IEnumerator Loop()
+    {
+        if(timer < 1.1f)
         {
-            return;
+            yield break;
         }
         else
         {
             timer = 0;
         }
         PlayList.instance.PlayAllCards();
+        yield return new WaitForSeconds(.1f);
         EnemyManager.Instance.EnemyAttack();
         PlayerManager.instance.Timer();
         int draw = PlayList.instance.ClearList();
@@ -92,17 +98,6 @@ public class scoreManager : MonoBehaviour
             DeckManager.instance.DrawCard();
         }
         DrawQueue = 0;
-        //minigame
-        // int pick = Random.Range(0, 2);
-        // if (pick < 1)
-        // {
-        //     minigame1.SetActive(true);       //testing
-        // }
-        // else
-        // {
-        //     minigame2.SetActive(true);
-        // }        
-        // minigameMode = true;
     }
 
     private int DrawQueue = 0;

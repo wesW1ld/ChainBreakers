@@ -57,7 +57,7 @@ public class Boss : Enemy
 
     public override void AttackPreview()
     {
-        base.textUI.text = $"Attacking for {attackPower} * 2";
+        base.textUI.text = $"Attacking for {attackPower * 2}";
     }
     
     public override void SpecialAttackPreview(int i)
