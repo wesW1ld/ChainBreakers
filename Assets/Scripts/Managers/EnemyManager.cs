@@ -219,4 +219,12 @@ public class EnemyManager : MonoBehaviour
             enemy.GetComponent<Enemy>().EnemyAction();
         }
     }
+
+    public void Dazed()
+    {
+        foreach(GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Enemy>().Dazed();
+        }
+    }
 }

@@ -181,18 +181,35 @@ public class Enemy : MonoBehaviour
         Debug.Log("Not implemented yet/No special");
     }
 
+    protected bool hitSelf = false;
+
     public virtual void Attack()
     {
         if(dazed)
         {
             if(Random.Range(0, 2) == 1)
             {
-                TakeDamage((int)(25f * damageMult));
-                Debug.Log("hit self");
+                hitSelf = true;
                 return;
             }
         }
+        hitSelf = false;
         PlayerManager.instance.TakeDamage((int)(attackPower * damageMult));
+    }
+
+    public void Dazed()
+    {
+        if(dazed && hitSelf)
+        {
+            StartCoroutine(DoDazed());
+        }
+    }
+
+    IEnumerator DoDazed()
+    {
+        yield return new WaitForSeconds(.2f);
+        TakeDamage((int)(25f * damageMult));
+        Debug.Log("hit self");
     }
 
     IEnumerator PickChoice()

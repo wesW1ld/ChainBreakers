@@ -75,7 +75,7 @@ public class scoreManager : MonoBehaviour
 
     IEnumerator Loop()
     {
-        if(timer < 1.1f)
+        if(timer < 1.3f)
         {
             yield break;
         }
@@ -86,6 +86,8 @@ public class scoreManager : MonoBehaviour
         PlayList.instance.PlayAllCards();
         yield return new WaitForSeconds(.1f);
         EnemyManager.Instance.EnemyAttack();
+        yield return new WaitForSeconds(.1f);
+        EnemyManager.Instance.Dazed();
         PlayerManager.instance.Timer();
         int draw = PlayList.instance.ClearList();
         for(int i = 0; i < draw; i++)

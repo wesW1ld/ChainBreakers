@@ -47,11 +47,11 @@ public class Boss : Enemy
         {
             if(Random.Range(0, 2) == 1)
             {
-                TakeDamage((int)(50f * damageMult));
-                Debug.Log("hit self");
+                hitSelf = true;
                 return;
             }
         }
+        hitSelf = false;
         PlayerManager.instance.TakeDamage((int)(attackPower* 2 * damageMult));
     }
 
