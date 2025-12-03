@@ -15,7 +15,7 @@ public class DeckManager : MonoBehaviour
 
     public void Start()
     {
-        Card[] cards = Resources.LoadAll<Card>("Cards");
+        Card[] cards = Resources.LoadAll<Card>("Cards/Starting_Cards");
         allCards.AddRange(cards);
         handManager = FindObjectOfType<HandManager>();
         if (handManager == null)
@@ -59,6 +59,11 @@ public class DeckManager : MonoBehaviour
         }
     }
 
+    public void AddToDeck(Card card)
+    {
+        allCards.Add(card);
+    }
+
     public static DeckManager instance;
     public static DeckManager Instance
     {
@@ -82,7 +87,7 @@ public class DeckManager : MonoBehaviour
         else
         {
             instance = this;
-            //DontDestroyOnLoad(this); //stay over scene
+            DontDestroyOnLoad(this); //stay over scene
         }
 
     }

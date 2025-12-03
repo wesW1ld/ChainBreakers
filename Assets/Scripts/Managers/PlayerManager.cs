@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
         {
             instance = this;
             Debug.Log("playermanager awakened");
-            DontDestroyOnLoad(this); //stay over scene
+            //DontDestroyOnLoad(this); //stay over scene
         }
 
     }
