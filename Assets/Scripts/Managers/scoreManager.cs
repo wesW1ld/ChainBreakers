@@ -61,8 +61,23 @@ public class scoreManager : MonoBehaviour
         Debug.Log($"[ScoreManager] Score changed by {amt}. New Score = {Score}");
     }
 
+    private float timer = 0f;
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+    }
+    
     public void ComboEnd()
     {
+        if(timer < 1f)
+        {
+            return;
+        }
+        else
+        {
+            timer = 0;
+        }
         PlayList.instance.PlayAllCards();
         EnemyManager.Instance.EnemyAttack();
         PlayerManager.instance.Timer();

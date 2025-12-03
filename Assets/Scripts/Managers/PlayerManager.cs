@@ -40,6 +40,7 @@ public class PlayerManager : MonoBehaviour
     
     private int HP = 250;
     private int maxHP = 250;
+    private int maxShield = 100;
 
     private int Shield = 0;
     private bool might = false;
@@ -94,6 +95,7 @@ public class PlayerManager : MonoBehaviour
     public void AddShield(int amt)
     {
         Shield += amt;
+        if(Shield > maxShield){Shield = maxShield;}
         UpdateShield?.Invoke();
     }
 
