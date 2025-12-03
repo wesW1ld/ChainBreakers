@@ -944,7 +944,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b6f66b3c912cbaa4e825d68adc246e3e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b2e558f00331564e8dab4ff5d23f3ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1002,6 +1002,22 @@ PrefabInstance:
       propertyPath: spawnPosition.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 199174007853638486, guid: 4907af2977eb36a45bc9475c4e8b1e48, type: 3}
+      propertyPath: Prefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 199174007853638486, guid: 4907af2977eb36a45bc9475c4e8b1e48, type: 3}
+      propertyPath: Prefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2980808397589556802, guid: 12457cf81e6acf94ca12f441f376bbbc, type: 3}
+    - target: {fileID: 199174007853638486, guid: 4907af2977eb36a45bc9475c4e8b1e48, type: 3}
+      propertyPath: Prefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2980808397589556802, guid: 12457cf81e6acf94ca12f441f376bbbc, type: 3}
+    - target: {fileID: 199174007853638486, guid: 4907af2977eb36a45bc9475c4e8b1e48, type: 3}
+      propertyPath: Prefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 2980808397589556802, guid: 12457cf81e6acf94ca12f441f376bbbc, type: 3}
     - target: {fileID: 2162284361057014010, guid: 4907af2977eb36a45bc9475c4e8b1e48, type: 3}
       propertyPath: m_Name
       value: EnemyManager

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
-    public int maxEnemies = 5;      // Maximum number of enemies allowed
+    public int maxEnemies = 3;      // Maximum number of enemies allowed
     public Vector3 spawnPosition = new Vector3(-0.4546244f, 2f, 0.04473706f); // Starting spawn position
     public float spacing = 2.5f;    // How far apart each enemy is placed (along X axis)
 
@@ -19,9 +19,7 @@ public class EnemyManager : MonoBehaviour
         Assassin,
         Boss
     }
-    public GameObject goblinPrefab;
-    public GameObject assassinPrefab;
-    public GameObject bossPrefab;
+    public List<GameObject> Prefabs;
 
     public GameObject textPrefab;
 
@@ -73,31 +71,15 @@ public class EnemyManager : MonoBehaviour
                 spawnPosition.y,
                 spawnPosition.z
             );
-            if (i == 0)
-                SpawnEnemy(offsetPosition, EnemyType.Goblin);
-            else if (i == 1)
-                SpawnEnemy(offsetPosition, EnemyType.Boss);
-            else
-                SpawnEnemy(offsetPosition, EnemyType.Assassin);
+            SpawnEnemy(offsetPosition, Prefabs[i]);
         }
     }
 
     // Spawns a single enemy at the given position
-    public void SpawnEnemy(Vector3 position, EnemyType type)
+    public void SpawnEnemy(Vector3 position, GameObject prefab)
     {
         GameObject newEnemy;
-        if (type == EnemyType.Goblin)
-        {
-            newEnemy = Instantiate(goblinPrefab, position, Quaternion.identity);
-        }
-        else if (type == EnemyType.Assassin)
-        {
-            newEnemy = Instantiate(assassinPrefab, position, Quaternion.identity);
-        }
-        else
-        {
-            newEnemy = Instantiate(bossPrefab, position, Quaternion.identity);
-        }        
+        newEnemy = Instantiate(prefab, position, Quaternion.identity);       
         enemies.Add(newEnemy);
         //Debug.Log($"[EnemyManager] Spawned enemy #{enemies.Count} at {position}.");
     }
