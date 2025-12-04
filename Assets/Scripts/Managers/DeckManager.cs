@@ -19,7 +19,7 @@ public class DeckManager : MonoBehaviour
     public void Start()
     {
         allCards.Clear();
-        Card[] cards = Resources.LoadAll<Card>("Cards"); ///Starting_Cards
+        Card[] cards = Resources.LoadAll<Card>("Cards/Starting_Cards"); ///Starting_Cards
         Debug.Log("Cards loaded: " + cards.Length);
         #if UNITY_EDITOR
             foreach (var c in cards)
