@@ -97,11 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6d232d2a962694f990b2446a462dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Polaris
-  maxHP: 100
-  currentHP: 0
-  attackPower: 20
-  damageReceived: 10
+  enemyName: Goblin
+  maxHP: 20
+  currentHP: 20
+  attackPower: 4
+  damageReceived: 7
   Count: 
   missChance: 0
   damageMult: 1

@@ -97,10 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7406fe21fa973514bb94487d262337a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Polaris
-  maxHP: 100
-  currentHP: 0
-  attackPower: 20
+  enemyName: Assassin
+  maxHP: 75
+  currentHP: 75
+  attackPower: 15
   damageReceived: 10
   Count: 
   missChance: 0

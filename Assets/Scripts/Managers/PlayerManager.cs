@@ -61,6 +61,12 @@ public class PlayerManager : MonoBehaviour
     
     public void TakeDamage(int amt) //called from Telegraph.cs
     {
+        if (curStatus == Status.bleeding)
+        {
+            amt += amt + 10;
+            curStatus = Status.normal;
+        }
+
         amt -= Shield;
         Shield -= amt;
         if(Shield < 0){Shield = 0;}
@@ -179,7 +185,11 @@ public class PlayerManager : MonoBehaviour
     {
         normal,
         poisoned,
-        weakend
+        weakend,
+        bleeding,
+        burning,
+
+
     }
 
     private Status curStatus = Status.normal;
@@ -195,6 +205,16 @@ public class PlayerManager : MonoBehaviour
     public bool WeakendCheck()
     {
         return curStatus == Status.weakend;
+    }
+
+    public bool BleedingCheck()
+    {
+        return curStatus == Status.bleeding;
+    }
+
+    public bool BurningCheck()
+    {
+        return curStatus == Status.burning;
     }
 
     private void DeathCheck()
