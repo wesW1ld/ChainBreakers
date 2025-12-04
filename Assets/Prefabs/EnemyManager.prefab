@@ -44,7 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a3fcc70493dcf49af1f2b5c193e0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2980808397589556802, guid: 15f6c4e35769de34590c607900cfcd6d, type: 3}
   maxEnemies: 5
   spawnPosition: {x: -7, y: 0, z: 0}
   spacing: 0.5
+  Prefabs:
+  - {fileID: 2980808397589556802, guid: 12457cf81e6acf94ca12f441f376bbbc, type: 3}
+  - {fileID: 7682496830444082417, guid: 711633b46c8a0854a833b064875db6d3, type: 3}
+  - {fileID: 7682496830444082417, guid: a46fd18dd6a6c57489a40547db679ac3, type: 3}
+  - {fileID: 2980808397589556802, guid: 15f6c4e35769de34590c607900cfcd6d, type: 3}
+  - {fileID: 7682496830444082417, guid: 51dad5e2b9db077469459042a53a84ba, type: 3}
+  - {fileID: 6240401854798175108, guid: b537df93c7e9a9e4382449baf4e1a4fe, type: 3}
+  - {fileID: 7682496830444082417, guid: 70934924640f5994d8f8ba1d6e42fbb5, type: 3}
+  - {fileID: 7682496830444082417, guid: 08ee9e097dadc384aa9a734d6a30fcd4, type: 3}
+  - {fileID: 7003925888736956339, guid: f0d8794c5b2e7b6439df61a32de66755, type: 3}
+  textPrefab: {fileID: 0}
