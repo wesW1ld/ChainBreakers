@@ -52,6 +52,9 @@ public class PlayerManager : MonoBehaviour
 
     public event System.Action UpdateHealth;
     public event System.Action UpdateShield;
+    public int Coins = 0;
+    public bool HasCurrencyInitialized = false;
+
 
     void Start()
     {
